@@ -33,7 +33,7 @@ public class AddmemMain extends AppCompatActivity {
     Button addmemBtn;
     FirebaseAuth firebaseAuth;
     private static final Pattern PASSWORD_PATTERN = Pattern.compile("^[a-zA-Z0-9!@.#$%^&*?_~]{6,10}$");
-    private static final Pattern NICKNAME_PATTERN = Pattern.compile("^[a-zA-Z0-9!@.#$%^&*?_~]{2,8}$");
+    private static final Pattern NICKNAME_PATTERN = Pattern.compile("^[a-zA-Z0-9!@.#$%^&*?_~]{2,6}$");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -15,19 +16,19 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+
 
 import java.util.ArrayList;
 
-import static java.lang.Character.getName;
+
 
 public class MessageboardMain extends AppCompatActivity {
-    TextView tv2;
+    TextView board_nickname,board_title,board_contents,board_time;
     ListView listView;
     ArrayAdapter boardAdapter2;
-    Button addlistBtn;
     ArrayList<Boards> boardDatas = new ArrayList<>();
     SearchView searchView;
     MenuItem searchItem;
@@ -38,12 +39,19 @@ public class MessageboardMain extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.message_board_main);
-        tv2 = findViewById(R.id.results);
+
+        board_nickname = findViewById(R.id.board_nickname);
+        board_title = findViewById(R.id.board_title);
+        board_contents = findViewById(R.id.board_contents);
+        board_time = findViewById(R.id.board_time);
+
         listView = findViewById(R.id.listview);
+
         boardAdapter2 = new ArrayAdapter(MessageboardMain.this, R.layout.message_board_form, boardDatas);
         listView.setAdapter(boardAdapter2);
-        addlistBtn=findViewById(R.id.addlistBtn);
+
         imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+
         setTitle("게시판");
 
     }
@@ -54,10 +62,11 @@ public class MessageboardMain extends AppCompatActivity {
         searchItem = menu.findItem(R.id.board_option_search);
         searchView = (SearchView) searchItem.getActionView();
         searchView.setQueryHint("검색할 내용 입력");
+
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
 
-
-            @Override
+           @Override
             public boolean onQueryTextSubmit(String query) {
                 for (int i = 0; i < boardDatas.size(); i++) {
                     if (boardDatas.get(i).equals(query)) {
@@ -90,21 +99,31 @@ public class MessageboardMain extends AppCompatActivity {
         switch (requestCode) {
             case 1:
                 if (resultCode == RESULT_OK) {
-                    String str1 = data.getStringExtra("data1");
-                    String str2 = data.getStringExtra("data2");
+                    String str1 = data.getStringExtra("title");
+                    String str2 = data.getStringExtra("contents");
 
-                    String str = str1 + "\n\n" + str2 + "\n";
+
 
                     boardAdapter2.notifyDataSetChanged();
                     break;
                 }
         }
     }
-    public void clickBtn (View view){
-        //SecondActivity 실행!
-        Intent intent = new Intent(this, MessageboardNew.class);
-        //세컨드 액티비티로 가는 인텐트가 돌아오도록
-        startActivityForResult(intent, 1);
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        int id=item.getItemId();
+
+        switch(id){
+            case R.id.board_add:
+                //SecondActivity 실행!
+                Intent intent = new Intent(this, MessageboardNew.class);
+                //세컨드 액티비티로 가는 인텐트가 돌아오도록
+                startActivityForResult(intent, 1);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }

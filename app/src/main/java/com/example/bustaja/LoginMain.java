@@ -63,17 +63,14 @@ public class LoginMain extends AppCompatActivity implements GoogleApiClient.OnCo
         progressDialog = new ProgressDialog(this);
 
         setTitle("로그인");
-
+//
 //        if(firebaseAuth.getCurrentUser() != null){
 //            //이미 로그인 되었다면 이 액티비티를 종료함
 //            Toast.makeText(this, "이미 로그인 중입니다", Toast.LENGTH_SHORT).show();
 //            finish();
 //            startActivity(new Intent(getApplicationContext(), MainActivity.class));
 //        }
-
-
-
-
+//
 
 
 
@@ -265,8 +262,6 @@ public class LoginMain extends AppCompatActivity implements GoogleApiClient.OnCo
     public void newaddmemBtn(View view) {
         Intent intent = new Intent(getApplicationContext(), AddmemMain.class);
         startActivityForResult(intent, 1000);
-
-
     }
 
     public void clickLogin(View view) {

@@ -14,6 +14,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MessageboardNew extends AppCompatActivity {
+
     TextView reque,tv_wordnum;
     EditText et_title,et_introduce;
 
@@ -66,15 +67,13 @@ public class MessageboardNew extends AppCompatActivity {
 
                 //복귀한 인텐트에 추가
                 Intent intent= getIntent();
-                intent.putExtra("data1",str1);
-                intent.putExtra("data2",str2);
+                intent.putExtra("title",str1);
+                intent.putExtra("contents",str2);
 
                 //액티비티의 결과라고 설정
                 setResult(RESULT_OK,intent);
                 //액티비티종료
                 finish();
-
-
             }
         }).create();
 

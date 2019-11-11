@@ -151,7 +151,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="35dp"
         android:layout_marginTop="3dp"
-        android:ems="10"
+        android:ems="6"
         android:inputType="text"
         android:textSize="16sp"
         android:cursorVisible="true"
@@ -178,6 +178,7 @@
         android:layout_below="@+id/tv_nickname_rule"
         android:onClick="clickAddmem"
         android:text="회원가입"
+
         android:background="#FFFFFF"
         android:textColor="@color/busblue"
         android:layout_alignParentRight="true"

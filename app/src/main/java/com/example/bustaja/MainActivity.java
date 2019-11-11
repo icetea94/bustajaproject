@@ -100,8 +100,10 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.menu_notice:
                         break;
                     case R.id.menu_messageboard:
+
                         intent=new Intent(MainActivity.this,MessageboardMain.class);
                         startActivity(intent);
+
                         break;
                     case R.id.menu_access:
                         break;

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <group
+        android:id="@+id/menu_01"
+        android:background="@color/white"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_login"
+            android:background="@color/white"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:title="로그인" />
+    </group>
+
+    <group
+        android:id="@+id/menu_02"
+        android:background="@color/white"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_favor"
+            android:background="@color/white"
+            android:icon="@drawable/ic_star_yellow_24dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:title="즐겨찾기" />
+    </group>
+
+    <group
+        android:id="@+id/menu_03"
+        android:background="@color/white"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_notice"
+            android:background="@color/white"
+            android:icon="@drawable/ic_priority_high_black_24dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:title="공지사항" />
+    </group>
+    <group
+        android:id="@+id/menu_04"
+        android:background="@color/white"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/menu_messageboard"
+            android:background="@color/white"
+            android:icon="@drawable/ic_question_answer_mint_24dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:title="건의 게시판" />
+    </group>
+
+    <group
+        android:id="@+id/menu_05"
+        android:background="@color/white"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_access"
+            android:background="@color/white"
+            android:icon="@drawable/ic_security_pink_24dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:title="접근 권한" />
+    </group>
+
+    <group>
+
+        <item
+            android:id="@+id/menu_version"
+            android:background="@color/white"
+            android:icon="@drawable/ic_apps_gray_24dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:title="앱 버전 정보" />
+    </group>
+</menu>

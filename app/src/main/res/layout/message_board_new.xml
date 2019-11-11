@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".MessageboardNew">
+
+
+
+    <EditText
+        android:id="@+id/et_title"
+        android:layout_marginTop="60dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="제목"
+        android:background="@drawable/bg_round"/>
+
+    <TextView
+        android:id="@+id/tv_wordnum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_title"
+        android:text="글자 수 : 0 / 300"
+        android:layout_alignRight="@+id/et_title"
+        android:layout_marginTop="20dp" />
+
+    <EditText
+        android:id="@+id/et_introduce"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_weight="1"
+        android:inputType="textMultiLine"
+        android:layout_below="@+id/tv_wordnum"
+        android:layout_marginTop="8dp"
+        android:hint="내용"
+        android:gravity="top"
+        android:maxLength="500"
+        android:background="@drawable/bg_round"/>
+
+    <Button
+        android:id="@+id/btn_cancel"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_introduce"
+        android:text="취소"
+        android:onClick="clickCancelbtn"
+        android:background="@drawable/bg_button"
+        android:layout_marginTop="20dp"/>
+
+    <Button
+        android:id="@+id/btn_ok"
+        android:layout_width="180dp"
+        android:layout_below="@+id/et_introduce"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_toRightOf="@+id/btn_cancel"
+        android:text="게시"
+        android:onClick="clickOkbtn"
+        android:background="@drawable/bg_button"
+        android:layout_marginTop="20dp"/>
+
+
+</RelativeLayout>

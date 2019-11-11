@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="400dp"
+    android:layout_gravity="center_horizontal"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_round_busblue"
+    android:textColor="#FFFFFF"
+    android:text="결과 칸"
+    android:id="@+id/results"
+    android:layout_marginTop="8dp"
+    android:padding="16dp">
+
+</TextView>

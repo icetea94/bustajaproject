@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#FFFFFF"
+    android:layout_height="match_parent"
+    tools:context=".LoginMain">
+
+    <TextView
+        android:id="@+id/new_addmem_btn"
+        android:layout_width="wrap_content"
+        android:clickable="true"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="아이디가 없으신가요? 회원가입 하러가기"
+        android:background="#FFFFFF"
+        android:onClick="newaddmemBtn"
+        android:layout_alignParentRight="true"
+        android:textColor="@color/busblue"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tv_id_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="80dp"
+        android:layout_marginLeft="3dp"
+        android:text="아이디"
+        android:textColor="@color/busblue"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tv_pw_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_id_input"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="11dp"
+        android:layout_alignParentLeft="true"
+        android:layout_toStartOf="@+id/et_pw_input"
+        android:text="비밀번호"
+        android:textColor="@color/busblue"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/et_id_input"
+        android:layout_width="250dp"
+        android:background="@drawable/bg_et"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="70dp"
+        android:ems="20"
+        android:inputType="text"
+        android:cursorVisible="true"
+        android:layout_height="45dp"
+        android:hint="아이디를 입력하세요" />
+
+    <EditText
+        android:id="@+id/et_pw_input"
+        android:layout_width="250dp"
+        android:inputType="textPassword"
+        android:background="@drawable/bg_et"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="40dp"
+        android:ems="10"
+        android:cursorVisible="true"
+        android:layout_height="45dp"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/et_id_input"
+        android:hint="비밀번호를 입력하세요" />
+
+    <TextView
+        android:id="@+id/loginBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/et_pw_input"
+        android:onClick="clickLogin"
+        android:clickable="true"
+        android:text="로그인"
+        android:background="#FFFFFF"
+        android:textColor="@color/busblue"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="30dp"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/Google_Login"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="15dp"
+        android:text="로그인"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="36dp"
+        android:layout_below="@+id/loginBtn"
+        android:layout_marginRight="25dp">
+    </com.google.android.gms.common.SignInButton>
+
+    <Button
+        android:id="@+id/Google_Logout"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="15dp"
+        android:text="구글 로그아웃"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="36dp"
+        android:layout_below="@+id/Google_Login"
+        android:background="@drawable/bg_et"
+        android:layout_marginRight="25dp"/>
+
+</RelativeLayout>

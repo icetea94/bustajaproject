@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="105dp"
+    android:backgroundTint="@color/busblue"
+    android:background="@color/white"
+    android:padding="8dp">
+
+    <ImageView
+        android:id="@+id/header_iv"
+        android:layout_width="61dp"
+        android:layout_height="59dp"
+        android:src="@drawable/ic_directions_bus_black_24dp"/>
+    <TextView
+        android:id="@+id/header_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/header_iv"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:text="버스타자"
+        android:layout_marginTop="1dp"/>
+
+    <com.example.bustaja.MyFontTextView
+        android:id="@+id/tv_mainbus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="40dp"
+        android:layout_toRightOf="@+id/header_tv"
+        android:text="안양시 \n버스정보"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="normal" />
+
+</RelativeLayout>

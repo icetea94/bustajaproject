@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="52dp"
+    android:layout_marginTop="1dp"     >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="#FFFFFF"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/bus_num"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:text="busnum"
+            android:textColor="@color/busblue"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView android:id="@+id/busstop_first_final"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="bus_stop_name"
+            android:textSize="12sp"
+             android:layout_marginTop="5dp"
+            android:textStyle="bold"
+            android:textColor="@color/busblue"
+            android:gravity="center_vertical"
+            android:layout_toRightOf="@+id/bus_num"
+            android:layout_marginLeft="20dp"
+            android:paddingLeft="8dp"/>
+
+        <ImageView android:id="@+id/favor_img"
+            android:layout_marginTop="8dp"
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_star_yellow_24dp"
+            android:clickable="true"
+            android:layout_alignParentRight="true"/>
+
+    </RelativeLayout>
+
+
+
+</androidx.cardview.widget.CardView>

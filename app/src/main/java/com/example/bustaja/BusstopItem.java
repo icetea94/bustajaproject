@@ -8,7 +8,7 @@ public class BusstopItem {
     }
 
     public BusstopItem(String Busstopnum, String Busstopname) {
-//dsfasfdfadfsfgfhfxdghfdsh
+//dsfasfdfadfsfgfhfxdghfdshergkeasklgnalkgwaln;kawenf;oawifneoawfne;lwgkanwlkg
         this.Busstopnum = Busstopnum;
         this.Busstopname = Busstopname;
 

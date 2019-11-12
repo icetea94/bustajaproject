@@ -17,6 +17,7 @@ public class BoardAdapter extends BaseAdapter {
     TextView title_textView;
     TextView date_textView;
     TextView content_textView;
+
     public BoardAdapter(ArrayList<Boards> boardDatas, Context context) {
         this.boardDatas = boardDatas;
         this.context = context;
@@ -52,7 +53,7 @@ public class BoardAdapter extends BaseAdapter {
         nickname_textView.setText(boardDatas.get(position).getNickname());
         title_textView.setText(boardDatas.get(position).getTitle());
         content_textView.setText(boardDatas.get(position).getContents());
-        date_textView.setText(boardDatas.get(position).getDate().toString());
+        date_textView.setText(boardDatas.get(position).getDate());
 
         return convertView;
     }

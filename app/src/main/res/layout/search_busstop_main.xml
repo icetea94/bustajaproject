@@ -30,7 +30,7 @@
         android:textSize="14sp"
         android:textColor="@color/gray"
         android:padding="35dip"
-        android:text="검색된 정류소가 없습니다. \n\n정류소명 또는 번호를 검색 해주세요." />
+        android:text="검색된 버스번호가 없습니다" />
 
     <ScrollView android:id="@+id/layout_add_search_busstop"
         android:layout_width="280dp"

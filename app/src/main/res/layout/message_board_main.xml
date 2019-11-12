@@ -17,7 +17,6 @@
         android:verticalSpacing="4dp"
         android:horizontalSpacing="4dp"
         android:layout_height="match_parent">
-
     </ListView>
 
 </RelativeLayout>

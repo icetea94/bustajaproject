@@ -17,7 +17,9 @@
         <activity android:name=".AddmemMain" android:parentActivityName=".LoginMain" android:theme="@style/AppTheme.Appbar">
 
         </activity>
+        <activity android:name=".NoticeMain" android:parentActivityName=".MainActivity" android:theme="@style/AppTheme.Appbar">
 
+        </activity>
         <activity android:name=".LoginMain" android:parentActivityName=".MainActivity" android:theme="@style/AppTheme.Appbar">
 
         </activity>

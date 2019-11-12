@@ -50,6 +50,9 @@ public class MessageboardMain extends AppCompatActivity {
         boardAdapter2 = new ArrayAdapter(MessageboardMain.this, R.layout.message_board_form, boardDatas);
         listView.setAdapter(boardAdapter2);
 
+        boardDatas.add(new Boards("","","",""));
+
+
         imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
         setTitle("게시판");

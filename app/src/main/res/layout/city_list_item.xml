@@ -8,7 +8,6 @@
         android:background="#FFFFFF"
         android:layout_height="match_parent">
 
-
         <TextView
             android:id="@+id/city_bus_num"
             android:layout_width="60dp"
@@ -33,15 +32,6 @@
             android:layout_toRightOf="@+id/city_bus_num"
             android:layout_marginLeft="20dp"
             android:paddingLeft="8dp"/>
-
-
-        <TextView android:id="@+id/city_bus_time"
-            android:layout_width="80dp"
-            android:layout_height="50dp"
-            android:text="0분0초 전"
-            android:textStyle="bold"
-            android:layout_marginTop="15dp"
-            android:layout_alignParentRight="true"/>
 
     </RelativeLayout>
 

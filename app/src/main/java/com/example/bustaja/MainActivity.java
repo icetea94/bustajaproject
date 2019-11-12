@@ -5,6 +5,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Context;
@@ -24,7 +25,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    ArrayList<BusstopItem> numDatas=new ArrayList<>();
+    ArrayList<CityItem> numDatas=new ArrayList<>();
     NavigationView navigationView;
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle drawerToggle;
@@ -37,9 +38,9 @@ public class MainActivity extends AppCompatActivity {
 
     private BackPressCloseHandler backPressCloseHandler;
 
-    ListView favor_listview;
-    ListView city_listview;
-    ListView busstop_listview;
+    RecyclerView favor_listview;
+    RecyclerView city_listview;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
         backPressCloseHandler = new BackPressCloseHandler(this);
 
         city_listview=findViewById(R.id.city_listview);
-        busstop_listview=findViewById(R.id.busstop_listview);
         favor_listview=findViewById(R.id.favor_listview);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -94,10 +94,13 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.menu_login:
                         Intent intent=new Intent(MainActivity.this,LoginMain.class);
                         startActivity(intent);
+
                         break;
                     case R.id.menu_favor:
                         break;
                     case R.id.menu_notice:
+                        intent=new Intent(MainActivity.this,NoticeMain.class);
+                        startActivity(intent);
                         break;
                     case R.id.menu_messageboard:
 
@@ -133,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.option, menu);
         searchItem = menu.findItem(R.id.option_search);
         searchView = (SearchView) searchItem.getActionView();
-        searchView.setQueryHint("버스 번호, 정류소번호, 정류소명 입력");
+        searchView.setQueryHint("버스 번호 입력");
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
 
 
@@ -148,8 +151,6 @@ public class MainActivity extends AppCompatActivity {
                         searchView.setIconified(true);
 
                         Toast.makeText(MainActivity.this, "검색이 완료되었습니다.", Toast.LENGTH_SHORT).show();
-
-                        busstop_listview.setSelection(i);
 
                         return false;
                     }
@@ -180,6 +181,4 @@ public class MainActivity extends AppCompatActivity {
     // 스위치 케이스 로 토스트 달아놓기
         return super.onOptionsItemSelected(item);
 }
-
-
 }//main activity

@@ -37,7 +37,7 @@
         android:layout_marginTop="8dp"
         android:hint="내용"
         android:gravity="top"
-        android:maxLength="500"
+        android:maxLength="100"
         android:background="@drawable/bg_round"/>
 
     <Button

@@ -27,6 +27,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/white"
         android:textSize="16sp"
+android:layout_marginBottom="8dp"
         android:layout_marginLeft="18dp"
         android:layout_toRightOf="@+id/header_iv"
         android:textStyle="bold"
@@ -38,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
 
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="45dp"
         android:layout_toRightOf="@+id/header_tv"
         android:text="안양시 \n버스정보"
         android:textColor="@color/black"

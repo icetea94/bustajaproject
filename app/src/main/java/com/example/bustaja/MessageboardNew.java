@@ -37,7 +37,7 @@ public class MessageboardNew extends AppCompatActivity {
             }
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                tv_wordnum.setText("글자수 : "+s.length()+"/300");
+                tv_wordnum.setText("글자수 : "+s.length()+"/100");
             }
             @Override
             public void afterTextChanged(Editable s) {

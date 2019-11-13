@@ -1,18 +1,17 @@
 package com.example.bustaja;
 
 import android.content.Context;
-import android.os.Bundle;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
+
 import android.view.View;
 import android.view.ViewGroup;
+
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
+
 
 import androidx.annotation.NonNull;
+
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -21,6 +20,10 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.MyViewHolder> 
 
         ArrayList<CityItem> cityItem;
         Context context;
+
+
+
+
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -45,7 +48,13 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.MyViewHolder> 
 
                     }
                 });
+                view.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View view) {
 
+                        return false;
+                    }
+                });
             }
 
 
@@ -53,10 +62,8 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.MyViewHolder> 
         }
 
         public CityAdapter(ArrayList<CityItem> cityItem,Context context){
-
             this.cityItem = cityItem;
             this.context = context;
-
         }
 
     @NonNull

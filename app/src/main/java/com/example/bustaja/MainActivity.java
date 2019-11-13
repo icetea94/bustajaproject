@@ -121,6 +121,9 @@ public class MainActivity extends AppCompatActivity {
 
                         break;
                     case R.id.menu_access:
+
+                        intent=new Intent(MainActivity.this,AccessMain.class);
+                        startActivity(intent);
                         break;
 
                     case R.id.menu_information:

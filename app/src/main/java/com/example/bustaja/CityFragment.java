@@ -47,7 +47,7 @@ SwipeRefreshLayout swipeRefreshLayout;
         city_listview.setAdapter(cityAdapter);
         city_refresh_fab = view.findViewById(R.id.city_refresh_fab);
         city_refresh_fab.setVisibility(View.VISIBLE);
-
+//
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -56,7 +56,7 @@ SwipeRefreshLayout swipeRefreshLayout;
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
-
+//
 
 
 

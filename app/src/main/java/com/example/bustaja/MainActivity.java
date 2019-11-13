@@ -5,23 +5,26 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.ListView;
+import android.app.FragmentManager;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
-
 import java.util.ArrayList;
+
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,12 +38,11 @@ public class MainActivity extends AppCompatActivity {
     SearchView searchView;
     MenuItem searchItem;
     InputMethodManager im;
-
     private BackPressCloseHandler backPressCloseHandler;
 
     RecyclerView favor_listview;
     RecyclerView city_listview;
-
+    TextView header_nickname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         backPressCloseHandler = new BackPressCloseHandler(this);
-
+        header_nickname=findViewById(R.id.header_nickname);
         city_listview=findViewById(R.id.city_listview);
         favor_listview=findViewById(R.id.favor_listview);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -90,13 +92,23 @@ public class MainActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+
                 switch (item.getItemId()) {
+
                     case R.id.menu_login:
                         Intent intent=new Intent(MainActivity.this,LoginMain.class);
                         startActivity(intent);
 
                         break;
                     case R.id.menu_favor:
+
+                        int index=pager.getCurrentItem();
+
+                        if(index==1) {
+                            //특정페이지로 이동
+                            pager.setCurrentItem(index - 1, true);
+                        }
                         break;
                     case R.id.menu_notice:
                         intent=new Intent(MainActivity.this,NoticeMain.class);
@@ -110,9 +122,18 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.menu_access:
                         break;
-                    case R.id.menu_version:
+
+                    case R.id.menu_information:
+
+                        intent=new Intent(MainActivity.this,InformationMain.class);
+                        startActivity(intent);
+
                         break;
+
+
                 }
+
+
                 //drawer nav 닫기
                 drawerLayout = (DrawerLayout) findViewById(R.id.layout_drawer);
                 drawerLayout.closeDrawer(navigationView);

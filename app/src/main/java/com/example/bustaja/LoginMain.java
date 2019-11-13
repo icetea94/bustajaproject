@@ -28,6 +28,7 @@ import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 
@@ -47,7 +48,7 @@ public class LoginMain extends AppCompatActivity implements GoogleApiClient.OnCo
     Button Google_Logout;
     ProgressDialog progressDialog;
     FirebaseAuth firebaseAuth;
-
+    NavigationView navigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +62,7 @@ public class LoginMain extends AppCompatActivity implements GoogleApiClient.OnCo
         et_id_input = findViewById(R.id.et_id_input);
         et_pw_input = findViewById(R.id.et_pw_input);
         progressDialog = new ProgressDialog(this);
-
+        navigationView = findViewById(R.id.nav);
         setTitle("로그인");
 //
 //        if(firebaseAuth.getCurrentUser() != null){
@@ -142,7 +143,7 @@ public class LoginMain extends AppCompatActivity implements GoogleApiClient.OnCo
             Log.d("RESULT", resultCode + "");
             Log.d("RESULT", data + "");
 
-            if(requestCode == 1000 && resultCode == RESULT_OK) {
+            if(resultCode == RESULT_OK) {
                 Toast.makeText(LoginMain.this, "회원가입을 완료했습니다!", Toast.LENGTH_SHORT).show();
                 et_id_input.setText(data.getStringExtra("email"));
             }
@@ -172,6 +173,7 @@ public class LoginMain extends AppCompatActivity implements GoogleApiClient.OnCo
                             Toast.makeText(LoginMain.this, "로그인 성공", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                             startActivity(intent);
+
                         } else {
                             // 로그인 실패
                             Toast.makeText(LoginMain.this, "로그인 실패", Toast.LENGTH_SHORT).show();

@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -21,7 +22,7 @@ import java.util.ArrayList;
 
 
 public class CityFragment extends Fragment {
-
+SwipeRefreshLayout swipeRefreshLayout;
     TextView city_empty_tv;
     RecyclerView city_listview;
     FloatingActionButton city_refresh_fab;
@@ -40,12 +41,24 @@ public class CityFragment extends Fragment {
         city_listview = view.findViewById(R.id.city_listview);
         city_empty_tv = view.findViewById(R.id.city_empty_tv);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
-
+        swipeRefreshLayout=view.findViewById(R.id.bus_refresh);
         cityAdapter = new CityAdapter(cityItem,getContext());
         city_listview.setLayoutManager(mLayoutManager);
         city_listview.setAdapter(cityAdapter);
         city_refresh_fab = view.findViewById(R.id.city_refresh_fab);
         city_refresh_fab.setVisibility(View.VISIBLE);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+
+
+
 
         city_refresh_fab.setOnClickListener(new View.OnClickListener() {
             @Override

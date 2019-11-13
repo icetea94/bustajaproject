@@ -5,14 +5,15 @@
     <group
         android:id="@+id/menu_01"
         android:background="@color/white"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         android:checkableBehavior="single">
         <item
             android:id="@+id/menu_login"
             android:background="@color/white"
             android:textColor="@color/black"
             android:textStyle="bold"
+            android:visible="true"
             android:title="로그인" />
+
     </group>
 
     <group
@@ -66,15 +67,17 @@
             android:textStyle="bold"
             android:title="접근 권한" />
     </group>
-
-    <group>
-
+    <group
+        android:id="@+id/menu_06"
+        android:background="@color/white"
+        android:checkableBehavior="single">
         <item
-            android:id="@+id/menu_version"
+            android:id="@+id/menu_information"
             android:background="@color/white"
-            android:icon="@drawable/ic_apps_gray_24dp"
+            android:icon="@drawable/ic_share_blue_24dp"
             android:textColor="@color/black"
             android:textStyle="bold"
-            android:title="앱 버전 정보" />
+            android:title="정보 제공처" />
     </group>
+
 </menu>

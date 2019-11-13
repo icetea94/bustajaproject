@@ -1,11 +1,16 @@
 package com.example.bustaja;
 
 import android.content.Context;
+import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,7 +22,8 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.MyViewHolder> 
         ArrayList<CityItem> cityItem;
         Context context;
 
-        public class MyViewHolder extends RecyclerView.ViewHolder {
+
+    public class MyViewHolder extends RecyclerView.ViewHolder {
 
             public TextView city_bus_num, city_bus_stop;
 
@@ -34,13 +40,14 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.MyViewHolder> 
                     public void onClick(View view) {
                         //클릭된 아이템뷰가 리사이클러 뷰에서 몇번째 index(position)인지 알아내기
                         int position  = getAdapterPosition();
-
-
                         Toast.makeText(context,position+":"+cityItem.get(position),Toast.LENGTH_SHORT).show();
+
+
                     }
                 });
 
             }
+
 
 
         }

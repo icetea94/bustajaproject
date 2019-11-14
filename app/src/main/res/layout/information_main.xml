@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".InformationMain">
+
+    <TextView
+        android:id="@+id/information_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:includeFontPadding="false"
+        android:text="앱에서 사용하는 정보는 아래 사이트 정보를 활용합니다."
+        android:textSize="16sp"
+        android:textColor="@color/busblue"
+        android:textStyle="bold"/>
+    <TextView
+        android:layout_marginTop="5dp"
+        android:id="@+id/information_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:includeFontPadding="false"
+        android:text="링크를 누르면 해당 사이트로 이동합니다"
+        android:textSize="12sp"
+        android:textColor="@color/red"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_marginTop="40dp"
+        android:id="@+id/information_first"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:includeFontPadding="false"
+        android:text="= 안양시 버스정보 시스템"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_marginTop="15dp"
+        android:id="@+id/information_first_link"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_height="wrap_content"
+        android:includeFontPadding="false"
+        android:autoLink="web"
+        android:clickable="true"
+        android:text="https://bis.anyang.go.kr"
+        android:textSize="14sp"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:layout_marginTop="40dp"
+        android:id="@+id/information_second"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:includeFontPadding="false"
+        android:text="= 경기도 버스정보 시스템"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_marginTop="15dp"
+        android:id="@+id/information_second_link"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_height="wrap_content"
+        android:includeFontPadding="false"
+        android:text="https://www.gbis.go.kr"
+        android:clickable="true"
+        android:autoLink="web"
+        android:textSize="14sp"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:layout_marginTop="40dp"
+        android:id="@+id/information_third"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:includeFontPadding="false"
+        android:text="= 공공 데이터 포털"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_marginTop="15dp"
+        android:id="@+id/information_third_link"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_height="wrap_content"
+        android:includeFontPadding="false"
+        android:autoLink="web"
+        android:clickable="true"
+        android:text="https://www.data.go.kr"
+        android:textSize="14sp"
+        android:textColor="@color/black" />
+
+
+</LinearLayout>

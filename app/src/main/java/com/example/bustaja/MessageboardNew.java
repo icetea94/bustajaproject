@@ -13,10 +13,13 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class MessageboardNew extends AppCompatActivity {
 
     TextView reque,tv_wordnum;
-    EditText et_title,et_introduce;
+    EditText et_title,et_contents;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,14 +27,14 @@ public class MessageboardNew extends AppCompatActivity {
         setContentView(R.layout.message_board_new);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+
         setTitle("작성하기");
 
         tv_wordnum=findViewById(R.id.tv_wordnum);
-        et_introduce= findViewById(R.id.et_introduce);
         et_title=findViewById(R.id.et_title);
-        et_introduce=findViewById(R.id.et_introduce);
+        et_contents=findViewById(R.id.et_contents);
 
-        et_introduce.addTextChangedListener(new TextWatcher() {
+        et_contents.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
@@ -52,7 +55,6 @@ public class MessageboardNew extends AppCompatActivity {
         //건축가에게 원하는 작업요청
         builder.setTitle("재확인");
         LayoutInflater inflater = getLayoutInflater();
-
         View v = inflater.inflate(R.layout.message_board_dialog,null);
 
         reque = v.findViewById(R.id.reque);
@@ -62,18 +64,20 @@ public class MessageboardNew extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
 
 
-                String str1=et_title.getText().toString();
-                String str2=et_introduce.getText().toString();
+                String str1 = et_title.getText().toString();
+                String str2 = et_contents.getText().toString();
 
                 //복귀한 인텐트에 추가
-                Intent intent= getIntent();
-                intent.putExtra("title",str1);
-                intent.putExtra("contents",str2);
+                Intent intent = getIntent();
+                intent.putExtra("title", str1);
+                intent.putExtra("contents", str2);
 
                 //액티비티의 결과라고 설정
-                setResult(RESULT_OK,intent);
+                setResult(RESULT_OK, intent);
+
                 //액티비티종료
                 finish();
+
             }
         }).create();
 
@@ -96,7 +100,6 @@ public class MessageboardNew extends AppCompatActivity {
 
 
     public void clickCancelbtn(View view) {
-
 
         AlertDialog dialog= new AlertDialog.Builder(this).setMessage("정말로 취소하시겠습니까?").setNegativeButton("아니오", null).setPositiveButton("네", new DialogInterface.OnClickListener() {
             @Override

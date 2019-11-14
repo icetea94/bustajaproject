@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/option_add"
+        android:title="즐겨찾기에 추가"
+        android:icon="@drawable/ic_star_yellow_24dp"
+        android:iconTint="#FFFF00" />
+    <item
+        android:id="@+id/option_remove"
+        android:title="즐겨찾기에서 삭제"
+        android:icon="@drawable/ic_remove_circle_outline_black_24dp"
+        android:iconTint="@color/black" />
+</menu>

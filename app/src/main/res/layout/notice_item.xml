@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/noticeItem"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp"
+    android:layout_marginBottom="8dp"
+    android:background="@android:color/white">
+
+    <LinearLayout
+        android:id="@+id/linearitem"
+        android:layout_width="match_parent"
+        android:background="@color/busblue"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/notice_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:includeFontPadding="false"
+                android:text="제목"
+                android:textSize="16sp"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/notice_subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:includeFontPadding="false"
+                android:layout_gravity="right"
+                android:text="서브타이틀"
+                android:textSize="12sp"
+                android:textColor="@android:color/white"/>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/notice_imageview"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_directions_bus_black_24dp"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_marginTop="32dp"
+        android:id="@+id/notice_contents"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:animateLayoutChanges="true"
+        android:padding="4dp"
+        android:textStyle="bold"
+        android:text="내용들"
+        android:textColor="@color/black" />
+
+</androidx.cardview.widget.CardView>

@@ -22,6 +22,9 @@ import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.ArrayList;
 
 
@@ -39,26 +42,24 @@ public class MainActivity extends AppCompatActivity {
     MenuItem searchItem;
     InputMethodManager im;
     private BackPressCloseHandler backPressCloseHandler;
-
+    FirebaseAuth firebaseAuth;
     RecyclerView favor_listview;
     RecyclerView city_listview;
-    TextView header_nickname;
+    TextView header_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        firebaseAuth = FirebaseAuth.getInstance();
         backPressCloseHandler = new BackPressCloseHandler(this);
-        header_nickname=findViewById(R.id.header_nickname);
         city_listview=findViewById(R.id.city_listview);
         favor_listview=findViewById(R.id.favor_listview);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        header_id=findViewById(R.id.header_id);
         navigationView = findViewById(R.id.nav);
         navigationView.setItemIconTintList(null);
-
         drawerLayout = findViewById(R.id.layout_drawer);
         drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.app_name, R.string.app_name);
         drawerLayout.addDrawerListener(drawerToggle); //레이아웃에 토글 붙이기

@@ -8,44 +8,37 @@
 
     <ImageView
         android:id="@+id/header_iv"
-        android:layout_width="61dp"
-        android:layout_height="59dp"
-        android:src="@drawable/ic_directions_bus_black_24dp"/>
+        android:layout_width="55dp"
+        android:layout_height="45dp"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/ic_directions_bus_black_24dp" />
     <TextView
         android:id="@+id/header_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/header_iv"
         android:textColor="@color/white"
-        android:textSize="16sp"
+        android:textSize="15sp"
         android:textStyle="bold"
-        android:text="버스타자"
-        android:layout_marginTop="1dp"/>
-    <TextView
-        android:id="@+id/header_nickname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-android:layout_marginBottom="8dp"
-        android:layout_marginLeft="18dp"
-        android:layout_toRightOf="@+id/header_iv"
-        android:textStyle="bold"
-        android:text="닉네임이\n없습니다"
-        android:layout_marginTop="1dp"/>
+        android:text="버스타자" />
     <com.example.bustaja.MyFontTextView
         android:id="@+id/tv_mainbus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-
-        android:layout_marginTop="45dp"
-        android:layout_toRightOf="@+id/header_tv"
+        android:layout_toRightOf="@+id/header_iv"
         android:text="안양시 \n버스정보"
         android:textColor="@color/black"
         android:textSize="15sp"
         android:textStyle="normal" />
-
-
+    <TextView
+        android:id="@+id/header_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="11sp"
+        android:layout_below="@+id/header_tv"
+        android:textStyle="bold"
+        android:text="로그인해주세요"
+        android:layout_marginTop="1dp"/>
 
 </RelativeLayout>

@@ -21,7 +21,6 @@
             android:textStyle="bold"
             android:textColor="@color/busblue"
             android:gravity="center_vertical"
-            android:layout_toRightOf="@+id/busstop_num"
             android:layout_marginLeft="20dp"
             android:paddingLeft="8dp"/>
 

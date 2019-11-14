@@ -128,57 +128,14 @@
         android:textColor="@color/red"
         android:textSize="11sp" />
 
-
-    <TextView
-        android:id="@+id/tv_addmem_nickname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_pw_confirm_rule"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="11dp"
-        android:layout_marginLeft="4dp"
-        android:layout_alignParentLeft="true"
-        android:layout_toStartOf="@+id/et_addmem_pw_input"
-        android:text="닉네임"
-        android:textColor="@color/busblue"
-        android:textSize="15sp" />
-
-    <EditText
-        android:id="@+id/et_addmem_nickname_input"
-        android:layout_width="250dp"
-        android:background="@drawable/bg_et"
-        android:layout_below="@id/tv_pw_confirm_rule"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="35dp"
-        android:layout_marginTop="3dp"
-        android:ems="6"
-        android:inputType="text"
-        android:textSize="16sp"
-        android:cursorVisible="true"
-        android:layout_height="45dp"
-        android:hint="변경이 불가하니 정확히 기재해주세요" />
-
-    <TextView
-        android:id="@+id/tv_nickname_rule"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="3dp"
-        android:layout_below="@id/et_addmem_nickname_input"
-        android:layout_marginRight="35dp"
-        android:text="* 공백없는 2~8자리 특수문자,영문자, 숫자 사용 가능"
-        android:textColor="@color/black"
-        android:textSize="11sp" />
-
     <Button
         android:id="@+id/addmemBtn"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:layout_below="@+id/tv_nickname_rule"
+        android:layout_below="@+id/tv_pw_confirm_rule"
         android:onClick="clickAddmem"
         android:text="회원가입"
-
         android:background="#FFFFFF"
         android:textColor="@color/busblue"
         android:layout_alignParentRight="true"

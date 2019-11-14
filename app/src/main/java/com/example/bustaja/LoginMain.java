@@ -40,9 +40,9 @@ import com.google.firebase.auth.GoogleAuthProvider;
 public class LoginMain extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
     SignInButton Google_Login;
     private static final int RC_SIGN_IN = 100;
-    private FirebaseAuth mAuth;
-    private GoogleApiClient mGoogleApiClient;
-    TextView new_addmem_btn, loginBtn;
+    FirebaseAuth mAuth;
+    GoogleApiClient mGoogleApiClient;
+    TextView new_addmem_btn, textviewFindPassword,loginBtn;
     TextView tv_id_input, tv_pw_input;
     EditText et_id_input, et_pw_input;
     Button Google_Logout;
@@ -56,22 +56,23 @@ public class LoginMain extends AppCompatActivity implements GoogleApiClient.OnCo
         firebaseAuth = FirebaseAuth.getInstance();
         Google_Logout = findViewById(R.id.Google_Logout);
         new_addmem_btn = findViewById(R.id.new_addmem_btn);
-        loginBtn = findViewById(R.id.loginBtn);
+        textviewFindPassword = findViewById(R.id.textViewFindpassword);
+        loginBtn=findViewById(R.id.loginBtn);
         tv_id_input = findViewById(R.id.tv_id_input);
         tv_pw_input = findViewById(R.id.tv_pw_input);
         et_id_input = findViewById(R.id.et_id_input);
         et_pw_input = findViewById(R.id.et_pw_input);
         progressDialog = new ProgressDialog(this);
         navigationView = findViewById(R.id.nav);
+
         setTitle("로그인");
-//
-//        if(firebaseAuth.getCurrentUser() != null){
-//            //이미 로그인 되었다면 이 액티비티를 종료함
-//            Toast.makeText(this, "이미 로그인 중입니다", Toast.LENGTH_SHORT).show();
-//            finish();
-//            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-//        }
-//
+
+        if(firebaseAuth.getCurrentUser() != null){
+            //이미 로그인 되었다면 이 액티비티를 종료함
+            finish();
+            //그리고 profile 액티비티를 연다.
+            startActivity(new Intent(getApplicationContext(), ProfileActivity.class)); //추가해 줄 ProfileActivity
+        }
 
 
 
@@ -177,6 +178,7 @@ public class LoginMain extends AppCompatActivity implements GoogleApiClient.OnCo
                         } else {
                             // 로그인 실패
                             Toast.makeText(LoginMain.this, "로그인 실패", Toast.LENGTH_SHORT).show();
+                            progressDialog.dismiss();
                         }
                     }
                 });
@@ -206,6 +208,8 @@ public class LoginMain extends AppCompatActivity implements GoogleApiClient.OnCo
                         progressDialog.show();
                         if (!task.isSuccessful()) {
                             Toast.makeText(LoginMain.this, "인증 실패", Toast.LENGTH_SHORT).show();
+                            progressDialog.dismiss();
+                            finish();
                         } else {
                             Toast.makeText(LoginMain.this, "구글 로그인 인증 성공", Toast.LENGTH_SHORT).show();
                             updateUI(null);
@@ -237,6 +241,7 @@ public class LoginMain extends AppCompatActivity implements GoogleApiClient.OnCo
                         public void onResult(@NonNull Status status) {
                             if (status.isSuccess()) {
                                 Log.v("알림", "구글 로그아웃 성공");
+
                                 setResult(1);
                             } else {
                                 setResult(0);
@@ -271,6 +276,13 @@ public class LoginMain extends AppCompatActivity implements GoogleApiClient.OnCo
             userLogin();
         }
 
+
+    }
+    public void clickFindPassword(View view) {
+        if(view == textviewFindPassword) {
+            finish();
+            startActivity(new Intent(this, FindActivity.class));
+        }
     }
 }
 

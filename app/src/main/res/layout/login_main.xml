@@ -71,6 +71,20 @@
         android:layout_marginTop="5dp"
         android:layout_below="@+id/et_id_input"
         android:hint="비밀번호를 입력하세요" />
+    <TextView
+        android:id="@+id/textViewFindpassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/et_pw_input"
+        android:clickable="true"
+        android:text="비밀번호가 기억나지 않으세요?"
+        android:background="#FFFFFF"
+        android:onClick="clickFindPassword"
+        android:textColor="@color/red"
+        android:layout_marginRight="30dp"
+        android:textAllCaps="false"
+        android:textSize="16sp"  />
 
     <TextView
         android:id="@+id/loginBtn"

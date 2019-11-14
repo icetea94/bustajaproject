@@ -1,6 +1,6 @@
 package com.example.bustaja;
 
-import android.app.ProgressDialog;
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -27,13 +27,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.util.regex.Pattern;
 
 public class AddmemMain extends AppCompatActivity {
-    TextView tv_addmem_id,tv_id_rule,tv_addmem_pw,tv_pw_rule,tv_addmem_pw_confirm,tv_pw_confirm_rule,tv_addmem_nickname,tv_nickname_rule;
+    TextView tv_addmem_id,tv_id_rule,tv_addmem_pw,tv_pw_rule,tv_addmem_pw_confirm,tv_pw_confirm_rule;
     TextView reque;
-    EditText et_addmem_id_input,et_addmem_pw_input,et_addmem_pw_confirm,et_addmem_nickname_input;
+    EditText et_addmem_id_input,et_addmem_pw_input,et_addmem_pw_confirm;
     Button addmemBtn;
     FirebaseAuth firebaseAuth;
     private static final Pattern PASSWORD_PATTERN = Pattern.compile("^[a-zA-Z0-9!@.#$%^&*?_~]{6,10}$");
-    private static final Pattern NICKNAME_PATTERN = Pattern.compile("^[a-zA-Z0-9!@.#$%^&*?_~]{2,6}$");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,12 +46,11 @@ public class AddmemMain extends AppCompatActivity {
         tv_pw_rule=findViewById(R.id.tv_pw_rule);
         tv_addmem_pw_confirm=findViewById(R.id.tv_addmem_pw_confirm);
         tv_pw_confirm_rule=findViewById(R.id.tv_pw_confirm_rule);
-        tv_addmem_nickname=findViewById(R.id.tv_addmem_nickname);
-        tv_nickname_rule=findViewById(R.id.tv_nickname_rule);
+
         et_addmem_id_input=findViewById(R.id.et_addmem_id_input);
         et_addmem_pw_input=findViewById(R.id.et_addmem_pw_input);
         et_addmem_pw_confirm=findViewById(R.id.et_addmem_pw_confirm);
-        et_addmem_nickname_input=findViewById(R.id.et_addmem_nickname_input);
+
         addmemBtn=findViewById(R.id.addmemBtn);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -91,10 +90,10 @@ public class AddmemMain extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-
+                            Toast.makeText(AddmemMain.this, "회원가입 성공~", Toast.LENGTH_SHORT).show();
                               } else {
                             // 회원가입 실패
-                            Toast.makeText(AddmemMain.this, "회원가입 실패", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AddmemMain.this, "회원가입 실패!", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -126,20 +125,6 @@ public class AddmemMain extends AppCompatActivity {
             return true;
         }
     }
-    // 닉네임 유효성 검사
-    private boolean isValidNickname() {
-        String nickname = et_addmem_nickname_input.getText().toString();
-        if (nickname.isEmpty()) {
-            // 비밀번호 공백
-            return false;
-        } else if (!NICKNAME_PATTERN.matcher(nickname).matches()) {
-            // 비밀번호 형식 불일치
-            return false;
-        } else {
-            return true;
-        }
-    }
-
 
     public void clickAddmem(View view) {
 
@@ -159,11 +144,6 @@ public class AddmemMain extends AppCompatActivity {
             et_addmem_pw_confirm.requestFocus();
             return;
         }
-        if(et_addmem_nickname_input.getText().toString().length() == 0) {
-            Toast.makeText(AddmemMain.this, "닉네임을 입력하세요", Toast.LENGTH_SHORT).show();
-            et_addmem_nickname_input.requestFocus();
-            return;
-        }
         if(!et_addmem_pw_input.getText().toString().equals(et_addmem_pw_confirm.getText().toString())){
             tv_pw_confirm_rule.setText("* 비밀번호가 일치하지 않습니다");
         }
@@ -178,11 +158,8 @@ public class AddmemMain extends AppCompatActivity {
             et_addmem_pw_input.requestFocus();
             return;
         }
-        if(!isValidNickname()) {
-            Toast.makeText(AddmemMain.this, "닉네임 형식이 올바르지 않습니다", Toast.LENGTH_SHORT).show();
-            et_addmem_nickname_input.requestFocus();
-            return;
-        }
+
+
         else {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("재확인");
@@ -199,7 +176,6 @@ public class AddmemMain extends AppCompatActivity {
 
                     Toast.makeText(AddmemMain.this, "회원가입 성공!!", Toast.LENGTH_LONG).show();
                     Intent result = new Intent();
-//                    result.putExtra("email", et_addmem_id_input.getText().toString());
 
                     // 자신을 호출한 Activity로 데이터를 보낸다.
                     setResult(RESULT_OK, result);

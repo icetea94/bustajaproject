@@ -14,8 +14,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.app.FragmentManager;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,11 +42,11 @@ public class MainActivity extends AppCompatActivity {
     MenuItem searchItem;
     InputMethodManager im;
     private BackPressCloseHandler backPressCloseHandler;
-    FirebaseAuth firebaseAuth;
+    public FirebaseAuth firebaseAuth;
     RecyclerView favor_listview;
     RecyclerView city_listview;
     TextView header_id;
-
+    FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,13 +57,24 @@ public class MainActivity extends AppCompatActivity {
         favor_listview=findViewById(R.id.favor_listview);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        header_id=findViewById(R.id.header_id);
         navigationView = findViewById(R.id.nav);
         navigationView.setItemIconTintList(null);
         drawerLayout = findViewById(R.id.layout_drawer);
         drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.app_name, R.string.app_name);
         drawerLayout.addDrawerListener(drawerToggle); //레이아웃에 토글 붙이기
         drawerToggle.syncState(); //토글에 삼선모양 나타나게하기
+        firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+
+        mAuth=FirebaseAuth.getInstance();
+        FirebaseUser googleuser = mAuth.getCurrentUser();
+
+        if(user!=null||googleuser!=null) {
+            View nav_header_view = navigationView.getHeaderView(0);
+            header_id = nav_header_view.findViewById(R.id.header_id);
+            String headerid = user.getEmail();
+            header_id.setText(headerid);
+        }
 
         tabLayout = findViewById(R.id.layout_tab);
         pager = findViewById(R.id.pager);

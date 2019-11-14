@@ -54,7 +54,6 @@
             android:name=".MessageboardNew"
             android:parentActivityName=".MessageboardMain"
             android:theme="@style/AppTheme.Appbar">
-
         </activity>
         <activity
             android:name=".MainActivity"

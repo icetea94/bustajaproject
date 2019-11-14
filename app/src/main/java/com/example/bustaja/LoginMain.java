@@ -146,7 +146,7 @@ public class LoginMain extends AppCompatActivity implements GoogleApiClient.OnCo
 
             if(resultCode == RESULT_OK) {
                 Toast.makeText(LoginMain.this, "회원가입을 완료했습니다!", Toast.LENGTH_SHORT).show();
-                et_id_input.setText(data.getStringExtra("email"));
+
             }
 
         }
@@ -185,7 +185,7 @@ public class LoginMain extends AppCompatActivity implements GoogleApiClient.OnCo
     }
 
 
-    private void updateUI(@Nullable FirebaseUser user) {
+    public void updateUI(@Nullable FirebaseUser user) {
         // No-op
     }
 
@@ -212,7 +212,6 @@ public class LoginMain extends AppCompatActivity implements GoogleApiClient.OnCo
                             finish();
                         } else {
                             Toast.makeText(LoginMain.this, "구글 로그인 인증 성공", Toast.LENGTH_SHORT).show();
-                            updateUI(null);
                             finish();
                         }
 

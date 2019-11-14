@@ -55,8 +55,7 @@ public class FavoriteFragment extends Fragment {
     }
 
     private void FavorData() {
-        favorItem.add(new FavorItem("6-2","공용차고지-공용차고지"));
-        favorItem.add(new FavorItem("8","공용차고지-공용차고지"));
+
     }
 
 

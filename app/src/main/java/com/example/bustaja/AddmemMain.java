@@ -112,6 +112,7 @@ public class AddmemMain extends AppCompatActivity {
             return true;
         }
     }
+
     // 비밀번호 유효성 검사
     private boolean isValidPasswd() {
         String password = et_addmem_pw_input.getText().toString();

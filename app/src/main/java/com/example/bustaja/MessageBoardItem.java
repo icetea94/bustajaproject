@@ -11,8 +11,6 @@ public class MessageBoardItem {
     public MessageBoardItem(String title, String contents) {
         this.title = title;
         this.contents = contents;
-
-
     }
 
     public String getTitle() {

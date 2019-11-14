@@ -11,13 +11,13 @@ import java.util.ArrayList;
 
 public class MessageBoardAdapter extends BaseAdapter {
 
-    ArrayList<MessageBoardItem> boardDatas;
+    ArrayList<MessageBoardItem> boardItem;
     Context context;
     TextView title_textView;
     TextView content_textView;
 
-    public MessageBoardAdapter(ArrayList<MessageBoardItem> boardDatas, Context context, TextView title_textView, TextView content_textView) {
-        this.boardDatas = boardDatas;
+    public MessageBoardAdapter(ArrayList<MessageBoardItem> boardItem, Context context, TextView title_textView, TextView content_textView) {
+        this.boardItem = boardItem;
         this.context = context;
         this.title_textView = title_textView;
         this.content_textView = content_textView;

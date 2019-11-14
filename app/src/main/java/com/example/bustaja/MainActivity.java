@@ -31,7 +31,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    ArrayList<CityItem> numDatas=new ArrayList<>();
+    ArrayList<CityItem> cityItem=new ArrayList<>();
     NavigationView navigationView;
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle drawerToggle;
@@ -167,42 +167,42 @@ public class MainActivity extends AppCompatActivity {
         backPressCloseHandler.onBackPressed();
     }
     //옵션메뉴 만들어주는 메소드
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.option, menu);
-        searchItem = menu.findItem(R.id.option_search);
-        searchView = (SearchView) searchItem.getActionView();
-        searchView.setQueryHint("버스 번호 입력");
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
-
-
 
             @Override
-            public boolean onQueryTextSubmit(String query) {
+            public boolean onCreateOptionsMenu(Menu menu) {
+                getMenuInflater().inflate(R.menu.option, menu);
+                searchItem = menu.findItem(R.id.option_search);
+                searchView = (SearchView) searchItem.getActionView();
+                searchView.setQueryHint("버스 번호 입력");
+                searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
 
-                for (int i = 0; i < numDatas.size(); i++) {
-                    if (numDatas.get(i).equals(query)) {
+
+
+                    @Override
+                    public boolean onQueryTextSubmit(String query) {
+
+                        for (int i = 0; i < cityItem.size(); i++) {
+                            if (cityItem.get(i).equals(query)) {
 //.getBusnum()
-                        searchView.setQuery("", false);
-                        searchView.setIconified(true);
+                                searchView.setQuery("", false);
+                                searchView.setIconified(true);
 
-                        Toast.makeText(MainActivity.this, "검색이 완료되었습니다.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainActivity.this, "검색이 완료되었습니다.", Toast.LENGTH_SHORT).show();
+
+                                return false;
+                            }
+                        }
+
+
+
+                        Toast.makeText(getApplicationContext(), "일치하는 정보가 없습니다.", Toast.LENGTH_SHORT).show();
+                        im.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
 
                         return false;
                     }
-                }
-
-
-
-                Toast.makeText(getApplicationContext(), "일치하는 정보가 없습니다.", Toast.LENGTH_SHORT).show();
-                im.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
-
-                return false;
-            }
-
             @Override
             public boolean onQueryTextChange(String query) {
-//                loadHistory(query);
+//               loadHistory(query);
 
                 return false;
             }

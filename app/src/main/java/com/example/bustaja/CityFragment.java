@@ -3,13 +3,18 @@ package com.example.bustaja;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,17 +27,21 @@ import java.util.ArrayList;
 
 
 public class CityFragment extends Fragment {
-SwipeRefreshLayout swipeRefreshLayout;
+    SwipeRefreshLayout swipeRefreshLayout;
     TextView city_empty_tv;
     RecyclerView city_listview;
     FloatingActionButton city_refresh_fab;
     ArrayList<CityItem> cityItem=new ArrayList<>();
     CityAdapter cityAdapter;
+    SearchView searchView;
+    MenuItem searchItem;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         CityData();
+
+
     }
     @Nullable
     @Override
@@ -57,6 +66,8 @@ SwipeRefreshLayout swipeRefreshLayout;
             }
         });
 //
+        //옵션메뉴 만들어주는 메소드
+
 
 
 
@@ -78,7 +89,18 @@ SwipeRefreshLayout swipeRefreshLayout;
         return view;
     }
 
-    private void CityData() {
+
+
+
+
+
+
+
+
+
+
+
+    public void CityData() {
 
         cityItem.add(new CityItem("01","관동교장 -> 관동교장"));
         cityItem.add(new CityItem("1","관동교장 -> 안양역"));

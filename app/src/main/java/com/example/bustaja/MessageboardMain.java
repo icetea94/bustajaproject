@@ -32,7 +32,7 @@ public class MessageboardMain extends AppCompatActivity {
     TextView board_nickname,board_title,board_contents,board_time;
     ListView listView;
     ArrayAdapter boardAdapter2;
-    ArrayList<MessageBoardItem> boardDatas = new ArrayList<>();
+    ArrayList<MessageBoardItem> boardItem = new ArrayList<>();
     SearchView searchView;
     MenuItem searchItem;
     CardView results;
@@ -52,7 +52,7 @@ public class MessageboardMain extends AppCompatActivity {
 
         SimpleDateFormat sdf= new SimpleDateFormat("yyyy/MM/dd HH:mm");
         String date= sdf.format(new Date());
-        boardAdapter2 = new ArrayAdapter(MessageboardMain.this, R.layout.message_board_form, boardDatas);
+        boardAdapter2 = new ArrayAdapter(MessageboardMain.this, R.layout.message_board_form, boardItem);
         listView.setAdapter(boardAdapter2);
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
@@ -74,21 +74,12 @@ public class MessageboardMain extends AppCompatActivity {
                     String str2 = data.getStringExtra("contents");
 
 
-                    boardDatas.add(new MessageBoardItem(str1,str2));
+                    boardItem.add(new MessageBoardItem(str1,str2));
                     boardAdapter2.notifyDataSetChanged();
                     break;
                 }
         }
     }
-
-
-
-
-
-
-
-
-
 
 
     //옵션메뉴 만들어주는 메소드
@@ -104,8 +95,8 @@ public class MessageboardMain extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextSubmit(String query) {
-                for (int i = 0; i < boardDatas.size(); i++) {
-                    if (boardDatas.get(i).equals(query)) {
+                for (int i = 0; i < boardItem.size(); i++) {
+                    if (boardItem.get(i).equals(query)) {
 //.getBoard()
                         searchView.setQuery("", false);
                         searchView.setIconified(true);

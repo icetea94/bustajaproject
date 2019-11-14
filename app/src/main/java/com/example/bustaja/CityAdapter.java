@@ -21,11 +21,6 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.MyViewHolder> 
         ArrayList<CityItem> cityItem;
         Context context;
 
-
-
-
-
-
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
             public TextView city_bus_num, city_bus_stop;

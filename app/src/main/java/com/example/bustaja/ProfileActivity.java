@@ -30,7 +30,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     public FirebaseAuth firebaseAuth;
     //view objects
-    private TextView textViewUserEmail;
+    public static TextView textViewUserEmail;
     private Button buttonLogout;
     private TextView textivewDelete;
 

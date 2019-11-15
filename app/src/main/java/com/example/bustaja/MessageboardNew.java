@@ -13,26 +13,44 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class MessageboardNew extends AppCompatActivity {
 
-    TextView reque,tv_wordnum;
+    TextView reque,tv_wordnum,tv_nickid,tv_date;
     EditText et_title,et_contents;
-
+    public FirebaseAuth firebaseAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.message_board_new);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
         setTitle("작성하기");
 
         tv_wordnum=findViewById(R.id.tv_wordnum);
         et_title=findViewById(R.id.et_title);
         et_contents=findViewById(R.id.et_contents);
+        tv_nickid=findViewById(R.id.tv_nickid);
+        tv_date=findViewById(R.id.tv_date);
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+
+
+        SimpleDateFormat sdf= new SimpleDateFormat("yyyy/MM/dd ");
+        String date= sdf.format(new Date());
+
+        tv_date.setText(date);
+
+        if(firebaseAuth.getCurrentUser() != null) {
+            tv_nickid.setText(user.getEmail());
+        }
+
 
         et_contents.addTextChangedListener(new TextWatcher() {
             @Override
@@ -64,13 +82,17 @@ public class MessageboardNew extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
 
 
-                String str1 = et_title.getText().toString();
-                String str2 = et_contents.getText().toString();
+                String title = et_title.getText().toString();
+                String contents = et_contents.getText().toString();
+                String dates= tv_date.getText().toString();
+                String emailid= tv_nickid.getText().toString();
 
                 //복귀한 인텐트에 추가
                 Intent intent = getIntent();
-                intent.putExtra("title", str1);
-                intent.putExtra("contents", str2);
+                intent.putExtra("title", title);
+                intent.putExtra("contents", contents);
+                intent.putExtra("date", dates);
+                intent.putExtra("nick", emailid);
 
                 //액티비티의 결과라고 설정
                 setResult(RESULT_OK, intent);

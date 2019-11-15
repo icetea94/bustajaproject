@@ -9,14 +9,15 @@
     android:padding="8dp"
     tools:context=".MessageboardMain">
 
-    <ListView
-        android:id="@+id/listview"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/board_listview"
         android:layout_width="match_parent"
         android:fadeScrollbars="true"
         android:numColumns="1"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:verticalSpacing="4dp"
         android:horizontalSpacing="4dp"
         android:layout_height="match_parent">
-    </ListView>
+    </androidx.recyclerview.widget.RecyclerView>
 
 </RelativeLayout>

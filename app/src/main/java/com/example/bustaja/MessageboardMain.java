@@ -4,8 +4,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -18,6 +20,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,14 +33,21 @@ import java.util.Date;
 
 public class MessageboardMain extends AppCompatActivity {
     TextView board_nickname,board_title,board_contents,board_time;
-    ListView listView;
-    ArrayAdapter boardAdapter2;
-    ArrayList<MessageBoardItem> boardItem = new ArrayList<>();
+
+    RecyclerView board_listview;
+    MessageboardAdapter boardAdapter2;
+    ArrayList<MessageboardItem> boardItem = new ArrayList<>();
+    ArrayList<MessageboardItem> searchboardItem = new ArrayList<>();
+
     SearchView searchView;
     MenuItem searchItem;
     CardView results;
+
+
     public FirebaseAuth firebaseAuth;
     InputMethodManager imm;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,15 +58,14 @@ public class MessageboardMain extends AppCompatActivity {
         board_title = findViewById(R.id.board_title);
         board_contents = findViewById(R.id.board_contents);
         board_time = findViewById(R.id.board_time);
-        listView = findViewById(R.id.listview);
+        board_listview = findViewById(R.id.board_listview);
+        boardAdapter2 = new MessageboardAdapter(boardItem,this);
 
-        SimpleDateFormat sdf= new SimpleDateFormat("yyyy/MM/dd HH:mm");
-        String date= sdf.format(new Date());
-        boardAdapter2 = new ArrayAdapter(MessageboardMain.this, R.layout.message_board_form, boardItem);
-        listView.setAdapter(boardAdapter2);
+        board_listview.setAdapter(boardAdapter2);
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
+        searchboardItem.addAll(boardItem);
 
         imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
@@ -70,14 +79,18 @@ public class MessageboardMain extends AppCompatActivity {
         switch (requestCode) {
             case 1:
                 if (resultCode == RESULT_OK) {
-                    String str1 = data.getStringExtra("title");
-                    String str2 = data.getStringExtra("contents");
+                    String title = data.getStringExtra("title");
+                    String contents = data.getStringExtra("contents");
+                    String date= data.getStringExtra("date");
+                    String emailid= data.getStringExtra("nick");
 
 
-                    boardItem.add(new MessageBoardItem(str1,str2));
+                    boardItem.add(0,new MessageboardItem(""+title,""+contents,""+date,""+emailid));
+
                     boardAdapter2.notifyDataSetChanged();
+
                     break;
-                }
+            }
         }
     }
 
@@ -96,14 +109,14 @@ public class MessageboardMain extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 for (int i = 0; i < boardItem.size(); i++) {
-                    if (boardItem.get(i).equals(query)) {
-//.getBoard()
+                    if (boardItem.get(i).getBoardTitle().contains(query)||boardItem.get(i).getBoardContents().contains(query)) {
+
                         searchView.setQuery("", false);
                         searchView.setIconified(true);
 
                         Toast.makeText(MessageboardMain.this, "검색이 완료되었습니다.", Toast.LENGTH_SHORT).show();
-                        listView.setSelection(i);
-
+                        board_listview.scrollToPosition(i);
+                        boardAdapter2.notifyDataSetChanged();
                         return false;
                     }
                 }
@@ -116,6 +129,26 @@ public class MessageboardMain extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String query) {
+                boardItem.addAll(searchboardItem);
+                if (query.length() == 0) {
+
+                }  else
+                {
+                    // 리스트의 모든 데이터를 검색한다.
+                    for(int i = 0;i < searchboardItem.size(); i++)
+                    {
+                        // arraylist의 모든 데이터에 입력받은 단어(charText)가 포함되어 있으면 true를 반환한다.
+                        if (searchboardItem.get(i).getBoardTitle().contains(query)||searchboardItem.get(i).getBoardContents().contains(query))
+                        {
+                            // 검색된 데이터를 리스트에 추가한다.
+                            boardItem.add(searchboardItem.get(i));
+                        }
+                    }
+                }
+                // 리스트 데이터가 변경되었으므로 아답터를 갱신하여 검색된 데이터를 화면에 보여준다.
+                boardAdapter2.notifyDataSetChanged();
+
+
 
                 return false;
             }

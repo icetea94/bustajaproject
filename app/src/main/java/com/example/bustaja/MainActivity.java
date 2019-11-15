@@ -182,13 +182,13 @@ public class MainActivity extends AppCompatActivity {
                     public boolean onQueryTextSubmit(String query) {
 
                         for (int i = 0; i < cityItem.size(); i++) {
-                            if (cityItem.get(i).equals(query)) {
+                            if (cityItem.get(i).getCitybusnum().contains(query)||cityItem.get(i).getCitybusstop().contains(query)) {
 //.getBusnum()
                                 searchView.setQuery("", false);
                                 searchView.setIconified(true);
 
                                 Toast.makeText(MainActivity.this, "검색이 완료되었습니다.", Toast.LENGTH_SHORT).show();
-
+                                city_listview.scrollToPosition(i);
                                 return false;
                             }
                         }

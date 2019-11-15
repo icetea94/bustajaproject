@@ -177,7 +177,6 @@ public class AddmemMain extends AppCompatActivity {
 
                     Toast.makeText(AddmemMain.this, "회원가입 성공!!", Toast.LENGTH_LONG).show();
                     Intent result = new Intent();
-
                     // 자신을 호출한 Activity로 데이터를 보낸다.
                     setResult(RESULT_OK, result);
 

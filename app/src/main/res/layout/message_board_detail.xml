@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".MessageboardDetail">
+
+    <TextView
+        android:id="@+id/detail_title_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_round"
+        android:hint="제목" />
+
+    <TextView
+        android:id="@+id/detail_nickid_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/detail_title_tv"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="20dp"
+        android:text="닉네임자리"
+        android:textColor="@color/busblue" />
+
+    <TextView
+        android:id="@+id/detail_date_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/detail_nickid_tv"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="5dp"
+        android:text="날짜"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/detail_contents_tv"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_below="@+id/detail_date_tv"
+        android:layout_marginTop="25dp"
+        android:layout_weight="1"
+        android:background="@drawable/bg_round"
+        android:gravity="top"
+        android:hint="내용"
+        android:inputType="textMultiLine"
+        android:maxLength="100" />
+
+    <Button
+        android:id="@+id/btn_replace"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/detail_contents_tv"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_button"
+        android:onClick="clickBack"
+        android:text="목록으로" />
+
+    <Button
+        android:id="@+id/btn_ok"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/detail_contents_tv"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="20dp"
+        android:layout_toRightOf="@+id/btn_replace"
+        android:background="@drawable/bg_button"
+        android:onClick="clickReplace"
+        android:text="수정하기" />
+
+
+</RelativeLayout>

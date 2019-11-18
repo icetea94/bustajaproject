@@ -1,11 +1,14 @@
 package com.example.bustaja;
 
-public class MessageboardItem {
 
+import java.io.Serializable;
+
+public class MessageboardItem implements Serializable {
+    private static final long serialVersionUID = 1L;
      String BoardTitle;
      String BoardContents;
-    String BoardDate;
-    String BoardNick;
+     String BoardDate;
+     String BoardNick;
 
     public MessageboardItem(String boardTitle, String boardContents, String boardDate, String boardNick) {
         BoardTitle = boardTitle;

@@ -1,8 +1,11 @@
 package com.example.bustaja;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -83,7 +86,6 @@ public class MessageboardMain extends AppCompatActivity {
                     String contents = data.getStringExtra("contents");
                     String date= data.getStringExtra("date");
                     String emailid= data.getStringExtra("nick");
-
 
                     boardItem.add(0,new MessageboardItem(""+title,""+contents,""+date,""+emailid));
 
@@ -178,10 +180,19 @@ public class MessageboardMain extends AppCompatActivity {
 
                     dialog.setCanceledOnTouchOutside(false);
                     dialog.show();
-                }else {
-                    Intent intent = new Intent(this, MessageboardNew.class);
-                    //세컨드 액티비티로 가는 인텐트가 돌아오도록
-                    startActivityForResult(intent, 1);
+                }else if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
+                    int checkedPermission= checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE);//READ는 WRITE를 주면 같이 권한이 주어짐
+
+                    if(checkedPermission== PackageManager.PERMISSION_DENIED){//퍼미션이 허가되어 있지 않다면
+                        //사용자에게 퍼미션 허용 여부를 물어보는 다이얼로그 보여주기!
+                        requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 10);
+
+                    }else {
+                        Intent intent = new Intent(this, MessageboardNew.class);
+                        //세컨드 액티비티로 가는 인텐트가 돌아오도록
+                        startActivityForResult(intent, 1);
+
+                    }
                 }
                 break;
         }

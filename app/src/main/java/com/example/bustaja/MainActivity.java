@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
             header_id = nav_header_view.findViewById(R.id.header_id);
             String headerid = user.getEmail();
             header_id.setText(headerid);
+
         }
 
         tabLayout = findViewById(R.id.layout_tab);

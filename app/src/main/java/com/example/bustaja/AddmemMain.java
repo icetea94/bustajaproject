@@ -23,6 +23,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.regex.Pattern;
 
@@ -147,6 +152,9 @@ public class AddmemMain extends AppCompatActivity {
         }
         if(!et_addmem_pw_input.getText().toString().equals(et_addmem_pw_confirm.getText().toString())){
             tv_pw_confirm_rule.setText("* 비밀번호가 일치하지 않습니다");
+            Toast.makeText(AddmemMain.this, "동일하게 입력해 주세요", Toast.LENGTH_SHORT).show();
+            et_addmem_pw_confirm.requestFocus();
+            return;
         }
 
         if(!isValidEmail()) {
@@ -159,7 +167,6 @@ public class AddmemMain extends AppCompatActivity {
             et_addmem_pw_input.requestFocus();
             return;
         }
-
 
         else {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -181,6 +188,37 @@ public class AddmemMain extends AppCompatActivity {
                     setResult(RESULT_OK, result);
 
                     createUser(email, password);
+
+                    FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
+                    DatabaseReference rootRef=firebaseDatabase.getReference();//괄호 안이 비어있으면 최상위 노드를 뜻함
+
+                    MemberVO member= new MemberVO(email,password);
+                    //'persons'노드를 새로 생성
+                    DatabaseReference personRef= rootRef.child("members");
+                    personRef.push().setValue(member);
+
+                    //'persons'라는 노드에 리스너 붙이기
+                    personRef.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            //persons노드는 여러개의 자식노드가 있으므로
+                            StringBuffer buffer= new StringBuffer();
+                            for(DataSnapshot snapshot: dataSnapshot.getChildren()){
+
+                                MemberVO person= snapshot.getValue(MemberVO.class);
+                                String email= person.getEmail();
+                                String password= person.getPassword();
+
+                                buffer.append(email+" , "+ password+"\n");
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+
 
                     finish();
                 }

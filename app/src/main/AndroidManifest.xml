@@ -53,8 +53,7 @@
         <activity
             android:name=".MessageboardNew"
             android:parentActivityName=".MessageboardMain"
-            android:theme="@style/AppTheme.Appbar">
-        </activity>
+            android:theme="@style/AppTheme.Appbar"></activity>
         <activity
             android:name=".MainActivity"
             android:theme="@style/Theme.MaterialComponents.NoActionBar">
@@ -71,6 +70,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".MessageboardDetail"
+            android:parentActivityName=".MessageboardMain"
+            android:theme="@style/AppTheme.Appbar" />
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
     </application>
 
 </manifest>

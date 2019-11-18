@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -35,6 +36,11 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class LoginMain extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
@@ -140,14 +146,6 @@ public class LoginMain extends AppCompatActivity implements GoogleApiClient.OnCo
                 firebaseAuthWithGoogle(account);
             } else {
             }
-            Log.d("RESULT", requestCode + "");
-            Log.d("RESULT", resultCode + "");
-            Log.d("RESULT", data + "");
-
-            if(resultCode == RESULT_OK) {
-                Toast.makeText(LoginMain.this, "회원가입을 완료했습니다!", Toast.LENGTH_SHORT).show();
-
-            }
 
         }
     }
@@ -211,8 +209,51 @@ public class LoginMain extends AppCompatActivity implements GoogleApiClient.OnCo
                             progressDialog.dismiss();
                             finish();
                         } else {
-                            Toast.makeText(LoginMain.this, "구글 로그인 인증 성공", Toast.LENGTH_SHORT).show();
-                            finish();
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            String googlemail = user.getEmail();
+                            SharedPreferences googlepref ;
+                            googlepref = getSharedPreferences("GoogleMailList",0);
+
+                            SharedPreferences.Editor editor = googlepref.edit();
+                            editor.putString("email",googlemail);
+                            editor.commit();
+                            String aftergooglemail =  googlepref.getString("email",googlemail);
+                            if(!aftergooglemail.contains(googlemail)) {
+
+                                FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+                                DatabaseReference rootRef = firebaseDatabase.getReference();//괄호 안이 비어있으면 최상위 노드를 뜻함
+
+                                GoogleMemberVO googlemember = new GoogleMemberVO(googlemail);
+                                //'persons'노드를 새로 생성
+                                DatabaseReference personRef = rootRef.child("members");
+                                personRef.push().setValue(googlemember);
+
+                                //'persons'라는 노드에 리스너 붙이기
+                                personRef.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        //persons노드는 여러개의 자식노드가 있으므로
+                                        StringBuffer buffer = new StringBuffer();
+                                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                            GoogleMemberVO googlemember = snapshot.getValue(GoogleMemberVO.class);
+                                            String googlemail = googlemember.getGooglemail();
+
+                                            buffer.append(googlemail + "\n");
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+                                Toast.makeText(LoginMain.this, "구글 로그인 인증 성공", Toast.LENGTH_SHORT).show();
+                                finish();
+                            }
+                            else{
+                                Toast.makeText(LoginMain.this, "구글 로그인 인증 성공", Toast.LENGTH_SHORT).show();
+                                finish();
+                            }
                         }
 
                     }

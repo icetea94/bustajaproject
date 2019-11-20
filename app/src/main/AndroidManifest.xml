@@ -5,6 +5,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
     <application
         android:allowBackup="true"
@@ -14,6 +16,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Appbar"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".MyLocationMain"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.Appbar"></activity>
+
         <activity
             android:name=".FindActivity"
             android:parentActivityName=".LoginMain"
@@ -77,6 +84,10 @@
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDHSTJsP2tRp5iUC9h6B5ru69CHmSKdrR8"     />
+
     </application>
 
 </manifest>

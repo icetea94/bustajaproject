@@ -2,18 +2,24 @@ package com.example.bustaja;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 
 
 public class MessageboardDetail extends AppCompatActivity {
 
+    public FirebaseAuth firebaseAuth;
 
      TextView detail_title_tv;
      TextView detail_nickid_tv;
@@ -25,46 +31,46 @@ public class MessageboardDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.message_board_detail);
 
+        firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        String gettemail = user.getEmail();
         detail_title_tv = (TextView) findViewById(R.id.detail_title_tv);
         detail_nickid_tv = (TextView) findViewById(R.id.detail_nickid_tv);
         detail_contents_tv = (TextView) findViewById(R.id.detail_contents_tv);
         detail_date_tv=(TextView) findViewById(R.id.detail_date_tv);
 
-        Intent intent=getIntent();
+        Bundle extras = getIntent().getExtras();
 
-        detail_title_tv.setText( intent.getStringExtra("title"));
-        detail_contents_tv.setText( intent.getStringExtra("contents"));
-        detail_nickid_tv.setText( intent.getStringExtra("nick"));
-        detail_date_tv.setText( intent.getStringExtra("date"));
+        String boardtitle= extras.getString("title");
+        detail_title_tv.setText( boardtitle);
+        String boardcontents = extras.getString("contents");
+        detail_contents_tv.setText(boardcontents);
+        String boardnick = extras.getString("nick");
+        detail_nickid_tv.setText(boardnick);
+        String boarddate= extras.getString("date");
+        detail_date_tv.setText(boarddate);
+
+        setTitle(boardtitle);
+
     }
-
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            case 1:
-                if (resultCode == RESULT_OK) {
-                    String title = data.getStringExtra("title");
-                    String contents = data.getStringExtra("contents");
-                    String date= data.getStringExtra("date");
-                    String emailid= data.getStringExtra("nick");
-
-                    detail_title_tv.setText(title);
-                    detail_contents_tv.setText(contents);
-                    detail_date_tv.setText(date);
-                    detail_nickid_tv.setText(emailid);
-
-                    break;
-                }
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
         }
+        return super.onOptionsItemSelected(item);
     }
 
     public void clickBack(View view) {
-        Intent intent2=new Intent(MessageboardDetail.this,MessageboardMain.class);
-        startActivity(intent2);
+        finish();
     }
 
     public void clickReplace(View view) {
+
+
+    }
+
+    public void clickRemove(View view) {
 
 
     }

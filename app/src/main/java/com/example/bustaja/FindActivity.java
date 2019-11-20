@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -55,6 +56,14 @@ public class FindActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
     @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public void onClick(View view) {
 
         if(editTextUserEmail.getText().toString().length() == 0) {
@@ -70,6 +79,7 @@ public class FindActivity extends AppCompatActivity implements View.OnClickListe
         if(view == buttonFind){
             progressDialog.setMessage("처리중입니다. 잠시 기다려 주세요...");
             progressDialog.show();
+
             //비밀번호 재설정 이메일 보내기
             String emailAddress = editTextUserEmail.getText().toString().trim();
             firebaseAuth.sendPasswordResetEmail(emailAddress)

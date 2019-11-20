@@ -3,8 +3,8 @@ package com.example.bustaja;
 
 import java.io.Serializable;
 
-public class MessageboardItem implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class MessageboardItem {
+
      String BoardTitle;
      String BoardContents;
      String BoardDate;

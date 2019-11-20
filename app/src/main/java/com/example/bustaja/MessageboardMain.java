@@ -7,9 +7,12 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
@@ -32,10 +35,12 @@ import com.google.firebase.auth.FirebaseUser;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Dictionary;
+import java.util.List;
 
 
 public class MessageboardMain extends AppCompatActivity {
-    TextView board_nickname,board_title,board_contents,board_time;
+    TextView board_nickname, board_title, board_contents, board_time;
 
     RecyclerView board_listview;
     MessageboardAdapter boardAdapter2;
@@ -62,19 +67,93 @@ public class MessageboardMain extends AppCompatActivity {
         board_contents = findViewById(R.id.board_contents);
         board_time = findViewById(R.id.board_time);
         board_listview = findViewById(R.id.board_listview);
-        boardAdapter2 = new MessageboardAdapter(boardItem,this);
+        boardAdapter2 = new MessageboardAdapter(boardItem, this);
+
 
         board_listview.setAdapter(boardAdapter2);
         firebaseAuth = FirebaseAuth.getInstance();
-        FirebaseUser user = firebaseAuth.getCurrentUser();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         searchboardItem.addAll(boardItem);
 
         imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
         setTitle("게시판");
+        ///////////////////
+
+        board_listview.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), board_listview, new ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                MessageboardItem dict = boardItem.get(position);
+
+                Intent intent = new Intent(getBaseContext(), MessageboardDetail.class);
+
+                intent.putExtra("title", dict.getBoardTitle());
+                intent.putExtra("date", dict.getBoardDate());
+                intent.putExtra("contents", dict.getBoardContents());
+                intent.putExtra("nick", dict.getBoardNick());
+
+                startActivity(intent);
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+
+
+            }
+        }));
+
 
     }
+
+    public interface ClickListener {
+        void onClick(View view, int position);
+
+        void onLongClick(View view, int position);
+    }
+
+    public static class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {
+
+        private GestureDetector gestureDetector;
+        private MessageboardMain.ClickListener clickListener;
+
+        public RecyclerTouchListener(Context context, final RecyclerView recyclerView, final MessageboardMain.ClickListener clickListener) {
+            this.clickListener = clickListener;
+            gestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
+                @Override
+                public boolean onSingleTapUp(MotionEvent e) {
+                    return true;
+                }
+
+                @Override
+                public void onLongPress(MotionEvent e) {
+                    View child = recyclerView.findChildViewUnder(e.getX(), e.getY());
+                    if (child != null && clickListener != null) {
+                        clickListener.onLongClick(child, recyclerView.getChildAdapterPosition(child));
+                    }
+                }
+            });
+        }
+
+        @Override
+        public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+            View child = rv.findChildViewUnder(e.getX(), e.getY());
+            if (child != null && clickListener != null && gestureDetector.onTouchEvent(e)) {
+                clickListener.onClick(child, rv.getChildAdapterPosition(child));
+            }
+            return false;
+        }
+
+        @Override
+        public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+        }
+
+        @Override
+        public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+        }
+    }
+///////////
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -84,15 +163,17 @@ public class MessageboardMain extends AppCompatActivity {
                 if (resultCode == RESULT_OK) {
                     String title = data.getStringExtra("title");
                     String contents = data.getStringExtra("contents");
-                    String date= data.getStringExtra("date");
-                    String emailid= data.getStringExtra("nick");
+                    String date = data.getStringExtra("date");
+                    String emailid = data.getStringExtra("nick");
 
-                    boardItem.add(0,new MessageboardItem(""+title,""+contents,""+date,""+emailid));
+                    boardItem.add(0, new MessageboardItem("" + title, "" + contents, "" + date, "" + emailid));
 
                     boardAdapter2.notifyDataSetChanged();
 
                     break;
-            }
+                }
+
+
         }
     }
 
@@ -106,50 +187,38 @@ public class MessageboardMain extends AppCompatActivity {
         searchView.setQueryHint("검색할 내용 입력");
 
 
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
             @Override
             public boolean onQueryTextSubmit(String query) {
-                for (int i = 0; i < boardItem.size(); i++) {
-                    if (boardItem.get(i).getBoardTitle().contains(query)||boardItem.get(i).getBoardContents().contains(query)) {
+
+
+
+
+                for (int i = 0; i < searchboardItem.size(); i++) {
+                    if (searchboardItem.get(i).getBoardTitle().contains(query) || searchboardItem.get(i).getBoardContents().contains(query)) {
 
                         searchView.setQuery("", false);
                         searchView.setIconified(true);
 
                         Toast.makeText(MessageboardMain.this, "검색이 완료되었습니다.", Toast.LENGTH_SHORT).show();
                         board_listview.scrollToPosition(i);
+                        boardItem.addAll(searchboardItem);
                         boardAdapter2.notifyDataSetChanged();
                         return false;
                     }
+
                 }
+
                 Toast.makeText(getApplicationContext(), "일치하는 정보가 없습니다.", Toast.LENGTH_SHORT).show();
                 imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
-
-                return false;
+                boardAdapter2.notifyDataSetChanged();
+                return true;
             }
 
 
             @Override
-            public boolean onQueryTextChange(String query) {
-                boardItem.addAll(searchboardItem);
-                if (query.length() == 0) {
-
-                }  else
-                {
-                    // 리스트의 모든 데이터를 검색한다.
-                    for(int i = 0;i < searchboardItem.size(); i++)
-                    {
-                        // arraylist의 모든 데이터에 입력받은 단어(charText)가 포함되어 있으면 true를 반환한다.
-                        if (searchboardItem.get(i).getBoardTitle().contains(query)||searchboardItem.get(i).getBoardContents().contains(query))
-                        {
-                            // 검색된 데이터를 리스트에 추가한다.
-                            boardItem.add(searchboardItem.get(i));
-                        }
-                    }
-                }
-                // 리스트 데이터가 변경되었으므로 아답터를 갱신하여 검색된 데이터를 화면에 보여준다.
-                boardAdapter2.notifyDataSetChanged();
-
+            public boolean onQueryTextChange(String newText) {
 
 
                 return false;
@@ -159,19 +228,16 @@ public class MessageboardMain extends AppCompatActivity {
     }
 
 
-
-
-
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        int id=item.getItemId();
+        int id = item.getItemId();
 
-        switch(id){
+        switch (id) {
             case R.id.board_add:
                 //SecondActivity 실행!
-                if(firebaseAuth.getCurrentUser() == null) {
-                    AlertDialog dialog= new AlertDialog.Builder(this).setMessage("로그인 하셔야 합니다.").setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                if (firebaseAuth.getCurrentUser() == null) {
+                    AlertDialog dialog = new AlertDialog.Builder(this).setMessage("로그인 하셔야 합니다.").setPositiveButton("확인", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.cancel();
@@ -180,14 +246,14 @@ public class MessageboardMain extends AppCompatActivity {
 
                     dialog.setCanceledOnTouchOutside(false);
                     dialog.show();
-                }else if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
-                    int checkedPermission= checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE);//READ는 WRITE를 주면 같이 권한이 주어짐
+                } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    int checkedPermission = checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE);//READ는 WRITE를 주면 같이 권한이 주어짐
 
-                    if(checkedPermission== PackageManager.PERMISSION_DENIED){//퍼미션이 허가되어 있지 않다면
+                    if (checkedPermission == PackageManager.PERMISSION_DENIED) {//퍼미션이 허가되어 있지 않다면
                         //사용자에게 퍼미션 허용 여부를 물어보는 다이얼로그 보여주기!
                         requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 10);
 
-                    }else {
+                    } else {
                         Intent intent = new Intent(this, MessageboardNew.class);
                         //세컨드 액티비티로 가는 인텐트가 돌아오도록
                         startActivityForResult(intent, 1);
@@ -195,8 +261,17 @@ public class MessageboardMain extends AppCompatActivity {
                     }
                 }
                 break;
+
+            case android.R.id.home: {
+                onBackPressed();
+
+            }
+
         }
         return super.onOptionsItemSelected(item);
     }
+
+
+
 
 }

@@ -6,18 +6,20 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class MessageboardAdapter extends RecyclerView.Adapter {
+public class MessageboardAdapter extends RecyclerView.Adapter implements Serializable {
 
     private ArrayList<MessageboardItem> boardItem;
-
     Context context;
 
 
@@ -41,11 +43,11 @@ public class MessageboardAdapter extends RecyclerView.Adapter {
                     //클릭된 아이템뷰가 리사이클러 뷰에서 몇번째 index(position)인지 알아내기
                     int position = getAdapterPosition();
 
-                    Intent intent = new Intent(context, MessageboardDetail.class);
-
-
-
-                    context.startActivity(intent);
+//                    Intent intent = new Intent(context, MessageboardDetail.class);
+//
+//
+//
+//                    context.startActivity(intent);
 
 
                 }
@@ -86,7 +88,6 @@ public class MessageboardAdapter extends RecyclerView.Adapter {
 
 
     }
-
 
     @Override
     public int getItemCount() {

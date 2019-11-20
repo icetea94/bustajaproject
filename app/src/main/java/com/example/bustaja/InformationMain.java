@@ -3,8 +3,10 @@ package com.example.bustaja;
 
 import android.os.Bundle;
 import android.text.util.Linkify;
+import android.view.MenuItem;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -32,6 +34,14 @@ public class InformationMain extends AppCompatActivity {
         information_second_link = findViewById(R.id.information_second_link);
         information_third = findViewById(R.id.information_third);
         information_third_link = findViewById(R.id.information_third_link);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }

@@ -21,6 +21,19 @@
         android:background="@color/white"
         android:checkableBehavior="single">
         <item
+            android:id="@+id/menu_location"
+            android:background="@color/white"
+            android:icon="@drawable/ic_location_on_white_24dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:title="내 위치 보기" />
+    </group>
+
+    <group
+        android:id="@+id/menu_03"
+        android:background="@color/white"
+        android:checkableBehavior="single">
+        <item
             android:id="@+id/menu_favor"
             android:background="@color/white"
             android:icon="@drawable/ic_star_yellow_24dp"
@@ -30,7 +43,7 @@
     </group>
 
     <group
-        android:id="@+id/menu_03"
+        android:id="@+id/menu_04"
         android:background="@color/white"
         android:checkableBehavior="single">
         <item
@@ -42,7 +55,7 @@
             android:title="공지사항" />
     </group>
     <group
-        android:id="@+id/menu_04"
+        android:id="@+id/menu_05"
         android:background="@color/white"
         android:checkableBehavior="single">
 
@@ -56,7 +69,7 @@
     </group>
 
     <group
-        android:id="@+id/menu_05"
+        android:id="@+id/menu_06"
         android:background="@color/white"
         android:checkableBehavior="single">
         <item
@@ -68,7 +81,7 @@
             android:title="접근 권한" />
     </group>
     <group
-        android:id="@+id/menu_06"
+        android:id="@+id/menu_07"
         android:background="@color/white"
         android:checkableBehavior="single">
         <item

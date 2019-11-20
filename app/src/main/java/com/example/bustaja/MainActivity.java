@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     SearchView searchView;
     MenuItem searchItem;
     InputMethodManager im;
-    private BackPressCloseHandler backPressCloseHandler;
+     BackPressCloseHandler backPressCloseHandler;
     public FirebaseAuth firebaseAuth;
     RecyclerView favor_listview;
     RecyclerView city_listview;
@@ -123,9 +123,17 @@ public class MainActivity extends AppCompatActivity {
                             pager.setCurrentItem(index - 1, true);
                         }
                         break;
+                    case R.id.menu_location:
+
+                        intent=new Intent(MainActivity.this,MyLocationMain.class);
+                        startActivity(intent);
+
+                        break;
+
                     case R.id.menu_notice:
                         intent=new Intent(MainActivity.this,NoticeMain.class);
                         startActivity(intent);
+
                         break;
                     case R.id.menu_messageboard:
 
@@ -137,6 +145,7 @@ public class MainActivity extends AppCompatActivity {
 
                         intent=new Intent(MainActivity.this,AccessMain.class);
                         startActivity(intent);
+
                         break;
 
                     case R.id.menu_information:
@@ -218,4 +227,6 @@ public class MainActivity extends AppCompatActivity {
     // 스위치 케이스 로 토스트 달아놓기
         return super.onOptionsItemSelected(item);
 }
+
+
 }//main activity

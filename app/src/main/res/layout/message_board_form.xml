@@ -30,13 +30,12 @@
         <TextView
             android:id="@+id/board_title"
             android:layout_width="60dp"
-            android:layout_height="20dp"
+            android:layout_height="25dp"
             android:gravity="center_vertical"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="5dp"
             android:layout_marginLeft="10dp"
             android:text="제목"
             android:textColor="@color/white"
-            android:ems="15"
             android:textSize="18sp"
             android:textStyle="bold" />
         <TextView
@@ -44,7 +43,7 @@
             android:layout_width="300dp"
             android:layout_height="20dp"
             android:gravity="center_vertical"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="50dp"
             android:layout_marginLeft="10dp"
             android:ems="15"
             android:textStyle="bold"

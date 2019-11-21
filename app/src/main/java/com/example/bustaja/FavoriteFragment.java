@@ -1,7 +1,12 @@
 package com.example.bustaja;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -26,6 +31,10 @@ public class FavoriteFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FavorData();
+
+
+
+
     }
 
     @Nullable
@@ -50,12 +59,12 @@ public class FavoriteFragment extends Fragment {
             favor_listview.setVisibility(View.VISIBLE);
             favor_empty_tv.setVisibility(View.GONE);
         }
-
         return view;
     }
 
     private void FavorData() {
 
+        favorItem.add(new FavorItem("01","관동교장 -> 관동교장"));
     }
 
 

@@ -1,7 +1,9 @@
 package com.example.bustaja;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -56,16 +58,22 @@ public class CityFragment extends Fragment {
         city_listview.setAdapter(cityAdapter);
         city_refresh_fab = view.findViewById(R.id.city_refresh_fab);
         city_refresh_fab.setVisibility(View.VISIBLE);
+        view.setOnCreateContextMenuListener(this);
+
 //
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
 
-
+                cityAdapter.notifyDataSetChanged();
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
 //
+
+
+
+
         //옵션메뉴 만들어주는 메소드
 
 
@@ -86,10 +94,43 @@ public class CityFragment extends Fragment {
             city_empty_tv.setVisibility(View.GONE);
         }
 
+
+        city_listview.addOnItemTouchListener(new MessageboardMain.RecyclerTouchListener(getContext(), city_listview, new MessageboardMain.ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                CityItem dict = cityItem.get(position);
+
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+
+
+
+                CityItem dict = cityItem.get(position);
+
+
+                Intent intent = new Intent(getContext(), FavoriteFragment.class);
+                intent.putExtra("citybusnum", dict.getCitybusnum());
+                intent.putExtra("citybusstop", dict.getCitybusstop());
+
+
+
+
+            }
+        }));
+
+
+
+
+
+
+
+
+
+
         return view;
     }
-
-
 
 
 

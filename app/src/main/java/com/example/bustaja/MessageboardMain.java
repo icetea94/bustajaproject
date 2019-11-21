@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -31,6 +32,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -46,15 +53,14 @@ public class MessageboardMain extends AppCompatActivity {
     MessageboardAdapter boardAdapter2;
     ArrayList<MessageboardItem> boardItem = new ArrayList<>();
     ArrayList<MessageboardItem> searchboardItem = new ArrayList<>();
-
+    BoardVO boardVO;
     SearchView searchView;
     MenuItem searchItem;
     CardView results;
 
-
+    RecyclerView.Adapter arrayAdapter;
     public FirebaseAuth firebaseAuth;
     InputMethodManager imm;
-
 
 
     @Override
@@ -67,19 +73,23 @@ public class MessageboardMain extends AppCompatActivity {
         board_contents = findViewById(R.id.board_contents);
         board_time = findViewById(R.id.board_time);
         board_listview = findViewById(R.id.board_listview);
-        boardAdapter2 = new MessageboardAdapter(boardItem, this);
 
+
+
+        boardAdapter2 = new MessageboardAdapter(boardItem, this);
 
         board_listview.setAdapter(boardAdapter2);
         firebaseAuth = FirebaseAuth.getInstance();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        searchboardItem.addAll(boardItem);
 
         imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
         setTitle("게시판");
+
+
         ///////////////////
+
 
         board_listview.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), board_listview, new ClickListener() {
             @Override
@@ -161,6 +171,7 @@ public class MessageboardMain extends AppCompatActivity {
         switch (requestCode) {
             case 1:
                 if (resultCode == RESULT_OK) {
+
                     String title = data.getStringExtra("title");
                     String contents = data.getStringExtra("contents");
                     String date = data.getStringExtra("date");
@@ -191,8 +202,6 @@ public class MessageboardMain extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextSubmit(String query) {
-
-
 
 
                 for (int i = 0; i < searchboardItem.size(); i++) {
@@ -270,8 +279,6 @@ public class MessageboardMain extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-
 
 
 }

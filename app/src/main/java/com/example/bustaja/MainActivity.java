@@ -76,7 +76,6 @@ public class MainActivity extends AppCompatActivity {
             header_id.setText(headerid);
 
         }
-
         tabLayout = findViewById(R.id.layout_tab);
         pager = findViewById(R.id.pager);
         adapter = new BusMainAdapter(getSupportFragmentManager());

@@ -14,6 +14,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -82,10 +84,6 @@ public class MessageboardAdapter extends RecyclerView.Adapter implements Seriali
         holder5.board_nickname.setText(boardItem.get(position).getBoardNick());
         holder5.board_time.setText(boardItem.get(position).getBoardDate());
         holder5.board_contents.setText(boardItem.get(position).getBoardContents());
-
-
-
-
 
     }
 

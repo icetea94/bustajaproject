@@ -1,5 +1,7 @@
 package com.example.bustaja;
 
+import java.util.ArrayList;
+
 public class BoardVO {
     String bTitle;
     String bContents;
@@ -7,7 +9,6 @@ public class BoardVO {
     String bDate;
 
     public BoardVO() {
-
     }
     public BoardVO(String bTitle, String bContents, String bNick, String bDate) {
         this.bTitle = bTitle;

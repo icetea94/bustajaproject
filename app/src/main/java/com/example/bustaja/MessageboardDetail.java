@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,7 +22,7 @@ import java.util.ArrayList;
 public class MessageboardDetail extends AppCompatActivity {
 
     public FirebaseAuth firebaseAuth;
-
+    Button btn_replaceOk ,btn_replace;
      TextView detail_title_tv;
      TextView detail_nickid_tv;
      TextView detail_contents_tv;
@@ -30,7 +32,8 @@ public class MessageboardDetail extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.message_board_detail);
-
+        btn_replaceOk=findViewById(R.id.btn_replaceOk);
+        btn_replace=findViewById(R.id.btn_replace);
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
         String gettemail = user.getEmail();
@@ -38,7 +41,8 @@ public class MessageboardDetail extends AppCompatActivity {
         detail_nickid_tv = (TextView) findViewById(R.id.detail_nickid_tv);
         detail_contents_tv = (TextView) findViewById(R.id.detail_contents_tv);
         detail_date_tv=(TextView) findViewById(R.id.detail_date_tv);
-
+        detail_title_tv.setFocusable(false);
+        detail_contents_tv.setFocusable(false);
         Bundle extras = getIntent().getExtras();
 
         String boardtitle= extras.getString("title");
@@ -62,17 +66,33 @@ public class MessageboardDetail extends AppCompatActivity {
     }
 
     public void clickBack(View view) {
+
+
+
         finish();
     }
 
     public void clickReplace(View view) {
+        detail_title_tv.setEnabled(true);
+        detail_contents_tv.setEnabled(true);
 
+        detail_contents_tv.setFocusable(true);
+        detail_title_tv.setFocusable(true);
+
+        detail_contents_tv.requestFocus();
+
+        btn_replace.setVisibility(View.GONE);
+        btn_replaceOk.setVisibility(View.VISIBLE);
 
     }
+    public void clickreplaceOk(View view) {
+        detail_title_tv.setEnabled(false);
+        detail_contents_tv.setEnabled(false);
+        detail_contents_tv.setFocusable(false);
+        detail_title_tv.setFocusable(false);
 
-    public void clickRemove(View view) {
-
-
+        btn_replace.setVisibility(View.VISIBLE);
+        btn_replaceOk.setVisibility(View.GONE);
     }
 }
 

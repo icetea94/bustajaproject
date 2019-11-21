@@ -17,6 +17,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -99,8 +101,23 @@ public class MessageboardNew extends AppCompatActivity {
                 intent.putExtra("date", dates);
                 intent.putExtra("nick", emailid);
 
+
+
+//
+                FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
+                DatabaseReference rootRef2=firebaseDatabase.getReference();//괄호 안이 비어있으면 최상위 노드를 뜻함
+                MessageboardItem boardItem = new MessageboardItem(title,contents,dates,emailid);
+                DatabaseReference boardRef= rootRef2.child("Boards");
+                boardRef.push().setValue(boardItem);
+
+
+
+
                 //액티비티의 결과라고 설정
                 setResult(RESULT_OK, intent);
+
+
+
 
                 //액티비티종료
                 finish();

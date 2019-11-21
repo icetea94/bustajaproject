@@ -24,7 +24,7 @@ public class FavorAdapter extends RecyclerView.Adapter {
     ArrayList<FavorItem> favorItem;
     Context context;
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder  implements View.OnCreateContextMenuListener {
 
         public TextView bus_num, busstop_first_final;
 
@@ -35,7 +35,7 @@ public class FavorAdapter extends RecyclerView.Adapter {
 
             bus_num = view.findViewById(R.id.bus_num);
             busstop_first_final = view.findViewById(R.id.busstop_first_final);
-
+            view.setOnCreateContextMenuListener(this);
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -45,12 +45,36 @@ public class FavorAdapter extends RecyclerView.Adapter {
                     Toast.makeText(context, position + ":" + favorItem.get(position), Toast.LENGTH_SHORT).show();
                 }
             });
+
+
         }
 
 
+        @Override
+        public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+            MenuItem Delete = menu.add(Menu.NONE, 1001, 1, "삭제");
+            Delete.setOnMenuItemClickListener(onEditMenu);
+        }
+
+        private final MenuItem.OnMenuItemClickListener onEditMenu = new MenuItem.OnMenuItemClickListener() {
+
+
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case 1001:
+                        favorItem.remove(getAdapterPosition());
+                        notifyItemRemoved(getAdapterPosition());
+                        notifyItemRangeChanged(getAdapterPosition(), favorItem.size());
+
+                        break;
+                }
+
+                return true;
+            }
+        };
+
     }
-
-
 
 
     public FavorAdapter(ArrayList<FavorItem> favorItem,Context context){

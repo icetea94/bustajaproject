@@ -71,7 +71,7 @@ public class LoginMain extends AppCompatActivity implements GoogleApiClient.OnCo
         et_pw_input = findViewById(R.id.et_pw_input);
         progressDialog = new ProgressDialog(this);
         navigationView = findViewById(R.id.nav);
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle("로그인");
 
         if(firebaseAuth.getCurrentUser() != null){

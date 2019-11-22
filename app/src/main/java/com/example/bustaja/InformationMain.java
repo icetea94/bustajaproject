@@ -34,6 +34,7 @@ public class InformationMain extends AppCompatActivity {
         information_second_link = findViewById(R.id.information_second_link);
         information_third = findViewById(R.id.information_third);
         information_third_link = findViewById(R.id.information_third_link);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override

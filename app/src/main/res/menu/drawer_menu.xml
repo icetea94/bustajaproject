@@ -12,6 +12,7 @@
             android:textColor="@color/black"
             android:textStyle="bold"
             android:visible="true"
+
             android:title="로그인" />
 
     </group>

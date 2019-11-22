@@ -18,8 +18,9 @@ public class BusMainAdapter extends FragmentPagerAdapter {
 
     public BusMainAdapter(@NonNull FragmentManager fm) {
         super(fm);
-        fragments[0] = new FavoriteFragment();
         fragments[1] = new CityFragment();
+        fragments[0] = new FavoriteFragment();
+
     }
 
     @NonNull

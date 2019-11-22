@@ -1,9 +1,12 @@
 package com.example.bustaja;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.KeyListener;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -21,13 +24,13 @@ import java.util.ArrayList;
 
 public class MessageboardDetail extends AppCompatActivity {
 
-    public FirebaseAuth firebaseAuth;
-    Button btn_replaceOk ,btn_replace;
-     TextView detail_title_tv;
+     public FirebaseAuth firebaseAuth;
+     Button btn_replaceOk ,btn_replace;
+     EditText detail_title_tv;
      TextView detail_nickid_tv;
-     TextView detail_contents_tv;
+     EditText detail_contents_tv;
      TextView detail_date_tv;
-
+     KeyListener originalKeyListener;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,11 +38,12 @@ public class MessageboardDetail extends AppCompatActivity {
         btn_replaceOk=findViewById(R.id.btn_replaceOk);
         btn_replace=findViewById(R.id.btn_replace);
         firebaseAuth = FirebaseAuth.getInstance();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         FirebaseUser user = firebaseAuth.getCurrentUser();
         String gettemail = user.getEmail();
-        detail_title_tv = (TextView) findViewById(R.id.detail_title_tv);
+        detail_title_tv = (EditText) findViewById(R.id.detail_title_tv);
         detail_nickid_tv = (TextView) findViewById(R.id.detail_nickid_tv);
-        detail_contents_tv = (TextView) findViewById(R.id.detail_contents_tv);
+        detail_contents_tv = (EditText) findViewById(R.id.detail_contents_tv);
         detail_date_tv=(TextView) findViewById(R.id.detail_date_tv);
         detail_title_tv.setFocusable(false);
         detail_contents_tv.setFocusable(false);
@@ -55,13 +59,48 @@ public class MessageboardDetail extends AppCompatActivity {
         detail_date_tv.setText(boarddate);
 
         setTitle(boardtitle);
+        btn_replace.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Restore key listener - this will make the field editable again.
+                detail_title_tv.setKeyListener(originalKeyListener);
+                // Focus the field.
+                detail_title_tv.requestFocus();
+                // Show soft keyboard for the user to enter the value.
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.showSoftInput(detail_title_tv, InputMethodManager.SHOW_IMPLICIT);
+
+                btn_replace.setVisibility(View.GONE);
+                btn_replaceOk.setVisibility(View.VISIBLE);
+            }
+        });
+
+        detail_title_tv.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                // If it loses focus...
+                if (!hasFocus) {
+                    // Hide soft keyboard.
+                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(detail_title_tv.getWindowToken(), 0);
+                    // Make it non-editable again.
+                    detail_title_tv.setKeyListener(null);
+                }
+            }
+        });
+
+
 
     }
+
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            onBackPressed();
+
+            finish();
         }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -73,16 +112,6 @@ public class MessageboardDetail extends AppCompatActivity {
     }
 
     public void clickReplace(View view) {
-        detail_title_tv.setEnabled(true);
-        detail_contents_tv.setEnabled(true);
-
-        detail_contents_tv.setFocusable(true);
-        detail_title_tv.setFocusable(true);
-
-        detail_contents_tv.requestFocus();
-
-        btn_replace.setVisibility(View.GONE);
-        btn_replaceOk.setVisibility(View.VISIBLE);
 
     }
     public void clickreplaceOk(View view) {

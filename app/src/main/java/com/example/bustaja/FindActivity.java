@@ -41,7 +41,7 @@ public class FindActivity extends AppCompatActivity implements View.OnClickListe
         firebaseAuth = FirebaseAuth.getInstance();
         setTitle("암호 찾기");
         buttonFind.setOnClickListener(this);
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
     private boolean isValidEmail() {
         String email = editTextUserEmail.getText().toString();

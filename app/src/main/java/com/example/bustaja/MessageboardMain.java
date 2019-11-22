@@ -53,15 +53,17 @@ public class MessageboardMain extends AppCompatActivity {
     MessageboardAdapter boardAdapter2;
     ArrayList<MessageboardItem> boardItem = new ArrayList<>();
     ArrayList<MessageboardItem> searchboardItem = new ArrayList<>();
-    BoardVO boardVO;
+
     SearchView searchView;
     MenuItem searchItem;
     CardView results;
 
-    RecyclerView.Adapter arrayAdapter;
     public FirebaseAuth firebaseAuth;
     InputMethodManager imm;
 
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference boardRef;
+    DatabaseReference rootRef2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,14 +75,47 @@ public class MessageboardMain extends AppCompatActivity {
         board_contents = findViewById(R.id.board_contents);
         board_time = findViewById(R.id.board_time);
         board_listview = findViewById(R.id.board_listview);
-
-
-
         boardAdapter2 = new MessageboardAdapter(boardItem, this);
-
         board_listview.setAdapter(boardAdapter2);
+        boardAdapter2.notifyDataSetChanged();
         firebaseAuth = FirebaseAuth.getInstance();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
+        boardRef=firebaseDatabase.getReference("Boards");
+        boardRef.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                // 새로 추가된 데이터(값: MessageItem객체)
+                MessageboardItem messageItem=dataSnapshot.getValue(MessageboardItem.class);
+                //새로운 메세지를 리스트뷰에 추가하기 ArrayList에 추가하기
+                boardItem.add(messageItem);
+                //리스트뷰 갱신
+                boardAdapter2.notifyDataSetChanged();
+               // board_listview.setSelection(boardItem.size()-1);//화면 포커스 이동
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
 
 
         imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -176,9 +211,16 @@ public class MessageboardMain extends AppCompatActivity {
                     String contents = data.getStringExtra("contents");
                     String date = data.getStringExtra("date");
                     String emailid = data.getStringExtra("nick");
-
+                    Log.i("moya",title);
                     boardItem.add(0, new MessageboardItem("" + title, "" + contents, "" + date, "" + emailid));
+                    boardAdapter2 = new MessageboardAdapter(boardItem, this);
 
+                    board_listview.setAdapter(boardAdapter2);
+                    firebaseDatabase=FirebaseDatabase.getInstance();
+                    rootRef2=firebaseDatabase.getReference();//괄호 안이 비어있으면 최상위 노드를 뜻함
+                    MessageboardItem boardItem = new MessageboardItem(title,contents,date,emailid);
+                    boardRef= rootRef2.child("Boards");
+                    boardRef.push().setValue(boardItem);
                     boardAdapter2.notifyDataSetChanged();
 
                     break;
@@ -266,6 +308,7 @@ public class MessageboardMain extends AppCompatActivity {
                         Intent intent = new Intent(this, MessageboardNew.class);
                         //세컨드 액티비티로 가는 인텐트가 돌아오도록
                         startActivityForResult(intent, 1);
+
 
                     }
                 }

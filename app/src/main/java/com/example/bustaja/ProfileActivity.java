@@ -52,7 +52,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         firebaseAuth = FirebaseAuth.getInstance();
         progressDialog = new ProgressDialog(this);
         Googlelogout2 =findViewById(R.id.Google_Logout2);
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //유저가 로그인 하지 않은 상태라면 null 상태이고 이 액티비티를 종료하고 로그인 액티비티를 연다.
         if(firebaseAuth.getCurrentUser() == null) {

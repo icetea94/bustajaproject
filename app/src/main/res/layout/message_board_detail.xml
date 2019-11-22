@@ -9,15 +9,15 @@
     tools:context=".MessageboardDetail">
 
     <EditText
-
         android:id="@+id/detail_title_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:textColor="@color/black"
-        android:enabled="false"
         android:maxLength="15"
         android:maxLines="1"
+        android:singleLine = "true"
+        android:lines = "1"
         android:background="@drawable/bg_round"
         android:hint="제목" />
 
@@ -52,7 +52,6 @@
         android:background="@drawable/bg_round"
         android:gravity="top"
         android:hint="내용"
-        android:enabled="false"
         android:maxLines="10"
         android:textColor="@color/black"
         android:inputType="textMultiLine"
@@ -77,7 +76,7 @@
         android:layout_marginTop="20dp"
         android:layout_toRightOf="@+id/btn_back"
         android:background="@drawable/bg_button"
-        android:onClick="clickReplace"
+
         android:visibility="visible"
         android:text="수정하기" />
 

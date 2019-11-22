@@ -18,40 +18,39 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name=".MyLocationMain"
-            android:parentActivityName=".MainActivity"
+
             android:theme="@style/AppTheme.Appbar"></activity>
 
         <activity
             android:name=".FindActivity"
-            android:parentActivityName=".LoginMain"
+
             android:theme="@style/AppTheme.Appbar"></activity>
         <activity
             android:name=".ProfileActivity"
-            android:parentActivityName=".MainActivity"
+
             android:theme="@style/AppTheme.Appbar"></activity>
         <activity
             android:name=".AccessMain"
-            android:parentActivityName=".MainActivity"
+
             android:theme="@style/AppTheme.Appbar" />
         <activity
             android:name=".InformationMain"
-            android:parentActivityName=".MainActivity"
+
             android:theme="@style/AppTheme.Appbar" />
         <activity
             android:name=".AddmemMain"
-            android:parentActivityName=".LoginMain"
+
             android:theme="@style/AppTheme.Appbar" />
         <activity
             android:name=".NoticeMain"
-            android:parentActivityName=".MainActivity"
+
             android:theme="@style/AppTheme.Appbar" />
         <activity
             android:name=".LoginMain"
-            android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.Appbar" />
         <activity
             android:name=".MessageboardMain"
-            android:parentActivityName=".MainActivity"
+
             android:theme="@style/AppTheme.Appbar">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
@@ -59,7 +58,7 @@
         </activity>
         <activity
             android:name=".MessageboardNew"
-            android:parentActivityName=".MessageboardMain"
+
             android:theme="@style/AppTheme.Appbar"></activity>
         <activity
             android:name=".MainActivity"
@@ -79,7 +78,7 @@
         </activity>
         <activity
             android:name=".MessageboardDetail"
-            android:parentActivityName=".MessageboardMain"
+
             android:theme="@style/AppTheme.Appbar" />
         <uses-library
             android:name="org.apache.http.legacy"

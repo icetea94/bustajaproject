@@ -52,5 +52,4 @@ public class MessageboardItem {
     public MessageboardItem() {
     }
 
-
 }

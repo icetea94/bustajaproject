@@ -46,7 +46,7 @@ public class MessageboardNew extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd ");
         String date = sdf.format(new Date());
 
@@ -103,12 +103,12 @@ public class MessageboardNew extends AppCompatActivity {
 
 
 
-//
-                FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
-                DatabaseReference rootRef2=firebaseDatabase.getReference();//괄호 안이 비어있으면 최상위 노드를 뜻함
-                MessageboardItem boardItem = new MessageboardItem(title,contents,dates,emailid);
-                DatabaseReference boardRef= rootRef2.child("Boards");
-                boardRef.push().setValue(boardItem);
+////
+//                FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
+//                DatabaseReference rootRef2=firebaseDatabase.getReference();//괄호 안이 비어있으면 최상위 노드를 뜻함
+//                MessageboardItem boardItem = new MessageboardItem(title,contents,dates,emailid);
+//                DatabaseReference boardRef= rootRef2.child("Boards");
+//                boardRef.push().setValue(boardItem);
 
 
 

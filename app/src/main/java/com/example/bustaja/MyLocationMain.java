@@ -103,7 +103,7 @@ public class MyLocationMain extends AppCompatActivity
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);

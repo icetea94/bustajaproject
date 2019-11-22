@@ -24,7 +24,7 @@ public class AccessMain extends AppCompatActivity {
         AccessBtn2 =findViewById(R.id.AccessBtn2);
         AccessBtn3 =findViewById(R.id.AccessBtn3);
         setTitle("접근 권한");
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
 

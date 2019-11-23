@@ -309,7 +309,7 @@ public class MessageboardMain extends AppCompatActivity {
                         //세컨드 액티비티로 가는 인텐트가 돌아오도록
                         startActivityForResult(intent, 1);
 
-
+//hometest//
                     }
                 }
                 break;

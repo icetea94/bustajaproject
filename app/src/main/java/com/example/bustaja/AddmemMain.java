@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -23,14 +24,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.SignInMethodQueryResult;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.List;
 import java.util.regex.Pattern;
+
+import static com.google.firebase.FirebaseError.ERROR_EMAIL_ALREADY_IN_USE;
 
 public class AddmemMain extends AppCompatActivity {
     TextView tv_addmem_id,tv_id_rule,tv_addmem_pw,tv_pw_rule,tv_addmem_pw_confirm,tv_pw_confirm_rule;
@@ -95,13 +102,21 @@ public class AddmemMain extends AppCompatActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(AddmemMain.this, "회원가입 성공~", Toast.LENGTH_SHORT).show();
-                              } else {
-                            // 회원가입 실패
-                            Toast.makeText(AddmemMain.this, "회원가입 실패!", Toast.LENGTH_SHORT).show();
+                        if (!task.isSuccessful()) {
+
+                            if (task.getException() instanceof FirebaseAuthUserCollisionException) {
+                                Toast.makeText(AddmemMain.this, "이미 메일을 가진 사용자가 존재합니다", Toast.LENGTH_SHORT).show();
+                                et_addmem_id_input.requestFocus();
+                                return;
+                            }
                         }
-                    }
+                            else{
+                                Toast.makeText(AddmemMain.this, "회원가입 성공~", Toast.LENGTH_SHORT).show();
+                            }
+
+
+                        }
+
                 });
     }
 
@@ -119,6 +134,7 @@ public class AddmemMain extends AppCompatActivity {
         }
     }
 
+
     // 비밀번호 유효성 검사
     private boolean isValidPasswd() {
         String password = et_addmem_pw_input.getText().toString();
@@ -132,6 +148,10 @@ public class AddmemMain extends AppCompatActivity {
             return true;
         }
     }
+
+
+
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
@@ -141,6 +161,7 @@ public class AddmemMain extends AppCompatActivity {
     }
 
     public void clickAddmem(View view) {
+
 
 
         if(et_addmem_id_input.getText().toString().length() == 0) {
@@ -175,7 +196,6 @@ public class AddmemMain extends AppCompatActivity {
             et_addmem_pw_input.requestFocus();
             return;
         }
-
         else {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("재확인");
@@ -190,7 +210,6 @@ public class AddmemMain extends AppCompatActivity {
                     String email = et_addmem_id_input.getText().toString();
                     String password = et_addmem_pw_input.getText().toString();
 
-                    Toast.makeText(AddmemMain.this, "회원가입 성공!!", Toast.LENGTH_LONG).show();
                     Intent result = new Intent();
                     // 자신을 호출한 Activity로 데이터를 보낸다.
                     setResult(RESULT_OK, result);
@@ -202,14 +221,23 @@ public class AddmemMain extends AppCompatActivity {
 
                     MemberVO member= new MemberVO(email,password);
                     //'persons'노드를 새로 생성
+                    if(email.contains(member.email)){
+                        Toast.makeText(AddmemMain.this, "이미 메일을 가진 사용자가 존재합니다", Toast.LENGTH_SHORT).show();
+                        et_addmem_id_input.setBackgroundColor(Color.RED);
+                        et_addmem_id_input.requestFocus();
+                        return;
+                    }else{
+                        et_addmem_id_input.setBackgroundColor(0xff0099FF);
+                    }
                     DatabaseReference personRef= rootRef.child("members");
                     personRef.push().setValue(member);
 
+                    Toast.makeText(AddmemMain.this, "회원가입 성공!!", Toast.LENGTH_LONG).show();
                     //'persons'라는 노드에 리스너 붙이기
                     personRef.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            //persons노드는 여러개의 자식노드가 있으므로
+                            //persons노드는 여러 자식노드가 있으므로
                             StringBuffer buffer= new StringBuffer();
                             for(DataSnapshot snapshot: dataSnapshot.getChildren()){
 

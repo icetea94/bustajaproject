@@ -13,13 +13,13 @@ import androidx.fragment.app.FragmentPagerAdapter;
 public class BusMainAdapter extends FragmentPagerAdapter {
 
     Fragment[] fragments = new Fragment[2];
-    String [] pageTitles=new String[]{"즐겨찾기","버스정보"};
+    String [] pageTitles=new String[]{"버스정보","즐겨찾기"};
 
 
     public BusMainAdapter(@NonNull FragmentManager fm) {
         super(fm);
-        fragments[1] = new CityFragment();
-        fragments[0] = new FavoriteFragment();
+        fragments[0] = new CityFragment();
+        fragments[1] = new FavoriteFragment();
 
     }
 

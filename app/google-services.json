@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "402602672713-lie7odel3feppbvvq3indrefp6ar2e28.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bustaja",
+            "certificate_hash": "02bf87ce34bb39a7405e85237683c413334f8185"
+          }
+        },
+        {
           "client_id": "402602672713-jlg8t314h1t6f29pf8v8ln48dkrg8q79.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

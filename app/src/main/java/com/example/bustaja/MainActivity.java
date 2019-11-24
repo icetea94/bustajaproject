@@ -31,7 +31,7 @@ import com.google.firebase.auth.FirebaseUser;
 import java.util.ArrayList;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  {
 
     ArrayList<CityItem> cityItem = new ArrayList<>();
     NavigationView navigationView;
@@ -55,7 +55,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        firebaseAuth = FirebaseAuth.getInstance();
+
+
         backPressCloseHandler = new BackPressCloseHandler(this);
         city_listview = findViewById(R.id.city_listview);
         favor_listview = findViewById(R.id.favor_listview);
@@ -74,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser googleuser = mAuth.getCurrentUser();
+
         menu_login = navigationView.getMenu().findItem(R.id.menu_login);
 
 
@@ -83,9 +85,12 @@ public class MainActivity extends AppCompatActivity {
             String headerid = user.getEmail();
             header_id.setText(headerid);
             menu_login.setTitle("프로필");
-        } else {
+        }else if(user==null||googleuser==null){
             menu_login.setTitle("로그인");
         }
+
+
+
 
         tabLayout = findViewById(R.id.layout_tab);
         pager = findViewById(R.id.pager);
@@ -100,8 +105,11 @@ public class MainActivity extends AppCompatActivity {
                 getSupportActionBar().setSubtitle(tab.getText()); //서브타이틀을 갖고와서 액션바에 붙이기
                 int numTab = tab.getPosition();
                 if(numTab==1){
-
+                    searchView.setVisibility(View.GONE);
+                }else if(numTab==0){
+                    searchView.setVisibility(View.VISIBLE);
                 }
+
             }
 
             @Override
@@ -132,9 +140,9 @@ public class MainActivity extends AppCompatActivity {
 
                         int index = pager.getCurrentItem();
 
-                        if (index == 1) {
+                        if (index == 0) {
                             //특정페이지로 이동
-                            pager.setCurrentItem(index - 1, true);
+                            pager.setCurrentItem(index +1, true);
                         }
                         break;
                     case R.id.menu_location:
@@ -208,7 +216,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (user != null || googleuser != null) {
             menu_login.setTitle("프로필");
-        } else {
+        } else if(user==null||googleuser==null){
             menu_login.setTitle("로그인");
         }
 
@@ -245,13 +253,69 @@ public class MainActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         drawerToggle.onOptionsItemSelected(item);
 
+
+
         // 스위치 케이스 로 토스트 달아놓기
         return super.onOptionsItemSelected(item);
     }
+    DrawerLayout.DrawerListener myDrawerListener = new DrawerLayout.DrawerListener() {
+        @Override
+        public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
 
 
+
+        }
+
+        @Override
+        public void onDrawerOpened(@NonNull View drawerView) {
+
+
+
+        }
+
+        @Override
+        public void onDrawerClosed(@NonNull View drawerView) {
+
+
+        }
+
+        @Override
+        public void onDrawerStateChanged(int newState) {
+
+        }
+    };
+
+    @Override
+    protected void onResume() {
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser googleuser = mAuth.getCurrentUser();
+
+        menu_login = navigationView.getMenu().findItem(R.id.menu_login);
+
+
+        if (user != null || googleuser != null) {
+            View nav_header_view = navigationView.getHeaderView(0);
+            header_id = nav_header_view.findViewById(R.id.header_id);
+            String headerid = user.getEmail();
+            header_id.setText(headerid);
+            menu_login.setTitle("프로필");
+        }else if(user==null||googleuser==null){
+            menu_login.setTitle("로그인");
+            View nav_header_view = navigationView.getHeaderView(0);
+            header_id = nav_header_view.findViewById(R.id.header_id);
+            String noheaderid ="로그인해주세요";
+            header_id.setText(noheaderid);
+        }
+
+        super.onResume();
+    }
 }//main activity

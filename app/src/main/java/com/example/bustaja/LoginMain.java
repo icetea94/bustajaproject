@@ -56,6 +56,7 @@ public class LoginMain extends AppCompatActivity implements GoogleApiClient.OnCo
     ProgressDialog progressDialog;
     FirebaseAuth firebaseAuth;
     NavigationView navigationView;
+    MenuItem menu_login;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +74,7 @@ public class LoginMain extends AppCompatActivity implements GoogleApiClient.OnCo
         navigationView = findViewById(R.id.nav);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle("로그인");
+        mAuth = FirebaseAuth.getInstance();
 
         if(firebaseAuth.getCurrentUser() != null){
             //이미 로그인 되었다면 이 액티비티를 종료함
@@ -115,6 +117,9 @@ public class LoginMain extends AppCompatActivity implements GoogleApiClient.OnCo
                                 progressDialog.show();
                                 signOut();
                                 Toast.makeText(LoginMain.this, "구글 로그아웃 성공", Toast.LENGTH_SHORT).show();
+
+
+
                             }
                         }).setNegativeButton("아니오",
                         new DialogInterface.OnClickListener() {
@@ -174,6 +179,7 @@ public class LoginMain extends AppCompatActivity implements GoogleApiClient.OnCo
                         if (task.isSuccessful()) {
                             // 로그인 성공
                             Toast.makeText(LoginMain.this, "로그인 성공", Toast.LENGTH_SHORT).show();
+
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                             startActivity(intent);
 
@@ -232,8 +238,10 @@ public class LoginMain extends AppCompatActivity implements GoogleApiClient.OnCo
 
                                 GoogleMemberVO googlemember = new GoogleMemberVO(googlemail);
                                 DatabaseReference personRef = rootRef.child("members");
-                                personRef.push().setValue(googlemember);
-                                //'persons'라는 노드에 리스너 붙이기
+                                if(!googlemail.equals(googlemember.googlemail)) {
+                                    personRef.push().setValue(googlemember);
+                                    //'persons'라는 노드에 리스너 붙이기
+                                }
                                 personRef.addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -253,12 +261,13 @@ public class LoginMain extends AppCompatActivity implements GoogleApiClient.OnCo
                                     }
                                 });
                                 Toast.makeText(LoginMain.this, "구글 로그인 인증 성공", Toast.LENGTH_SHORT).show();
-                                finish();
-//                            }
+
+                                 finish();
+//                            }                                                                                                    //
 //                            else{
 //                                Toast.makeText(LoginMain.this, "구글 로그인 인증 성공", Toast.LENGTH_SHORT).show();
 //                                finish();
-//                            }
+//                            }                                                                                                  //
                         }
 
                     }
@@ -286,7 +295,6 @@ public class LoginMain extends AppCompatActivity implements GoogleApiClient.OnCo
                         public void onResult(@NonNull Status status) {
                             if (status.isSuccess()) {
                                 Log.v("알림", "구글 로그아웃 성공");
-
                                 setResult(1);
                             } else {
                                 setResult(0);

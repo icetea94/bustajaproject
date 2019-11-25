@@ -1,7 +1,8 @@
 package com.example.bustaja;
 
 
-import java.io.Serializable;
+
+
 
 public class MessageboardItem {
 

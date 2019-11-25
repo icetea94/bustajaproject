@@ -3,6 +3,7 @@ package com.example.bustaja;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +22,7 @@ import java.util.ArrayList;
 
 public class MessageboardAdapter extends RecyclerView.Adapter implements Serializable {
 
-    private ArrayList<MessageboardItem> boardItem;
+    ArrayList<MessageboardItem> boardItem;
     Context context;
 
 
@@ -81,6 +82,7 @@ public class MessageboardAdapter extends RecyclerView.Adapter implements Seriali
         MessageboardAdapter.MyViewHolder holder5 = (MessageboardAdapter.MyViewHolder) holder;
 
         holder5.board_title.setText(boardItem.get(position).getBoardTitle());
+
         holder5.board_nickname.setText(boardItem.get(position).getBoardNick());
         holder5.board_time.setText(boardItem.get(position).getBoardDate());
         holder5.board_contents.setText(boardItem.get(position).getBoardContents());

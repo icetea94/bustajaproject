@@ -238,7 +238,7 @@ public class LoginMain extends AppCompatActivity implements GoogleApiClient.OnCo
 
                                 GoogleMemberVO googlemember = new GoogleMemberVO(googlemail);
                                 DatabaseReference personRef = rootRef.child("members");
-                                if(!googlemail.equals(googlemember.googlemail)) {
+                                if(!googlemail.contains(googlemember.googlemail)) {
                                     personRef.push().setValue(googlemember);
                                     //'persons'라는 노드에 리스너 붙이기
                                 }

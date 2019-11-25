@@ -1,5 +1,6 @@
 package com.example.bustaja;
 
+
 import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -92,7 +93,7 @@ public class MessageboardMain extends AppCompatActivity {
                 boardItem.add(0,messageItem);
                 //리스트뷰 갱신
                 boardAdapter2.notifyDataSetChanged();
-               // board_listview.setSelection(boardItem.size()-1);//화면 포커스 이동
+                // board_listview.setSelection(boardItem.size()-1);//화면 포커스 이동
             }
 
             @Override
@@ -212,10 +213,10 @@ public class MessageboardMain extends AppCompatActivity {
                     String date = data.getStringExtra("date");
                     String emailid = data.getStringExtra("nick");
                     Log.i("moya",title);
-                    boardItem.add(0, new MessageboardItem("" + title, "" + contents, "" + date, "" + emailid));
-                    boardAdapter2 = new MessageboardAdapter(boardItem, this);
-
-                    board_listview.setAdapter(boardAdapter2);
+//                    boardItem.add(0, new MessageboardItem("" + title, "" + contents, "" + date, "" + emailid));
+//                    boardAdapter2 = new MessageboardAdapter(boardItem, this);
+//
+//                    board_listview.setAdapter(boardAdapter2);
                     firebaseDatabase=FirebaseDatabase.getInstance();
                     rootRef2=firebaseDatabase.getReference();//괄호 안이 비어있으면 최상위 노드를 뜻함
                     MessageboardItem boardItem = new MessageboardItem(title,contents,date,emailid);

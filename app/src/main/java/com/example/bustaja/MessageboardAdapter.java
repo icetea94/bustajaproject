@@ -82,7 +82,6 @@ public class MessageboardAdapter extends RecyclerView.Adapter implements Seriali
         MessageboardAdapter.MyViewHolder holder5 = (MessageboardAdapter.MyViewHolder) holder;
 
         holder5.board_title.setText(boardItem.get(position).getBoardTitle());
-
         holder5.board_nickname.setText(boardItem.get(position).getBoardNick());
         holder5.board_time.setText(boardItem.get(position).getBoardDate());
         holder5.board_contents.setText(boardItem.get(position).getBoardContents());

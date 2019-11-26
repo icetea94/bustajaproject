@@ -27,7 +27,7 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.MyViewHolder> 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-            public TextView city_bus_num, city_bus_stop;
+            public TextView city_bus_num, city_bus_stop ,city_route_id;
 
 
             public MyViewHolder(View view) {
@@ -36,6 +36,7 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.MyViewHolder> 
 
                 city_bus_num = view.findViewById(R.id.city_bus_num);
                 city_bus_stop =view.findViewById(R.id.city_bus_stop);
+                city_route_id =view.findViewById(R.id.city_route_id);
 
                 view.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -83,7 +84,7 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.MyViewHolder> 
 
             holder3.city_bus_num.setText(cityItem.get(position).getCitybusnum());
             holder3.city_bus_stop.setText(cityItem.get(position).getCitybusstop());
-
+            holder3.city_route_id.setText(cityItem.get(position).getCityRouteId());
 
         }
 

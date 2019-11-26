@@ -1,8 +1,10 @@
 package com.example.bustaja;
 
 
+import com.google.firebase.database.Exclude;
 
-
+import java.util.HashMap;
+import java.util.Map;
 
 public class MessageboardItem {
 
@@ -53,4 +55,13 @@ public class MessageboardItem {
     public MessageboardItem() {
     }
 
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("title", BoardTitle);
+        result.put("date", BoardDate);
+        result.put("nick", BoardNick);
+        result.put("contents", BoardContents);
+        return result;
+    }
 }

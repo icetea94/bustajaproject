@@ -18,6 +18,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
@@ -26,7 +30,8 @@ public class FavoriteFragment extends Fragment {
     TextView favor_empty_tv;
     ArrayList<FavorItem> favorItem = new ArrayList<>();
     FavorAdapter favorAdapter;
-
+    FloatingActionButton favor_refresh_fab;
+    SwipeRefreshLayout swipeRefreshLayout;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,13 +49,30 @@ public class FavoriteFragment extends Fragment {
 
 
         favorAdapter = new FavorAdapter(favorItem,getContext());
-
+swipeRefreshLayout=view.findViewById(R.id.favor_refresh);
         favor_listview = view.findViewById(R.id.favor_listview);
         favor_empty_tv = view.findViewById(R.id.favor_empty_tv);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         favor_listview.setLayoutManager(mLayoutManager);
         favor_listview.setAdapter(favorAdapter);
+        favor_refresh_fab=view.findViewById(R.id.favor_refresh_fab);
 
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+                favorAdapter.notifyDataSetChanged();
+                swipeRefreshLayout.setRefreshing(true);
+            }
+        });
+
+        favor_refresh_fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "최신 정보를 불러오는 중입니다", Snackbar.LENGTH_SHORT).setAction("Refresh", null).show();
+                favorAdapter.notifyDataSetChanged();
+            }
+        });
         if (favorItem.isEmpty()) {
             favor_listview.setVisibility(View.GONE);
             favor_empty_tv.setVisibility(View.VISIBLE);

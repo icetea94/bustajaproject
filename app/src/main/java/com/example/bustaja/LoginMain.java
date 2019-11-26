@@ -288,6 +288,7 @@ public class LoginMain extends AppCompatActivity implements GoogleApiClient.OnCo
             @Override
             public void onConnected(@Nullable Bundle bundle) {
                 FirebaseAuth.getInstance().signOut();
+
                 mAuth.signOut();
                 if (mGoogleApiClient.isConnected()) {
                     Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(new ResultCallback<Status>() {

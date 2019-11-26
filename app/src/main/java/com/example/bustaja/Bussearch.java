@@ -1,13 +1,16 @@
 package com.example.bustaja;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -23,6 +26,7 @@ public class Bussearch extends AppCompatActivity {
 
     private final String TAG = "myTag";
     private final String key = "HPhv7q1fispfruW2r4aROp%2FvBjNa6M0jg%2F1FVE4BliwYYTY4oWQ54%2Fs10n8Ny2eFJcTKZ21NEbFaC%2BSs%2BGWNSQ%3D%3D";
+
     private final String endPoint = "http://61.43.246.153/openapi-data/service/busanBIMS2";
 
     //xml 변수
@@ -58,15 +62,26 @@ public class Bussearch extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //상태바 없애기(FullScreen)
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_main);
-
+//        //상태바 없애기(FullScreen)
+//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+//                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.bussearch_main);
+        setTitle("실시간 위치 조회");
         //xml 아이디 얻어오기
         getXmlId();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         buffer = new StringBuffer();
     }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     //검색하기 onclick버튼
     public void search(View view) {
         //사용자한테 출발정류장, 도착정류장 알아오기.
@@ -103,8 +118,8 @@ public class Bussearch extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Log.d(TAG, car1 + " " + min1 + " " + station1);
-                        Log.d(TAG, car2 + " " + min2 + " " + station2);
+//                        Log.d(TAG, car1 + " " + min1 + " " + station1);
+//                        Log.d(TAG, car2 + " " + min2 + " " + station2);
                         if(car1 == null) {
                             buffer.append("도착 정보 없음");
                         } else {
@@ -136,7 +151,7 @@ public class Bussearch extends AppCompatActivity {
      */
     public void getStationId(String station) {
         String stationUrl = endPoint + "/busStop?arsno=" + station + "&serviceKey=" + key;
-        Log.d(TAG, "정류장명 -> 정류장Id : " + stationUrl);
+//        Log.d(TAG, "정류장명 -> 정류장Id : " + stationUrl);
 
         try {
             setUrlNParser(stationUrl);
@@ -231,7 +246,7 @@ public class Bussearch extends AppCompatActivity {
      */
     public void userWant(String busNumId, String stationId) {
         String dataUrl = endPoint + "/busStopArr?bstopid=" + stationId + "&lineid=" + busNumId + "&serviceKey=" + key;
-        Log.d(TAG, dataUrl);
+//        Log.d(TAG, dataUrl);
 
         try {
             setUrlNParser(dataUrl);
@@ -337,5 +352,10 @@ public class Bussearch extends AppCompatActivity {
         xmlBusNum = findViewById(R.id.busNum);
         xmlStationArsno = findViewById(R.id.stationArsno);
         xmlShowInfo = findViewById(R.id.showInfo);
+    }
+
+    public void search2(View view) {
+        Intent intent = new Intent(Bussearch.this, BusParsingMain.class);
+        startActivity(intent);
     }
 }

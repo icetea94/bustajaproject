@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/fm_favor"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center_vertical"
     android:gravity="center_vertical"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/favor_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/favor_listview"
         android:layout_width="match_parent"
@@ -15,6 +20,25 @@
         android:scrollbars="vertical"
         android:dividerHeight="4dp">
     </androidx.recyclerview.widget.RecyclerView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="55dp"
+        android:windowSoftInputMode = "adjustResize"
+        android:id="@+id/favor_refresh_fab"
+        android:clickable="true"
+        android:fitsSystemWindows ="true"
+        android:visibility="visible"
+        app:rippleColor="@color/white"
+        android:elevation="6dp"
+        android:backgroundTint="@color/busblue"
+        app:fabSize="normal"
+        android:src="@drawable/ic_refresh_black_24dp"/>
 
     <TextView android:id="@+id/favor_empty_tv"
         android:layout_width="match_parent"
@@ -27,4 +51,4 @@
         android:gravity="center"/>
 
 
-</LinearLayout>
+</RelativeLayout>

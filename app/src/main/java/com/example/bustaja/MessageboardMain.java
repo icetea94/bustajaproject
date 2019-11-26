@@ -84,31 +84,21 @@ public class MessageboardMain extends AppCompatActivity {
 
         FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
         boardRef=firebaseDatabase.getReference("Boards");
-        boardRef.addChildEventListener(new ChildEventListener() {
+        boardRef.addValueEventListener(new ValueEventListener() {
+
+
             @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 // 새로 추가된 데이터(값: MessageItem객체)
                 MessageboardItem messageItem=dataSnapshot.getValue(MessageboardItem.class);
                 //새로운 메세지를 리스트뷰에 추가하기 ArrayList에 추가하기
+
+
+
                 boardItem.add(0,messageItem);
-                //리스트뷰 갱신
+//                //리스트뷰 갱신
                 boardAdapter2.notifyDataSetChanged();
                 // board_listview.setSelection(boardItem.size()-1);//화면 포커스 이동
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
             }
 
             @Override

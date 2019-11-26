@@ -2,6 +2,7 @@ package com.example.bustaja;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -10,8 +11,12 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.TextAppearanceSpan;
@@ -40,7 +45,6 @@ public class MainActivity extends AppCompatActivity  {
     TabLayout tabLayout;
     ViewPager pager;
     BusMainAdapter adapter;
-    SearchView searchView;
     MenuItem searchItem;
     InputMethodManager im;
     BackPressCloseHandler backPressCloseHandler;
@@ -105,9 +109,9 @@ public class MainActivity extends AppCompatActivity  {
                 getSupportActionBar().setSubtitle(tab.getText()); //서브타이틀을 갖고와서 액션바에 붙이기
                 int numTab = tab.getPosition();
                 if(numTab==1){
-                    searchView.setVisibility(View.GONE);
+                    searchItem.setVisible(false);
                 }else if(numTab==0){
-                    searchView.setVisibility(View.VISIBLE);
+                    searchItem.setVisible(true);
                 }
 
             }
@@ -204,8 +208,6 @@ public class MainActivity extends AppCompatActivity  {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.option, menu);
         searchItem = menu.findItem(R.id.option_search);
-        searchView = (SearchView) searchItem.getActionView();
-        searchView.setQueryHint("버스 번호 입력");
         menu_login = navigationView.getMenu().findItem(R.id.menu_login);
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -220,36 +222,9 @@ public class MainActivity extends AppCompatActivity  {
             menu_login.setTitle("로그인");
         }
 
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-
-                for (int i = 0; i < cityItem.size(); i++) {
-                    if (cityItem.get(i).getCitybusnum().contains(query) ){//|| cityItem.get(i).getCitybusstop().contains(query)//) {
-//.getBusnum()
-                        searchView.setQuery("", false);
-                        searchView.setIconified(true);
-
-                        Toast.makeText(MainActivity.this, "검색이 완료되었습니다.", Toast.LENGTH_SHORT).show();
-                        city_listview.scrollToPosition(i);
-                        return true;
-                    }
-                }
 
 
-                Toast.makeText(getApplicationContext(), "일치하는 정보가 없습니다.", Toast.LENGTH_SHORT).show();
-                im.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
 
-                return true;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String query) {
-//               loadHistory(query);
-
-                return true;
-            }
-        });
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -257,38 +232,22 @@ public class MainActivity extends AppCompatActivity  {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         drawerToggle.onOptionsItemSelected(item);
+            int id = item.getItemId();
 
+            switch (id) {
+                case R.id.option_search:
 
+                            Intent intent = new Intent(this, Bussearch.class);
+                            //세컨드 액티비티로 가는 인텐트가 돌아오도록
+                            startActivity(intent);
 
+                        break;
+           }
         // 스위치 케이스 로 토스트 달아놓기
         return super.onOptionsItemSelected(item);
     }
-    DrawerLayout.DrawerListener myDrawerListener = new DrawerLayout.DrawerListener() {
-        @Override
-        public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
 
 
-
-        }
-
-        @Override
-        public void onDrawerOpened(@NonNull View drawerView) {
-
-
-
-        }
-
-        @Override
-        public void onDrawerClosed(@NonNull View drawerView) {
-
-
-        }
-
-        @Override
-        public void onDrawerStateChanged(int newState) {
-
-        }
-    };
 
     @Override
     protected void onResume() {

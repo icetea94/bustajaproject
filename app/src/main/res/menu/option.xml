@@ -7,7 +7,6 @@
         android:title="Search"
         android:icon="@android:drawable/ic_menu_search"
         android:iconTint="@color/black"
-        app:showAsAction="always"
-        app:actionViewClass="android.widget.SearchView" />
+        app:showAsAction="always" />
 
 </menu>

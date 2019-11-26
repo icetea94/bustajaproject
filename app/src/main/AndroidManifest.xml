@@ -17,9 +17,16 @@
         android:theme="@style/AppTheme.Appbar"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".BusParsingMain"
+
+            android:theme="@style/AppTheme.Appbar"></activity>
+        <activity
             android:name=".MyLocationMain"
 
             android:theme="@style/AppTheme.Appbar"></activity>
+        <activity
+            android:name=".BusWebinfo"
+            android:theme="@style/AppTheme.NoActionBar2"></activity>
 
         <activity
             android:name=".FindActivity"
@@ -41,6 +48,10 @@
             android:name=".AddmemMain"
 
             android:theme="@style/AppTheme.Appbar" />
+        <activity
+            android:name=".Bussearch"
+            android:theme="@style/AppTheme.Appbar"         />
+
         <activity
             android:name=".NoticeMain"
 

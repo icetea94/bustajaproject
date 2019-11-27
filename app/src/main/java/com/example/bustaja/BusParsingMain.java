@@ -2,9 +2,11 @@ package com.example.bustaja;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,37 +27,48 @@ public class BusParsingMain extends AppCompatActivity {
     ArrayList<ParsingItem> list = null;
     ParsingItem bus = null;
     RecyclerView recyclerView;
-    EditText editText;
+    EditText edittext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.busparsing_main);
+        setContentView(R.layout.busstopparsing_main);
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
-        editText = findViewById(R.id.edittext);
+        edittext = findViewById(R.id.edittext);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setTitle("정류소별 실시간 정차버스 조회");
 //        AsyncTask
-        MyAsyncTask myAsyncTask = new MyAsyncTask();
-        myAsyncTask.execute();
+//        MyAsyncTask myAsyncTask = new MyAsyncTask();
+//        myAsyncTask.execute();
     }
 
     public void clickse(View view) {
+
         MyAsyncTask myAsyncTask = new MyAsyncTask();
         myAsyncTask.execute();
-        String inputnum = editText.getText().toString();
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public class MyAsyncTask extends AsyncTask<String, Void, String> {
 
+        String stationNum = edittext.getText().toString();
+
         @Override
         protected String doInBackground(String... strings) {
 
-            requestUrl = "http://openapi.gbis.go.kr/ws/rest/busarrivalservice/station?serviceKey=" + dataKey + "&stationId=" + "200000078";
+
+            requestUrl = "http://openapi.gbis.go.kr/ws/rest/busarrivalservice/station?serviceKey=" + dataKey + "&stationId=" + stationNum;
             try {
                 boolean b_locationNo1 = false;
                 boolean b_plateNo1 = false;

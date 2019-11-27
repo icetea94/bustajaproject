@@ -16,13 +16,21 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class FavorAdapter extends RecyclerView.Adapter {
+public class FavorAdapter extends RecyclerView.Adapter implements Serializable {
 
     ArrayList<FavorItem> favorItem;
     Context context;
+
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference boardRef2;
+    DatabaseReference rootRef2;
 
     public class MyViewHolder extends RecyclerView.ViewHolder  implements View.OnCreateContextMenuListener {
 
@@ -40,14 +48,15 @@ public class FavorAdapter extends RecyclerView.Adapter {
                 @Override
                 public void onClick(View view) {
                     //클릭된 아이템뷰가 리사이클러 뷰에서 몇번째 index(position)인지 알아내기
-                    int position = getAdapterPosition();
-
-                    Toast.makeText(context, position + ":" + favorItem.get(position), Toast.LENGTH_SHORT).show();
+//                    int position = getAdapterPosition();
+//
+//                    Toast.makeText(context, position + ":" + favorItem.get(position), Toast.LENGTH_SHORT).show();
                 }
             });
 
 
         }
+
 
 
         @Override
@@ -66,6 +75,12 @@ public class FavorAdapter extends RecyclerView.Adapter {
                         favorItem.remove(getAdapterPosition());
                         notifyItemRemoved(getAdapterPosition());
                         notifyItemRangeChanged(getAdapterPosition(), favorItem.size());
+
+                        firebaseDatabase = FirebaseDatabase.getInstance();
+                        rootRef2 = firebaseDatabase.getReference();//괄호 안이 비어있으면 최상위 노드를 뜻함
+                        boardRef2 = rootRef2.child("Favors");
+                        boardRef2.removeValue();
+
 
                         break;
                 }
@@ -89,17 +104,26 @@ public class FavorAdapter extends RecyclerView.Adapter {
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.favor_list_item, parent, false);
-        MyViewHolder holder=new MyViewHolder(view);
+        MyViewHolder holder=new FavorAdapter.MyViewHolder(view);
         return holder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        MyViewHolder holder2=(MyViewHolder)holder;
+        FavorAdapter.MyViewHolder holder2=(FavorAdapter.MyViewHolder)holder;
 
-        holder2.bus_num.setText(favorItem.get(position).getBusNum());
-        holder2.busstop_first_final.setText(favorItem.get(position).getBusstopFF());
 
+        if(favorItem.get(position).getBusNum()==null){
+            holder2.bus_num.setText("");
+        }else{
+            holder2.bus_num.setText(favorItem.get(position).getBusNum());
+        }
+
+        if(favorItem.get(position).getBusstopFF()==null){
+            holder2.busstop_first_final.setText("");
+        }else{
+            holder2.busstop_first_final.setText(favorItem.get(position).getBusstopFF());
+        }
 
     }
 

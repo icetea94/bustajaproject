@@ -26,9 +26,9 @@ public class Bussearch extends AppCompatActivity {
 
     private final String TAG = "myTag";
     private final String key = "HPhv7q1fispfruW2r4aROp%2FvBjNa6M0jg%2F1FVE4BliwYYTY4oWQ54%2Fs10n8Ny2eFJcTKZ21NEbFaC%2BSs%2BGWNSQ%3D%3D";
-
-    private final String endPoint = "http://61.43.246.153/openapi-data/service/busanBIMS2";
-
+    private final String numKey= "";
+    private final String endPoint = "http://openapi.gbis.go.kr/ws/rest/busrouteservice/station?serviceKey=";
+    private final String endPoint2 = "http://61.43.246.153/openapi-data/service/busanBIMS2";
     //xml 변수
     private EditText xmlBusNum;
     private EditText xmlStationArsno;
@@ -150,8 +150,8 @@ public class Bussearch extends AppCompatActivity {
      * 조회하는 정류소정보 조회 서비스
      */
     public void getStationId(String station) {
-        String stationUrl = endPoint + "/busStop?arsno=" + station + "&serviceKey=" + key;
-//        Log.d(TAG, "정류장명 -> 정류장Id : " + stationUrl);
+        String stationUrl = endPoint + key + "&routeId=" + station;
+//        Log.d(TAG, "정류장명 -> 정류장Id : " + stationUrl);st
 
         try {
             setUrlNParser(stationUrl);
@@ -163,8 +163,8 @@ public class Bussearch extends AppCompatActivity {
                     case XmlPullParser.START_TAG:
                         tag = xpp.getName();
 
-                        if (tag.equals("item")) ; //첫번째 검색 결과
-                        else if (tag.equals("bstopId")) {
+                        if (tag.equals("busRouteStationList")) ; //첫번째 검색 결과
+                        else if (tag.equals("stationName")) {
                             xpp.next();
                             stationId = xpp.getText();
                         } else if (tag.equals("bstopArsno")) ;
@@ -177,7 +177,7 @@ public class Bussearch extends AppCompatActivity {
                         break;
                     case XmlPullParser.END_TAG:
                         tag = xpp.getName();
-                        if (tag.equals("item")); // 첫번째 검색 결과 종료.. 줄바꿈
+                        if (tag.equals("busRouteStationList")); // 첫번째 검색 결과 종료.. 줄바꿈
                         break;
                 } //end of switch~case
 
@@ -195,8 +195,9 @@ public class Bussearch extends AppCompatActivity {
      * 노선ID, 노선번호를 기준으로 버스종류, 회사이름, 출/도착지, 첫/막차시간, 배차간격을 조회하는 노선정보 조회 서비스
      */
     public void getBusId(String busNum) {
-        String busNumUrl = endPoint + "/busInfo?lineno=" + busNum + "&serviceKey=" + key;
-        Log.d(TAG,"버스번호 -> 버스id : " + busNumUrl);
+
+        String busNumUrl =  endPoint + key + "&routeId=" + busNum;
+
 
         try {
             setUrlNParser(busNumUrl);
@@ -208,7 +209,7 @@ public class Bussearch extends AppCompatActivity {
                     case XmlPullParser.START_TAG:
                         tag = xpp.getName();
 
-                        if (tag.equals("item")) ; //첫번째 검색 결과
+                        if (tag.equals("busRouteStationList")) ; //첫번째 검색 결과
                         else if (tag.equals("lineId")) {
                             xpp.next();
                             busNumId = xpp.getText();

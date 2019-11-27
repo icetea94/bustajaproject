@@ -8,7 +8,10 @@
     android:orientation="vertical"
     android:padding="8dp"
     tools:context=".MessageboardMain">
-
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/board_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/board_listview"
         android:layout_width="match_parent"
@@ -19,5 +22,15 @@
         android:horizontalSpacing="4dp"
         android:layout_height="match_parent">
     </androidx.recyclerview.widget.RecyclerView>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    <TextView android:id="@+id/board_empty_tv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="게시글이 없습니다."
+        android:visibility="gone"
+        android:textColor="@color/gray"
+        android:textStyle="bold"
+        android:textSize="14sp"
+        android:gravity="center"/>
 
 </RelativeLayout>

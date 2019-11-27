@@ -112,14 +112,16 @@ public class MessageReplaceFragment extends Fragment {
                         boardDetail.detail_title_tv.setText(replaceTitle);
                         boardDetail.detail_contents_tv.setText(replaceContents);
 
-
-
-
-//                FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
-//                DatabaseReference rootRef2=firebaseDatabase.getReference();//괄호 안이 비어있으면 최상위 노드를 뜻함
-//                DatabaseReference boardRef= rootRef2.child("Boards");
-//                        boardRef.updateChildren()
-
+                FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
+                DatabaseReference rootRef2=firebaseDatabase.getReference();//괄호 안이 비어있으면 최상위 노드를 뜻함
+                DatabaseReference boardRef= rootRef2.child("Boards").child("boardTitle");
+                DatabaseReference boardRef2=rootRef2.child("Boards").child("boardNick");
+                DatabaseReference boardRef3= rootRef2.child("Boards").child("boardContents");
+                DatabaseReference boardRef4=rootRef2.child("Boards").child("boardDate");
+                boardRef.setValue(replaceTitle);
+                boardRef2.setValue(replaceNick);
+                boardRef3.setValue(replaceContents);
+                boardRef4.setValue(replaceDate);
 
 
 

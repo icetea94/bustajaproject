@@ -29,6 +29,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -48,7 +49,8 @@ import java.util.List;
 
 
 public class MessageboardMain extends AppCompatActivity {
-    TextView board_nickname, board_title, board_contents, board_time;
+    SwipeRefreshLayout swipeRefreshLayout;
+    TextView board_nickname, board_title, board_contents, board_time,board_empty_tv;
 
     RecyclerView board_listview;
     MessageboardAdapter boardAdapter2;
@@ -67,6 +69,15 @@ public class MessageboardMain extends AppCompatActivity {
     DatabaseReference rootRef2;
 
     @Override
+    protected void onStart() {
+        boardAdapter2.notifyDataSetChanged();
+        board_listview.setAdapter(boardAdapter2);
+
+        super.onStart();
+
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.message_board_main);
@@ -74,31 +85,105 @@ public class MessageboardMain extends AppCompatActivity {
         board_nickname = findViewById(R.id.board_nickname);
         board_title = findViewById(R.id.board_title);
         board_contents = findViewById(R.id.board_contents);
+        board_empty_tv=findViewById(R.id.board_empty_tv);
         board_time = findViewById(R.id.board_time);
         board_listview = findViewById(R.id.board_listview);
         boardAdapter2 = new MessageboardAdapter(boardItem, this);
-        board_listview.setAdapter(boardAdapter2);
+        if (boardItem.isEmpty()) {
+            board_listview.setVisibility(View.GONE);
+            board_empty_tv.setVisibility(View.VISIBLE);
+        }
+        else {
+            board_listview.setVisibility(View.VISIBLE);
+            board_empty_tv.setVisibility(View.GONE);
+        }
         boardAdapter2.notifyDataSetChanged();
+        board_listview.setAdapter(boardAdapter2);
         firebaseAuth = FirebaseAuth.getInstance();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        swipeRefreshLayout=findViewById(R.id.board_refresh);
 
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                onResume();
+                boardAdapter2.notifyDataSetChanged();
+                board_listview.setAdapter(boardAdapter2);
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
         FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
         boardRef=firebaseDatabase.getReference("Boards");
         boardRef.addValueEventListener(new ValueEventListener() {
 
+//            @Override
+//            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+//                // 새로 추가된 데이터(값: MessageItem객체)
+//                MessageboardItem messageItem=dataSnapshot.getValue(MessageboardItem.class);
+//                //새로운 메세지를 리스트뷰에 추가하기 ArrayList에 추가하기
+//
+//                boardItem.add(0,messageItem);
+//
+////                //리스트뷰 갱신
+//                boardAdapter2.notifyDataSetChanged();
+//                // board_listview.setSelection(boardItem.size()-1);//화면 포커스 이동
+//                board_listview.setAdapter(boardAdapter2);
+//                if (boardItem.isEmpty()) {
+//                    board_listview.setVisibility(View.GONE);
+//                    board_empty_tv.setVisibility(View.VISIBLE);
+//                }
+//                else {
+//                    board_listview.setVisibility(View.VISIBLE);
+//                    board_empty_tv.setVisibility(View.GONE);
+//                }
+//            }
+//
+//            @Override
+//            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+//
+//                boardAdapter2.notifyDataSetChanged();
+//                // board_listview.setSelection(boardItem.size()-1);//화면 포커스 이동
+//                board_listview.setAdapter(boardAdapter2);
+//                if (boardItem.isEmpty()) {
+//                    board_listview.setVisibility(View.GONE);
+//                    board_empty_tv.setVisibility(View.VISIBLE);
+//                }
+//                else {
+//                    board_listview.setVisibility(View.VISIBLE);
+//                    board_empty_tv.setVisibility(View.GONE);
+//                }
+//            }
+//
+//            @Override
+//            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+//
+//            }
+//
+//            @Override
+//            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+//
+//            }
 
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                // 새로 추가된 데이터(값: MessageItem객체)
+            //     새로 추가된 데이터(값: MessageItem객체)
                 MessageboardItem messageItem=dataSnapshot.getValue(MessageboardItem.class);
                 //새로운 메세지를 리스트뷰에 추가하기 ArrayList에 추가하기
-
-
-
                 boardItem.add(0,messageItem);
+
 //                //리스트뷰 갱신
                 boardAdapter2.notifyDataSetChanged();
                 // board_listview.setSelection(boardItem.size()-1);//화면 포커스 이동
+                board_listview.setAdapter(boardAdapter2);
+
+                if (boardItem.isEmpty()) {
+                    board_listview.setVisibility(View.GONE);
+                    board_empty_tv.setVisibility(View.VISIBLE);
+                }
+                else {
+                    board_listview.setVisibility(View.VISIBLE);
+                    board_empty_tv.setVisibility(View.GONE);
+                }
             }
 
             @Override
@@ -221,7 +306,6 @@ public class MessageboardMain extends AppCompatActivity {
         }
     }
 
-
     //옵션메뉴 만들어주는 메소드
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -268,6 +352,18 @@ public class MessageboardMain extends AppCompatActivity {
         });
         return super.onCreateOptionsMenu(menu);
     }
+
+    @Override
+    protected void onResume() {
+
+        boardAdapter2.notifyDataSetChanged();
+        board_listview.setAdapter(boardAdapter2);
+
+
+        super.onResume();
+
+    }
+
 
 
     @Override

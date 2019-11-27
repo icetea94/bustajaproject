@@ -68,10 +68,15 @@ public class CityFragment extends Fragment {
             public void onRefresh() {
 
                 cityAdapter.notifyDataSetChanged();
-                swipeRefreshLayout.setRefreshing(true);
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
 //
+
+
+
+
+
 
 
         city_listview.addOnItemTouchListener(new CityFragment.RecyclerTouchListener(getContext(), city_listview, new MessageboardMain.ClickListener() {

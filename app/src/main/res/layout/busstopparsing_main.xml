@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".BusParsingMain">
+    <EditText
+        android:id="@+id/edittext"
+        android:enabled="true"
+        android:layout_width="320dp"
+        android:hint="정류소 번호 입력"
+        android:text=""
+        android:textColorHint="@color/black"
+        android:textColor="@color/busblue"
+        android:layout_height="wrap_content"/>
+
+<Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:drawableLeft="@drawable/ic_directions_bus_black_24dp"
+    android:drawableTint="@color/busblue"
+    android:textColor="@color/busblue"
+    android:background="@color/white"
+    android:text="조회하기"
+    android:layout_toRightOf="@+id/edittext"
+    android:onClick="clickse"/>
+
+
+    <!--리사이클러뷰-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_marginTop="60dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical" />
+
+    </RelativeLayout>

@@ -95,29 +95,25 @@ public class MessageboardDetail extends AppCompatActivity {
 
     public void clickBack(View view) {
 
-        String title = detail_title_tv.getText().toString();
-        String contents = detail_contents_tv.getText().toString();
-        String emailid = detail_nickid_tv.getText().toString();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd ");
-        String replacedate = sdf.format(new Date());
-        detail_date_tv.setText(replacedate);
-        String dates = detail_date_tv.getText().toString();
+//        String title = detail_title_tv.getText().toString();
+//        String contents = detail_contents_tv.getText().toString();
+//        String emailid = detail_nickid_tv.getText().toString();
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd ");
+//        String replacedate = sdf.format(new Date());
+//        detail_date_tv.setText(replacedate);
+//        String dates = detail_date_tv.getText().toString();
+//
+//        //복귀한 인텐트에 추가
+//        Intent intent = getIntent();
+//        intent.putExtra("title", title);
+//        intent.putExtra("contents", contents);
+//        intent.putExtra("date", dates);
+//        intent.putExtra("nick", emailid);
+//
+//        //액티비티의 결과라고 설정
+//        setResult(RESULT_OK, intent);
 
-        //복귀한 인텐트에 추가
-        Intent intent = getIntent();
-        intent.putExtra("title", title);
-        intent.putExtra("contents", contents);
-        intent.putExtra("date", dates);
-        intent.putExtra("nick", emailid);
 
-        //액티비티의 결과라고 설정
-        setResult(RESULT_OK, intent);
-
-//        FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
-//        DatabaseReference rootRef2=firebaseDatabase.getReference();//괄호 안이 비어있으면 최상위 노드를 뜻함
-//        DatabaseReference boardRef= rootRef2.child("Boards");
-//        MessageboardItem boardItem = new MessageboardItem(title,contents,dates,emailid);
-//        boardRef.setValue(boardItem);
 
         finish();
 
@@ -127,23 +123,24 @@ public class MessageboardDetail extends AppCompatActivity {
     public void clickReplace(View view) {
 
         FirebaseUser user = firebaseAuth.getCurrentUser();
-        String gettemail = user.getEmail();
+        if(user!=null) {
+            String gettemail = user.getEmail();
 
-        if(!gettemail.equals(detail_nickid_tv.getText().toString())){
-            AlertDialog dialog = new AlertDialog.Builder(this).setMessage("본인만 수정할 수 있습니다.").setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-            dialog.cancel();
-                }
-            }).create();
+            if (!gettemail.equals(detail_nickid_tv.getText().toString()) || user == null) {
+                AlertDialog dialog = new AlertDialog.Builder(this).setMessage("본인만 수정할 수 있습니다.").setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                }).create();
 
-            dialog.setCanceledOnTouchOutside(false);
-            dialog.show();
-        }
-        else {
-            getSupportFragmentManager().beginTransaction().replace(R.id.container, messageReplaceFragment).commit();
-            btn_replace.setVisibility(view.GONE);
-            btn_back.setVisibility(view.GONE);
+                dialog.setCanceledOnTouchOutside(false);
+                dialog.show();
+            } else {
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, messageReplaceFragment).commit();
+                btn_replace.setVisibility(view.GONE);
+                btn_back.setVisibility(view.GONE);
+            }
         }
     }
 

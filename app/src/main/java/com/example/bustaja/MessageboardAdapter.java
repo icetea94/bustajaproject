@@ -2,9 +2,13 @@ package com.example.bustaja;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
@@ -13,9 +17,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -25,8 +34,15 @@ public class MessageboardAdapter extends RecyclerView.Adapter implements Seriali
     ArrayList<MessageboardItem> boardItem;
     Context context;
 
+    RecyclerView board_listview;
+    MessageboardAdapter boardAdapter2;
+    public FirebaseAuth firebaseAuth;
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference boardRef3;
+    DatabaseReference rootRef3;
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener {
 
         public TextView board_nickname, board_title, board_contents, board_time;
 
@@ -39,7 +55,56 @@ public class MessageboardAdapter extends RecyclerView.Adapter implements Seriali
             board_title = view.findViewById(R.id.board_title);
             board_contents = view.findViewById(R.id.board_contents);
             board_time = view.findViewById(R.id.board_time);
+            view.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
+                @Override
+                public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+                    MenuItem Delete = menu.add(Menu.NONE, 1001, 1, "삭제");
+                    Delete.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem item) {
+                            switch (item.getItemId()) {
+                                case 1001:
+                                    int position = getAdapterPosition();
+                                    firebaseAuth = FirebaseAuth.getInstance();
+                                    FirebaseUser user = firebaseAuth.getCurrentUser();
+                                    String cd = boardItem.get(position).getBoardNick();
+                                    if(user!=null) {
+                                        String gettemail = user.getEmail();
 
+                                        if (!gettemail.equals(cd) || user == null) {
+                                            AlertDialog dialog = new AlertDialog.Builder(context).setMessage("본인만 삭제할 수 있습니다.").setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    dialog.cancel();
+                                                }
+                                            }).create();
+
+                                            dialog.setCanceledOnTouchOutside(false);
+                                            dialog.show();
+                                        } else if(gettemail.equals(cd) && user != null) {
+                                            boardItem.remove(getAdapterPosition());
+                                            notifyItemRemoved(getAdapterPosition());
+                                            notifyItemRangeChanged(getAdapterPosition(), boardItem.size());
+
+                                            firebaseDatabase = FirebaseDatabase.getInstance();
+                                            rootRef3 = firebaseDatabase.getReference();//괄호 안이 비어있으면 최상위 노드를 뜻함
+                                            boardRef3 = rootRef3.child("Boards");
+                                            boardRef3.removeValue();
+
+
+                                        }
+                                    }
+
+
+
+                                    break;
+                            }
+                            return false;
+                        }
+                    });
+
+                }
+            });
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -55,6 +120,11 @@ public class MessageboardAdapter extends RecyclerView.Adapter implements Seriali
 
                 }
             });
+
+        }
+
+        @Override
+        public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
 
         }
     }
@@ -80,6 +150,7 @@ public class MessageboardAdapter extends RecyclerView.Adapter implements Seriali
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
         MessageboardAdapter.MyViewHolder holder5 = (MessageboardAdapter.MyViewHolder) holder;
+
 
         holder5.board_title.setText(boardItem.get(position).getBoardTitle());
         holder5.board_nickname.setText(boardItem.get(position).getBoardNick());

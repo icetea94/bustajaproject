@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/back"
     tools:context=".ProfileActivity">
     <RelativeLayout
         android:orientation="vertical"
-        android:layout_margin="16dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -43,21 +43,23 @@
             android:layout_width="150dp"
             android:layout_below="@+id/textviewUserEmail"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="100dp"
-            android:textColor="@color/busblue"
+            android:layout_marginLeft="50dp"
+            android:textColor="@color/white"
             android:background="@drawable/bg_et"
+            android:backgroundTint="@color/busblue"
             android:text="로그아웃" />
 
         <Button
             android:id="@+id/Google_Logout2"
             android:layout_width="150dp"
             android:layout_height="50dp"
-            android:textColor="@color/busblue"
+            android:textColor="@color/white"
             android:text="구글 로그아웃"
             android:layout_marginTop="20dp"
             android:layout_below="@id/buttonLogout"
-            android:layout_marginLeft="100dp"
+            android:layout_marginLeft="50dp"
             android:background="@drawable/bg_et"
+            android:backgroundTint="@color/busblue"
             android:layout_marginRight="25dp"/>
 
         <com.example.bustaja.MyFontTextView
@@ -77,11 +79,18 @@
             android:id="@+id/tv_noticelogout"
             android:layout_gravity="center_horizontal"
             android:textColor="@color/red"
-            android:layout_margin="16dp"
-            android:textStyle="bold"
-            android:layout_below="@+id/textviewDelete"
+             android:textStyle="bold"
+            android:layout_marginTop="16dp"
+            android:layout_below="@+id/Google_Logout2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/black"
+            android:layout_alignParentBottom="true"/>
 
     </RelativeLayout>
 

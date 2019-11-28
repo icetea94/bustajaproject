@@ -41,7 +41,7 @@
         android:layout_marginTop="80dp"
         android:text="닉네임자리"
         android:maxLength="20"
-        android:textColor="@color/busblue" />
+        android:textColor="@color/black" />
 
     <TextView
         android:id="@+id/replace_date_tv"

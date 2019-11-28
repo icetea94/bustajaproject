@@ -2,6 +2,7 @@ package com.example.bustaja;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -59,15 +60,26 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.MyViewHolder> 
                             switch (item.getItemId()) {
                                 case 1002:
 //즐겨찾기 추가 코드
+
                                     int position = getAdapterPosition();
                                     String ab =cityItem.get(position).getCitybusnum();
                                     String cd = cityItem.get(position).getCitybusstop();
-
+                                    String ef = cityItem.get(position).getCityRouteId();
                                     firebaseDatabase = FirebaseDatabase.getInstance();
                                     rootRef2 = firebaseDatabase.getReference();//괄호 안이 비어있으면 최상위 노드를 뜻함
-                                    FavorItem favorItem2 = new FavorItem(""+ab,""+cd);
+                                    FavorItem favorItem2 = new FavorItem(""+ab,""+cd,""+ef);
                                     boardRef2 = rootRef2.child("Favors");
                                     boardRef2.push().setValue(favorItem2);
+                                    notifyDataSetChanged();
+
+//                                    SharedPreferences cityFavor;
+//
+//                                    cityFavor = context.getSharedPreferences("FavorList" + i, 0);
+//                                    SharedPreferences.Editor editor = cityFavor.edit();
+//                                    editor.putString("FavorNum", ab);
+//                                    editor.putString("FavorStop", cd);
+//                                    editor.putString("FavorId", ef);
+//                                    editor.commit();
 
                                     break;
                             }
@@ -78,22 +90,7 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.MyViewHolder> 
                 }
             });
 
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    //클릭된 아이템뷰가 리사이클러 뷰에서 몇번째 index(position)인지 알아내기
-                    int position = getAdapterPosition();
-
-//                        Toast.makeText(context,position+":"+cityItem.get(position),Toast.LENGTH_SHORT).show();
-
-
-                }
-            });
-
-
         }
-
-
     }
 
 

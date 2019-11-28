@@ -118,7 +118,6 @@ public class MyLocationMain extends AppCompatActivity
 
     @Override
     public void onMapReady(final GoogleMap googleMap) {
-        Log.d(TAG, "onMapReady :");
 
         mMap = googleMap;
 
@@ -184,7 +183,7 @@ public class MyLocationMain extends AppCompatActivity
             @Override
             public void onMapClick(LatLng latLng) {
 
-                Log.d( TAG, "onMapClick :");
+
             }
         });
     }
@@ -208,7 +207,8 @@ public class MyLocationMain extends AppCompatActivity
                 String markerSnippet = "위도:" + String.valueOf(location.getLatitude())
                         + " 경도:" + String.valueOf(location.getLongitude());
 
-                Log.d(TAG, "onLocationResult : " + markerSnippet);
+
+
 
 
                 //현재 위치에 마커 생성하고 이동
@@ -228,7 +228,7 @@ public class MyLocationMain extends AppCompatActivity
 
         if (!checkLocationServicesStatus()) {
 
-            Log.d(TAG, "startLocationUpdates : call showDialogForLocationServiceSetting");
+
             showDialogForLocationServiceSetting();
         }else {
 
@@ -242,12 +242,12 @@ public class MyLocationMain extends AppCompatActivity
             if (hasFineLocationPermission != PackageManager.PERMISSION_GRANTED ||
                     hasCoarseLocationPermission != PackageManager.PERMISSION_GRANTED   ) {
 
-                Log.d(TAG, "startLocationUpdates : 퍼미션 안가지고 있음");
+
                 return;
             }
 
 
-            Log.d(TAG, "startLocationUpdates : call mFusedLocationClient.requestLocationUpdates");
+
 
             mFusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper());
 
@@ -263,11 +263,12 @@ public class MyLocationMain extends AppCompatActivity
     protected void onStart() {
         super.onStart();
 
-        Log.d(TAG, "onStart");
+
 
         if (checkPermission()) {
 
-            Log.d(TAG, "onStart : call mFusedLocationClient.requestLocationUpdates");
+
+
             mFusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null);
 
             if (mMap!=null)
@@ -286,7 +287,7 @@ public class MyLocationMain extends AppCompatActivity
 
         if (mFusedLocationClient != null) {
 
-            Log.d(TAG, "onStop : call stopLocationUpdates");
+
             mFusedLocationClient.removeLocationUpdates(locationCallback);
         }
     }

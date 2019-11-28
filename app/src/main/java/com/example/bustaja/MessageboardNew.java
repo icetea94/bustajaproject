@@ -29,7 +29,9 @@ public class MessageboardNew extends AppCompatActivity {
     TextView reque, tv_wordnum, tv_nickid, tv_date;
     EditText et_title, et_contents;
     public FirebaseAuth firebaseAuth;
-
+    FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
+    DatabaseReference rootRef2=firebaseDatabase.getReference();//괄호 안이 비어있으면 최상위 노드를 뜻함
+    DatabaseReference boardRef;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,11 +107,15 @@ public class MessageboardNew extends AppCompatActivity {
 
 
 ////
-//                FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
-//                DatabaseReference rootRef2=firebaseDatabase.getReference();//괄호 안이 비어있으면 최상위 노드를 뜻함
+
 //                MessageboardItem boardItem = new MessageboardItem(title,contents,dates,emailid);
 //                DatabaseReference boardRef= rootRef2.child("Boards");
 //                boardRef.push().setValue(boardItem);
+                firebaseDatabase=FirebaseDatabase.getInstance();
+                rootRef2=firebaseDatabase.getReference();//괄호 안이 비어있으면 최상위 노드를 뜻함
+                MessageboardItem boardItem = new MessageboardItem(""+title,""+contents,""+dates,""+emailid);
+                boardRef= rootRef2.child("Boards");
+                boardRef.push().setValue(boardItem);
 
 
 

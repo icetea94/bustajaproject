@@ -1,7 +1,9 @@
 package com.example.bustaja;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -42,16 +44,18 @@ public class FavoriteFragment extends Fragment {
     SwipeRefreshLayout swipeRefreshLayout;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference boardRef2;
-
+    ProgressDialog progressDialog;
+    SharedPreferences cityFavor;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         firebaseDatabase=FirebaseDatabase.getInstance();
 
         boardRef2=firebaseDatabase.getReference("Favors");
-
+        progressDialog = new ProgressDialog(getContext());
         boardRef2.addChildEventListener(new ChildEventListener() {
 
 
@@ -96,7 +100,18 @@ public class FavoriteFragment extends Fragment {
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
+                
+                favorAdapter.notifyDataSetChanged();
+                favor_listview.setAdapter(favorAdapter);
+                // board_listview.setSelection(boardItem.size()-1);//화면 포커스 이동
+                if (favorItem.isEmpty()) {
+                    favor_listview.setVisibility(View.GONE);
+                    favor_empty_tv.setVisibility(View.VISIBLE);
+                }
+                else {
+                    favor_listview.setVisibility(View.VISIBLE);
+                    favor_empty_tv.setVisibility(View.GONE);
+                }
             }
 
             @Override
@@ -130,6 +145,38 @@ public class FavoriteFragment extends Fragment {
         favor_listview.setAdapter(favorAdapter);
         favor_refresh_fab=view.findViewById(R.id.favor_refresh_fab);
 
+
+
+
+
+
+
+        favor_listview.addOnItemTouchListener(new FavoriteFragment.RecyclerTouchListener(getContext(), favor_listview, new MessageboardMain.ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                FavorItem dict = favorItem.get(position);
+
+                Intent intent = new Intent(getContext(), BusWebinfo.class);
+
+                intent.putExtra("busnum", dict.getBusNum());
+                intent.putExtra("busstop", dict.getBusstopFF());
+                intent.putExtra("routeid", dict.getFavorRouteId());
+                progressDialog.setMessage("경기 버스정보 웹 화면으로 이동중입니다. \n잠시 기다려 주세요...");
+                progressDialog.show();
+
+                startActivity(intent);
+
+                progressDialog.dismiss();
+
+
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+
+
+            }
+        }));
 
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -169,6 +216,63 @@ public class FavoriteFragment extends Fragment {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.detach(this).attach(this).commit();
     }
+
+
+
+
+
+    public interface ClickListener {
+        void onClick(View view, int position);
+
+        void onLongClick(View view, int position);
+    }
+
+    public static class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {
+
+        private GestureDetector gestureDetector;
+        private MessageboardMain.ClickListener clickListener;
+
+        public RecyclerTouchListener(Context context, final RecyclerView recyclerView, final MessageboardMain.ClickListener clickListener) {
+            this.clickListener = clickListener;
+            gestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
+                @Override
+                public boolean onSingleTapUp(MotionEvent e) {
+                    return true;
+                }
+
+                @Override
+                public void onLongPress(MotionEvent e) {
+                    View child = recyclerView.findChildViewUnder(e.getX(), e.getY());
+                    if (child != null && clickListener != null) {
+                        clickListener.onLongClick(child, recyclerView.getChildAdapterPosition(child));
+                    }
+                }
+            });
+        }
+
+
+        @Override
+        public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+            View child = rv.findChildViewUnder(e.getX(), e.getY());
+            if (child != null && clickListener != null && gestureDetector.onTouchEvent(e)) {
+                clickListener.onClick(child, rv.getChildAdapterPosition(child));
+            }
+            return false;
+        }
+
+        @Override
+        public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+        }
+
+        @Override
+        public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+        }
+
+
+    }
+
+
+
 
 }
 

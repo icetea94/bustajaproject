@@ -12,6 +12,9 @@
         android:layout_width="320dp"
         android:hint="정류소 번호 입력"
         android:text=""
+        android:maxLines="1"
+        android:lines = "1"
+        android:singleLine = "true"
         android:textColorHint="@color/black"
         android:textColor="@color/busblue"
         android:layout_height="wrap_content"/>

@@ -38,7 +38,7 @@ public class ParsingAdapter  extends RecyclerView.Adapter<ParsingAdapter.MyViewH
         holder.locationNo1.setText(mList.get(position).locationNo1);
         holder.plateNo1.setText(mList.get(position).plateNo1);
         holder.routeId.setText(mList.get(position).routeId);
-        holder.stationId.setText(mList.get(position).stationId);
+
 
         //Click event
     }
@@ -53,7 +53,7 @@ public class ParsingAdapter  extends RecyclerView.Adapter<ParsingAdapter.MyViewH
         public TextView locationNo1;
         public TextView plateNo1;
         public TextView routeId;
-        public TextView stationId;
+
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -61,7 +61,7 @@ public class ParsingAdapter  extends RecyclerView.Adapter<ParsingAdapter.MyViewH
             locationNo1 = itemView.findViewById(R.id.tv_locationNo1);
             plateNo1 = itemView.findViewById(R.id.tv_plateNo1);
             routeId = itemView.findViewById(R.id.tv_routeId);
-            stationId = itemView.findViewById(R.id.tv_stationId);
+
 
         }
     }

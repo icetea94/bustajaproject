@@ -9,8 +9,6 @@ public class ParsingItem{
     String predictTime1;
     String predictTime2;
     String routeId;
-    String staOrder;
-    String stationId;
 
 
     public String getLocationNo1() {
@@ -37,13 +35,7 @@ public class ParsingItem{
         return routeId;
     }
 
-    public String getStaOrder() {
-        return staOrder;
-    }
 
-    public String getStationId() {
-        return stationId;
-    }
 
     public void setLocationNo1(String locationNo1) {
         this.locationNo1 = locationNo1;
@@ -69,11 +61,5 @@ public class ParsingItem{
         this.routeId = routeId;
     }
 
-    public void setStaOrder(String staOrder) {
-        this.staOrder = staOrder;
-    }
 
-    public void setStationId(String stationId) {
-        this.stationId = stationId;
-    }
 }

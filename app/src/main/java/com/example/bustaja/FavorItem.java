@@ -3,12 +3,23 @@ package com.example.bustaja;
 public class FavorItem {
     private String BusNum;
     private String BusstopFF;
+    private String FavorRouteId;
+
+    public FavorItem(String busNum, String busstopFF, String favorRouteId) {
+        BusNum = busNum;
+        BusstopFF = busstopFF;
+        FavorRouteId = favorRouteId;
+    }
 
     public FavorItem(){
     }
-    public FavorItem(String BusNum, String BusstopFF){
-        this.BusNum = BusNum;
-        this.BusstopFF = BusstopFF;
+
+    public String getFavorRouteId() {
+        return FavorRouteId;
+    }
+
+    public void setFavorRouteId(String favorRouteId) {
+        FavorRouteId = favorRouteId;
     }
 
     public String getBusNum() {

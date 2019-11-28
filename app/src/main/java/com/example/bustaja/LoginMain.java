@@ -221,27 +221,26 @@ public class LoginMain extends AppCompatActivity implements GoogleApiClient.OnCo
                         } else {
                             FirebaseUser user = mAuth.getCurrentUser();
                             String googlemail = user.getEmail();
-
-                            SharedPreferences googlepref;
-
-                            googlepref = getSharedPreferences("GoogleMailList",0);
-
-                            SharedPreferences.Editor editor = googlepref.edit();
-                            editor.putString("email",googlemail);
-                            editor.commit();
-                            String aftergooglemail =  googlepref.getString("email",googlemail);
+//
+//                            SharedPreferences googlepref;
+//
+//                            googlepref = getSharedPreferences("GoogleMailList",0);
+//
+//                            SharedPreferences.Editor editor = googlepref.edit();
+//                            editor.putString("email",googlemail);
+//                            editor.commit();
+//                            String aftergooglemail =  googlepref.getString("email",googlemail);
 
 //                            if(!aftergooglemail.contains(googlemail)) {
-
                                 FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
                                 DatabaseReference rootRef = firebaseDatabase.getReference();//괄호 안이 비어있으면 최상위 노드를 뜻함
 
                                 GoogleMemberVO googlemember = new GoogleMemberVO(googlemail);
                                 DatabaseReference personRef = rootRef.child("members");
-                                if(!googlemail.contains(googlemember.googlemail)) {
+//                                if(!googlemail.contains(googlemember.googlemail)) {
                                     personRef.push().setValue(googlemember);
                                     //'persons'라는 노드에 리스너 붙이기
-                                }
+//                                }
                                 personRef.addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

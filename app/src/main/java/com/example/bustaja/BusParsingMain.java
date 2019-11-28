@@ -42,9 +42,7 @@ public class BusParsingMain extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle("정류소별 실시간 정차버스 조회");
-//        AsyncTask
-//        MyAsyncTask myAsyncTask = new MyAsyncTask();
-//        myAsyncTask.execute();
+
     }
 
     public void clickse(View view) {
@@ -73,7 +71,7 @@ public class BusParsingMain extends AppCompatActivity {
                 boolean b_locationNo1 = false;
                 boolean b_plateNo1 = false;
                 boolean b_routeId = false;
-                boolean b_stationId = false;
+
 
                 URL url = new URL(requestUrl);
                 InputStream is = url.openStream();
@@ -103,7 +101,7 @@ public class BusParsingMain extends AppCompatActivity {
                             if (parser.getName().equals("locationNo1")) b_locationNo1 = true;
                             if (parser.getName().equals("plateNo1")) b_plateNo1 = true;
                             if (parser.getName().equals("routeId")) b_routeId = true;
-                            if (parser.getName().equals("stationId")) b_stationId = true;
+
                             break;
                         case XmlPullParser.TEXT:
                             if (b_locationNo1) {
@@ -115,9 +113,6 @@ public class BusParsingMain extends AppCompatActivity {
                             } else if (b_routeId) {
                                 bus.setRouteId(parser.getText());
                                 b_routeId = false;
-                            } else if (b_stationId) {
-                                bus.setStationId(parser.getText());
-                                b_stationId = false;
                             }
                             break;
                     }

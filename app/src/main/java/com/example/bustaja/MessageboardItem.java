@@ -9,13 +9,22 @@ public class MessageboardItem {
      String BoardContents;
      String BoardDate;
      String BoardNick;
-
-    public MessageboardItem(String boardTitle, String boardContents, String boardDate, String boardNick) {
+//     int Hitcount;
+    public MessageboardItem(String boardTitle, String boardContents, String boardDate, String boardNick) { //,int hitcount
         BoardTitle = boardTitle;
         BoardContents = boardContents;
         BoardDate = boardDate;
         BoardNick = boardNick;
+//        Hitcount=hitcount;
     }
+
+//    public int getHitcount() {
+//        return Hitcount;
+//    }
+//
+//    public void setHitcount(int hitcount) {
+//        Hitcount = hitcount;
+//    }
 
     public String getBoardTitle() {
         return BoardTitle;

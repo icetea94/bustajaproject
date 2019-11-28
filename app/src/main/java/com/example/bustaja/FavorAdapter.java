@@ -34,7 +34,7 @@ public class FavorAdapter extends RecyclerView.Adapter implements Serializable {
 
     public class MyViewHolder extends RecyclerView.ViewHolder  implements View.OnCreateContextMenuListener {
 
-        public TextView bus_num, busstop_first_final;
+        public TextView bus_num, busstop_first_final,favor_route_id;
 
 
         public MyViewHolder(View view) {
@@ -43,6 +43,7 @@ public class FavorAdapter extends RecyclerView.Adapter implements Serializable {
 
             bus_num = view.findViewById(R.id.bus_num);
             busstop_first_final = view.findViewById(R.id.busstop_first_final);
+            favor_route_id=view.findViewById(R.id.favor_route_id);
             view.setOnCreateContextMenuListener(this);
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -80,7 +81,7 @@ public class FavorAdapter extends RecyclerView.Adapter implements Serializable {
                         rootRef2 = firebaseDatabase.getReference();//괄호 안이 비어있으면 최상위 노드를 뜻함
                         boardRef2 = rootRef2.child("Favors");
                         boardRef2.removeValue();
-
+                        notifyDataSetChanged();
 
                         break;
                 }
@@ -123,6 +124,11 @@ public class FavorAdapter extends RecyclerView.Adapter implements Serializable {
             holder2.busstop_first_final.setText("");
         }else{
             holder2.busstop_first_final.setText(favorItem.get(position).getBusstopFF());
+        }
+        if(favorItem.get(position).getFavorRouteId()==null){
+            holder2.favor_route_id.setText("");
+        }else{
+            holder2.favor_route_id.setText(favorItem.get(position).getFavorRouteId());
         }
 
     }

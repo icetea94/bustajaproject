@@ -1,54 +1,40 @@
 package com.example.bustaja;
 
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
-import android.text.method.KeyListener;
+
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
+
 import android.widget.Button;
-import android.widget.EditText;
+
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
+
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 
 
 public class MessageboardDetail extends AppCompatActivity {
 
 
 
-     public FirebaseAuth firebaseAuth;
-     Button btn_replaceOk ,btn_replace,btn_back;
-     TextView detail_title_tv;
-     TextView detail_nickid_tv;
-     TextView detail_contents_tv;
-     TextView detail_date_tv;
+    public FirebaseAuth firebaseAuth;
+    Button btn_back;
+    TextView detail_title_tv;
+    TextView detail_nickid_tv;
+    TextView detail_contents_tv;
+    TextView detail_date_tv;
 
-     MessageReplaceFragment messageReplaceFragment;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.message_board_detail);
-        btn_replaceOk=findViewById(R.id.btn_replaceOk);
-        btn_replace=findViewById(R.id.btn_replace);
         btn_back=findViewById(R.id.btn_back);
         firebaseAuth = FirebaseAuth.getInstance();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -74,9 +60,6 @@ public class MessageboardDetail extends AppCompatActivity {
         String boarddate= extras.getString("date");
         detail_date_tv.setText(boarddate);
 
-        messageReplaceFragment=new MessageReplaceFragment();
-
-
         setTitle(boardtitle);
 
 
@@ -95,54 +78,12 @@ public class MessageboardDetail extends AppCompatActivity {
 
     public void clickBack(View view) {
 
-//        String title = detail_title_tv.getText().toString();
-//        String contents = detail_contents_tv.getText().toString();
-//        String emailid = detail_nickid_tv.getText().toString();
-//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd ");
-//        String replacedate = sdf.format(new Date());
-//        detail_date_tv.setText(replacedate);
-//        String dates = detail_date_tv.getText().toString();
-//
-//        //복귀한 인텐트에 추가
-//        Intent intent = getIntent();
-//        intent.putExtra("title", title);
-//        intent.putExtra("contents", contents);
-//        intent.putExtra("date", dates);
-//        intent.putExtra("nick", emailid);
-//
-//        //액티비티의 결과라고 설정
-//        setResult(RESULT_OK, intent);
-
-
 
         finish();
 
 
     }
 
-    public void clickReplace(View view) {
-
-        FirebaseUser user = firebaseAuth.getCurrentUser();
-        if(user!=null) {
-            String gettemail = user.getEmail();
-
-            if (!gettemail.equals(detail_nickid_tv.getText().toString()) || user == null) {
-                AlertDialog dialog = new AlertDialog.Builder(this).setMessage("본인만 수정할 수 있습니다.").setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                }).create();
-
-                dialog.setCanceledOnTouchOutside(false);
-                dialog.show();
-            } else {
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, messageReplaceFragment).commit();
-                btn_replace.setVisibility(view.GONE);
-                btn_back.setVisibility(view.GONE);
-            }
-        }
-    }
 
 
     @Override
@@ -155,5 +96,3 @@ public class MessageboardDetail extends AppCompatActivity {
         super.onResume();
     }
 }
-
-

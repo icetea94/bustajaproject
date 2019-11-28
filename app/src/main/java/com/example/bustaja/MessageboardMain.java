@@ -1,6 +1,5 @@
 package com.example.bustaja;
 
-
 import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -8,17 +7,15 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.util.Log;
+
 import android.view.GestureDetector;
-import android.view.LayoutInflater;
+
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,30 +30,27 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-import java.text.SimpleDateFormat;
+
+
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Dictionary;
-import java.util.List;
 
 
 public class MessageboardMain extends AppCompatActivity {
     SwipeRefreshLayout swipeRefreshLayout;
-    TextView board_nickname, board_title, board_contents, board_time,board_empty_tv;
+    TextView board_nickname, board_title, board_contents, board_time,board_empty_tv,hitcount;
 
     RecyclerView board_listview;
     MessageboardAdapter boardAdapter2;
     ArrayList<MessageboardItem> boardItem = new ArrayList<>();
     ArrayList<MessageboardItem> searchboardItem = new ArrayList<>();
-
+    static ArrayList<String> boardKeys= new ArrayList<>();
     SearchView searchView;
     MenuItem searchItem;
     CardView results;
@@ -64,9 +58,8 @@ public class MessageboardMain extends AppCompatActivity {
     public FirebaseAuth firebaseAuth;
     InputMethodManager imm;
 
-    FirebaseDatabase firebaseDatabase;
+
     DatabaseReference boardRef;
-    DatabaseReference rootRef2;
 
     @Override
     protected void onStart() {
@@ -89,6 +82,13 @@ public class MessageboardMain extends AppCompatActivity {
         board_time = findViewById(R.id.board_time);
         board_listview = findViewById(R.id.board_listview);
         boardAdapter2 = new MessageboardAdapter(boardItem, this);
+        boardAdapter2.notifyDataSetChanged();
+        board_listview.setAdapter(boardAdapter2);
+        hitcount=findViewById(R.id.hitcount);
+
+
+        searchboardItem.addAll(boardItem);
+
         if (boardItem.isEmpty()) {
             board_listview.setVisibility(View.GONE);
             board_empty_tv.setVisibility(View.VISIBLE);
@@ -97,8 +97,7 @@ public class MessageboardMain extends AppCompatActivity {
             board_listview.setVisibility(View.VISIBLE);
             board_empty_tv.setVisibility(View.GONE);
         }
-        boardAdapter2.notifyDataSetChanged();
-        board_listview.setAdapter(boardAdapter2);
+
         firebaseAuth = FirebaseAuth.getInstance();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         swipeRefreshLayout=findViewById(R.id.board_refresh);
@@ -114,68 +113,20 @@ public class MessageboardMain extends AppCompatActivity {
         });
         FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
         boardRef=firebaseDatabase.getReference("Boards");
-        boardRef.addValueEventListener(new ValueEventListener() {
-
-//            @Override
-//            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-//                // 새로 추가된 데이터(값: MessageItem객체)
-//                MessageboardItem messageItem=dataSnapshot.getValue(MessageboardItem.class);
-//                //새로운 메세지를 리스트뷰에 추가하기 ArrayList에 추가하기
-//
-//                boardItem.add(0,messageItem);
-//
-////                //리스트뷰 갱신
-//                boardAdapter2.notifyDataSetChanged();
-//                // board_listview.setSelection(boardItem.size()-1);//화면 포커스 이동
-//                board_listview.setAdapter(boardAdapter2);
-//                if (boardItem.isEmpty()) {
-//                    board_listview.setVisibility(View.GONE);
-//                    board_empty_tv.setVisibility(View.VISIBLE);
-//                }
-//                else {
-//                    board_listview.setVisibility(View.VISIBLE);
-//                    board_empty_tv.setVisibility(View.GONE);
-//                }
-//            }
-//
-//            @Override
-//            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-//
-//                boardAdapter2.notifyDataSetChanged();
-//                // board_listview.setSelection(boardItem.size()-1);//화면 포커스 이동
-//                board_listview.setAdapter(boardAdapter2);
-//                if (boardItem.isEmpty()) {
-//                    board_listview.setVisibility(View.GONE);
-//                    board_empty_tv.setVisibility(View.VISIBLE);
-//                }
-//                else {
-//                    board_listview.setVisibility(View.VISIBLE);
-//                    board_empty_tv.setVisibility(View.GONE);
-//                }
-//            }
-//
-//            @Override
-//            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-//
-//            }
-//
-//            @Override
-//            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-//
-//            }
+        boardRef.addChildEventListener(new ChildEventListener() {
 
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-            //     새로 추가된 데이터(값: MessageItem객체)
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                // 새로 추가된 데이터(값: MessageItem객체)
+
                 MessageboardItem messageItem=dataSnapshot.getValue(MessageboardItem.class);
                 //새로운 메세지를 리스트뷰에 추가하기 ArrayList에 추가하기
                 boardItem.add(0,messageItem);
-
+                boardKeys.add(0,dataSnapshot.getKey());
 //                //리스트뷰 갱신
                 boardAdapter2.notifyDataSetChanged();
                 // board_listview.setSelection(boardItem.size()-1);//화면 포커스 이동
                 board_listview.setAdapter(boardAdapter2);
-
                 if (boardItem.isEmpty()) {
                     board_listview.setVisibility(View.GONE);
                     board_empty_tv.setVisibility(View.VISIBLE);
@@ -184,6 +135,36 @@ public class MessageboardMain extends AppCompatActivity {
                     board_listview.setVisibility(View.VISIBLE);
                     board_empty_tv.setVisibility(View.GONE);
                 }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                boardAdapter2.notifyDataSetChanged();
+                // board_listview.setSelection(boardItem.size()-1);//화면 포커스 이동
+                board_listview.setAdapter(boardAdapter2);
+
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+                boardAdapter2.notifyDataSetChanged();
+                // board_listview.setSelection(boardItem.size()-1);//화면 포커스 이동
+                board_listview.setAdapter(boardAdapter2);
+                if (boardItem.isEmpty()) {
+                    board_listview.setVisibility(View.GONE);
+                    board_empty_tv.setVisibility(View.VISIBLE);
+                }
+                else {
+                    board_listview.setVisibility(View.VISIBLE);
+                    board_empty_tv.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
             }
 
             @Override
@@ -287,17 +268,6 @@ public class MessageboardMain extends AppCompatActivity {
                     String contents = data.getStringExtra("contents");
                     String date = data.getStringExtra("date");
                     String emailid = data.getStringExtra("nick");
-                    Log.i("moya",title);
-//                    boardItem.add(0, new MessageboardItem("" + title, "" + contents, "" + date, "" + emailid));
-//                    boardAdapter2 = new MessageboardAdapter(boardItem, this);
-//
-//                    board_listview.setAdapter(boardAdapter2);
-                    firebaseDatabase=FirebaseDatabase.getInstance();
-                    rootRef2=firebaseDatabase.getReference();//괄호 안이 비어있으면 최상위 노드를 뜻함
-                    MessageboardItem boardItem = new MessageboardItem(title,contents,date,emailid);
-                    boardRef= rootRef2.child("Boards");
-                    boardRef.push().setValue(boardItem);
-                    boardAdapter2.notifyDataSetChanged();
 
                     break;
                 }
@@ -321,17 +291,17 @@ public class MessageboardMain extends AppCompatActivity {
             public boolean onQueryTextSubmit(String query) {
 
 
-                for (int i = 0; i < searchboardItem.size(); i++) {
-                    if (searchboardItem.get(i).getBoardTitle().contains(query) || searchboardItem.get(i).getBoardContents().contains(query)) {
+                for (int i = 0; i < boardItem.size(); i++) {
+                    if (boardItem.get(i).getBoardTitle().contains(query) || boardItem.get(i).getBoardContents().contains(query)) {
 
                         searchView.setQuery("", false);
                         searchView.setIconified(true);
 
                         Toast.makeText(MessageboardMain.this, "검색이 완료되었습니다.", Toast.LENGTH_SHORT).show();
                         board_listview.scrollToPosition(i);
-                        boardItem.addAll(searchboardItem);
+
                         boardAdapter2.notifyDataSetChanged();
-                        return false;
+                        return true;
                     }
 
                 }
@@ -347,7 +317,9 @@ public class MessageboardMain extends AppCompatActivity {
             public boolean onQueryTextChange(String newText) {
 
 
-                return false;
+
+
+                return true;
             }
         });
         return super.onCreateOptionsMenu(menu);

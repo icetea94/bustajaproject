@@ -83,6 +83,7 @@ public class FavorAdapter extends RecyclerView.Adapter implements Serializable {
                         boardRef2.removeValue();
                         notifyDataSetChanged();
 
+
                         break;
                 }
 

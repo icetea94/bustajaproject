@@ -73,6 +73,7 @@ public class FavorAdapter extends RecyclerView.Adapter implements Serializable {
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case 1001:
+
                         favorItem.remove(getAdapterPosition());
                         notifyItemRemoved(getAdapterPosition());
                         notifyItemRangeChanged(getAdapterPosition(), favorItem.size());

@@ -41,11 +41,12 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.MyViewHolder> 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         public TextView city_bus_num, city_bus_stop, city_route_id;
-
+        int hitcount=0;
 
         public MyViewHolder(View view) {
 
             super(view);
+
             city_listview = view.findViewById(R.id.city_listview);
             city_bus_num = view.findViewById(R.id.city_bus_num);
             city_bus_stop = view.findViewById(R.id.city_bus_stop);
@@ -72,17 +73,19 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.MyViewHolder> 
                                     boardRef2.push().setValue(favorItem2);
                                     notifyDataSetChanged();
 
-//                                    SharedPreferences cityFavor;
-//
-//                                    cityFavor = context.getSharedPreferences("FavorList" + i, 0);
-//                                    SharedPreferences.Editor editor = cityFavor.edit();
-//                                    editor.putString("FavorNum", ab);
-//                                    editor.putString("FavorStop", cd);
-//                                    editor.putString("FavorId", ef);
-//                                    editor.commit();
+                                    SharedPreferences cityFavor;
+
+                                    cityFavor = context.getSharedPreferences("FavorList" + hitcount, context.MODE_APPEND);
+                                    SharedPreferences.Editor editor = cityFavor.edit();
+                                    editor.putString("FavorNum", ab);
+                                    editor.putString("FavorStop", cd);
+                                    editor.putString("FavorId", ef);
+                                    editor.commit();
 
                                     break;
+
                             }
+                            hitcount++;
                             return false;
                         }
                     });

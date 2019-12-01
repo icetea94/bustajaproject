@@ -3,6 +3,7 @@ package com.example.bustaja;
 
 import android.content.Context;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -22,15 +23,22 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import static android.content.Context.MODE_PRIVATE;
 
 public class FavorAdapter extends RecyclerView.Adapter implements Serializable {
 
     ArrayList<FavorItem> favorItem;
     Context context;
-
+    RecyclerView favor_listview;
+    TextView favor_empty_tv;
+    FavorAdapter favorAdapter;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference boardRef2;
     DatabaseReference rootRef2;
+
+    String dbName="Favor.db";//데이터베이스 파일명
+    String tableName = "FavorList";//표 이름
+    SQLiteDatabase db;
 
     public class MyViewHolder extends RecyclerView.ViewHolder  implements View.OnCreateContextMenuListener {
 
@@ -40,7 +48,8 @@ public class FavorAdapter extends RecyclerView.Adapter implements Serializable {
         public MyViewHolder(View view) {
 
             super(view);
-
+            favor_listview = view.findViewById(R.id.favor_listview);
+            favor_empty_tv = view.findViewById(R.id.favor_empty_tv);
             bus_num = view.findViewById(R.id.bus_num);
             busstop_first_final = view.findViewById(R.id.busstop_first_final);
             favor_route_id=view.findViewById(R.id.favor_route_id);
@@ -71,18 +80,28 @@ public class FavorAdapter extends RecyclerView.Adapter implements Serializable {
 
             @Override
             public boolean onMenuItemClick(MenuItem item) {
+
                 switch (item.getItemId()) {
                     case 1001:
+                        int position=getAdapterPosition();
+                        String ef =favorItem.get(position).getFavorRouteId();
+                        db = context.openOrCreateDatabase(dbName,MODE_PRIVATE,null);
+                        db.execSQL("DELETE FROM "+tableName+" WHERE ef=?", new String[]{ef});
 
                         favorItem.remove(getAdapterPosition());
                         notifyItemRemoved(getAdapterPosition());
                         notifyItemRangeChanged(getAdapterPosition(), favorItem.size());
-
-                        firebaseDatabase = FirebaseDatabase.getInstance();
-                        rootRef2 = firebaseDatabase.getReference();//괄호 안이 비어있으면 최상위 노드를 뜻함
-                        boardRef2 = rootRef2.child("Favors");
-                        boardRef2.removeValue();
                         notifyDataSetChanged();
+
+
+
+
+//                        firebaseDatabase = FirebaseDatabase.getInstance();
+//                        rootRef2 = firebaseDatabase.getReference();//괄호 안이 비어있으면 최상위 노드를 뜻함
+//                        boardRef2 = rootRef2.child("Favors");
+//                        boardRef2.removeValue();
+
+
 
 
                         break;

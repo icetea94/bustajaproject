@@ -6,7 +6,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".NoticeMain">
-
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/notice_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/notice_recyclerview"
         android:layout_width="match_parent"
@@ -14,5 +17,5 @@
         android:padding="4dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:background="@color/white"/>
-
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </LinearLayout>

@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -24,7 +25,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class NoticeMain extends AppCompatActivity {
-
+    SwipeRefreshLayout swipeRefreshLayout;
     RecyclerView notice_recyclerview;
     NoticeAdapter noticeAdapter;
     ArrayList<NoticeItem> NoticeData=new ArrayList<>();
@@ -36,7 +37,7 @@ public class NoticeMain extends AppCompatActivity {
         setContentView(R.layout.notice_main);
         setTitle("공지사항");
 
-
+        swipeRefreshLayout=findViewById(R.id.notice_refresh);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         notice_recyclerview = findViewById(R.id.notice_recyclerview);
         noticeAdapter = new NoticeAdapter(NoticeData, this);
@@ -47,7 +48,15 @@ public class NoticeMain extends AppCompatActivity {
         //서버의 loadDBtoJson.php파일에
         //접속하여 (DB데이터들)결과 받기
         //Volley+ 라이브러리 사용
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
 
+                noticeAdapter.notifyDataSetChanged();
+                swipeRefreshLayout.setRefreshing(false);
+
+            }
+        });
         //서버주소
         String serverUrl="http://icetea94.dothome.co.kr/BusWeb/noticeData.php";
 

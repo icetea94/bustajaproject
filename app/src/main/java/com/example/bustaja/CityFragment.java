@@ -4,6 +4,7 @@ package com.example.bustaja;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.GestureDetector;
@@ -40,6 +41,11 @@ public class CityFragment extends Fragment {
     ArrayList<CityItem> cityItem=new ArrayList<>();
     CityAdapter cityAdapter;
     ProgressDialog progressDialog;
+    String dbName="Favor.db";//데이터베이스 파일명
+    String tableName = "FavorList";//표 이름
+    SQLiteDatabase db;
+
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -133,6 +139,7 @@ public class CityFragment extends Fragment {
         }
         return view;
     }
+
 
 
 

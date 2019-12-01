@@ -39,9 +39,7 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.MyViewHolder> 
     SQLiteDatabase db;
 
     RecyclerView city_listview;
-    FirebaseDatabase firebaseDatabase;
-    DatabaseReference boardRef2;
-    DatabaseReference rootRef2;
+
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 

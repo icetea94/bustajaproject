@@ -51,7 +51,6 @@ public class MyLocationMain extends AppCompatActivity
 
     private Marker currentMarker = null;
 
-    private static final String TAG = "googlemap_example";
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
     private static final int UPDATE_INTERVAL_MS = 1000;  // 1초
     private static final int FASTEST_UPDATE_INTERVAL_MS = 500; // 0.5초
@@ -514,7 +513,7 @@ public class MyLocationMain extends AppCompatActivity
                 if (checkLocationServicesStatus()) {
                     if (checkLocationServicesStatus()) {
 
-                        Log.d(TAG, "onActivityResult : GPS 활성화 되있음");
+
 
 
                         needRequest = true;

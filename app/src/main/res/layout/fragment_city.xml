@@ -8,19 +8,19 @@
     android:gravity="center_vertical"
     android:orientation="vertical">
 
-<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-    android:id="@+id/bus_refresh"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/city_listview"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/bus_refresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:divider="#dddddd"
-        android:scrollbars="vertical"
-        android:dividerHeight="4dp">
-    </androidx.recyclerview.widget.RecyclerView>
-</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        android:layout_height="match_parent">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/city_listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="#dddddd"
+            android:scrollbars="vertical"
+            android:dividerHeight="4dp">
+        </androidx.recyclerview.widget.RecyclerView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"

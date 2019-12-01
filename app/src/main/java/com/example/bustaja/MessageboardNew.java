@@ -9,6 +9,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -72,7 +73,9 @@ public class MessageboardNew extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
+
             }
+
         });
     }
 
@@ -167,5 +170,10 @@ public class MessageboardNew extends AppCompatActivity {
 
         dialog.setCanceledOnTouchOutside(false);
         dialog.show();
+    }
+
+    public void newOnclick(View view) {
+        InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
     }
 }

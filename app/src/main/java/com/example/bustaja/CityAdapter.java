@@ -3,6 +3,7 @@ package com.example.bustaja;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -27,11 +28,15 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class CityAdapter extends RecyclerView.Adapter<CityAdapter.MyViewHolder> implements Serializable {
 
     ArrayList<CityItem> cityItem;
     Context context;
-
+    String dbName="Favor.db";//데이터베이스 파일명
+    String tableName = "FavorList";//표 이름
+    SQLiteDatabase db;
 
     RecyclerView city_listview;
     FirebaseDatabase firebaseDatabase;
@@ -41,11 +46,15 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.MyViewHolder> 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         public TextView city_bus_num, city_bus_stop, city_route_id;
-        int hitcount=0;
+
 
         public MyViewHolder(View view) {
 
             super(view);
+
+            db = context.openOrCreateDatabase(dbName,MODE_PRIVATE,null);
+
+            db.execSQL("CREATE TABLE IF NOT EXISTS " +  tableName  + "(num integer primary key autoincrement,ab text,cd text,ef text not null)");
 
             city_listview = view.findViewById(R.id.city_listview);
             city_bus_num = view.findViewById(R.id.city_bus_num);
@@ -66,26 +75,16 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.MyViewHolder> 
                                     String ab =cityItem.get(position).getCitybusnum();
                                     String cd = cityItem.get(position).getCitybusstop();
                                     String ef = cityItem.get(position).getCityRouteId();
-                                    firebaseDatabase = FirebaseDatabase.getInstance();
-                                    rootRef2 = firebaseDatabase.getReference();//괄호 안이 비어있으면 최상위 노드를 뜻함
-                                    FavorItem favorItem2 = new FavorItem(""+ab,""+cd,""+ef);
-                                    boardRef2 = rootRef2.child("Favors");
-                                    boardRef2.push().setValue(favorItem2);
-                                    notifyDataSetChanged();
 
-                                    SharedPreferences cityFavor;
 
-                                    cityFavor = context.getSharedPreferences("FavorList" + hitcount, context.MODE_APPEND);
-                                    SharedPreferences.Editor editor = cityFavor.edit();
-                                    editor.putString("FavorNum", ab);
-                                    editor.putString("FavorStop", cd);
-                                    editor.putString("FavorId", ef);
-                                    editor.commit();
+                                    db.execSQL("INSERT INTO " + tableName + "(ab, cd, ef) VALUES('"+ab+"','"+cd+"','"+ef+"')");
+
+
 
                                     break;
 
                             }
-                            hitcount++;
+
                             return false;
                         }
                     });

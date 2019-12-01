@@ -1,5 +1,4 @@
 package com.example.bustaja;
-
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
@@ -36,7 +35,6 @@ public class BusWebinfo extends AppCompatActivity {
         getWindow().setWindowAnimations(android.R.style.Animation_Toast);
 //        setTitle("버스정보 보기(경기도 버스정보)");
         //intent 받아오기
-
         Intent intent = getIntent();
 //        requestWindowFeature(Window.FEATURE_NO_TITLE);
 //        setTheme(android.R.style.Theme_NoTitleBar_Fullscreen);
@@ -119,4 +117,3 @@ public class BusWebinfo extends AppCompatActivity {
     }
 
 }
-

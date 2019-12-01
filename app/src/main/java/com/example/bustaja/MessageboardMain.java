@@ -8,6 +8,8 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.GestureDetector;
 
 import android.view.Menu;
@@ -16,6 +18,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
+import android.widget.EditText;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,21 +43,22 @@ import com.google.firebase.database.FirebaseDatabase;
 
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 
 public class MessageboardMain extends AppCompatActivity {
     SwipeRefreshLayout swipeRefreshLayout;
-    TextView board_nickname, board_title, board_contents, board_time,board_empty_tv,hitcount;
+    TextView board_nickname, board_title, board_contents, board_time,board_empty_tv;
+
 
     RecyclerView board_listview;
     MessageboardAdapter boardAdapter2;
     ArrayList<MessageboardItem> boardItem = new ArrayList<>();
-    ArrayList<MessageboardItem> searchboardItem = new ArrayList<>();
+
     static ArrayList<String> boardKeys= new ArrayList<>();
+    CardView results;
     SearchView searchView;
     MenuItem searchItem;
-    CardView results;
-
     public FirebaseAuth firebaseAuth;
     InputMethodManager imm;
 
@@ -84,10 +88,8 @@ public class MessageboardMain extends AppCompatActivity {
         boardAdapter2 = new MessageboardAdapter(boardItem, this);
         boardAdapter2.notifyDataSetChanged();
         board_listview.setAdapter(boardAdapter2);
-        hitcount=findViewById(R.id.hitcount);
 
 
-        searchboardItem.addAll(boardItem);
 
         if (boardItem.isEmpty()) {
             board_listview.setVisibility(View.GONE);
@@ -101,6 +103,13 @@ public class MessageboardMain extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         swipeRefreshLayout=findViewById(R.id.board_refresh);
+
+
+
+
+
+
+
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -204,9 +213,8 @@ public class MessageboardMain extends AppCompatActivity {
 
             }
         }));
-
-
     }
+
 
     public interface ClickListener {
         void onClick(View view, int position);
@@ -275,7 +283,6 @@ public class MessageboardMain extends AppCompatActivity {
 
         }
     }
-
     //옵션메뉴 만들어주는 메소드
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -297,7 +304,7 @@ public class MessageboardMain extends AppCompatActivity {
                         searchView.setQuery("", false);
                         searchView.setIconified(true);
 
-                        Toast.makeText(MessageboardMain.this, "검색이 완료되었습니다.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MessageboardMain.this, "검색 내용과 일치하는 게시글이 존재합니다.", Toast.LENGTH_SHORT).show();
                         board_listview.scrollToPosition(i);
 
                         boardAdapter2.notifyDataSetChanged();
@@ -306,7 +313,8 @@ public class MessageboardMain extends AppCompatActivity {
 
                 }
 
-                Toast.makeText(getApplicationContext(), "일치하는 정보가 없습니다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "검색 내용과 일치하는 게시글이 없습니다.", Toast.LENGTH_SHORT).show();
+                InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
                 boardAdapter2.notifyDataSetChanged();
                 return true;

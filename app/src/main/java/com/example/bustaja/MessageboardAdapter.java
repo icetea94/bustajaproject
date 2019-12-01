@@ -31,6 +31,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Dictionary;
+import java.util.List;
 
 public class MessageboardAdapter extends RecyclerView.Adapter implements Serializable {
 
@@ -97,7 +98,6 @@ public class MessageboardAdapter extends RecyclerView.Adapter implements Seriali
                                             final EditText edittext_dialog_contents = (EditText) view.findViewById(R.id.edittext_dialog_contents);
                                             final TextView date_tv = view.findViewById(R.id.replace_date_tv);
                                             final TextView nick_tv = view.findViewById(R.id.replace_nickid_tv);
-                                            final TextView hitcount = view.findViewById(R.id.hitcount);
                                             editTextID.setText(boardItem.get(getAdapterPosition()).getBoardTitle());
                                             edittext_dialog_contents.setText(boardItem.get(getAdapterPosition()).getBoardContents());
                                             nick_tv.setText(boardItem.get(getAdapterPosition()).getBoardNick());
@@ -158,7 +158,7 @@ public class MessageboardAdapter extends RecyclerView.Adapter implements Seriali
                             String cd = boardItem.get(position).getBoardNick();
 
                             switch (item.getItemId()) {
-                                     case 1001:
+                                case 1001:
 
                                     if(user!=null) {
                                         String gettemail = user.getEmail();

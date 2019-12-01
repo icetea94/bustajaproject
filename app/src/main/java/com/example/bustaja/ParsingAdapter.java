@@ -1,5 +1,6 @@
 package com.example.bustaja;
 
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,8 +18,8 @@ public class ParsingAdapter  extends RecyclerView.Adapter<ParsingAdapter.MyViewH
     private LayoutInflater mInflate;
     private Context mContext;
 
-    public ParsingAdapter(Context context, ArrayList<ParsingItem> itmes) {
-        this.mList = itmes;
+    public ParsingAdapter(Context context, ArrayList<ParsingItem> items) {
+        this.mList = items;
         this.mInflate = LayoutInflater.from(context);
         this.mContext = context;
     }
@@ -38,7 +39,7 @@ public class ParsingAdapter  extends RecyclerView.Adapter<ParsingAdapter.MyViewH
         holder.locationNo1.setText(mList.get(position).locationNo1);
         holder.plateNo1.setText(mList.get(position).plateNo1);
         holder.routeId.setText(mList.get(position).routeId);
-
+        holder.predictTime1.setText(mList.get(position).predictTime1);
 
         //Click event
     }
@@ -53,6 +54,7 @@ public class ParsingAdapter  extends RecyclerView.Adapter<ParsingAdapter.MyViewH
         public TextView locationNo1;
         public TextView plateNo1;
         public TextView routeId;
+        public TextView predictTime1;
 
 
         public MyViewHolder(View itemView) {
@@ -61,7 +63,7 @@ public class ParsingAdapter  extends RecyclerView.Adapter<ParsingAdapter.MyViewH
             locationNo1 = itemView.findViewById(R.id.tv_locationNo1);
             plateNo1 = itemView.findViewById(R.id.tv_plateNo1);
             routeId = itemView.findViewById(R.id.tv_routeId);
-
+            predictTime1 = itemView.findViewById(R.id.tv_predictTime1);
 
         }
     }

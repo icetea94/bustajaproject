@@ -51,15 +51,15 @@
             android:textColor="@color/black"
             android:textSize="15sp"          />
 
-        <TextView android:id="@+id/hitcount"
-            android:layout_width="80dp"
-            android:layout_height="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_below="@+id/board_nickname"
-            android:textColor="@color/black"
-            android:textSize="10sp"
-            android:text="조회수"
-            android:layout_alignParentRight="true"/>
+        <!--        <TextView android:id="@+id/hitcount"-->
+        <!--            android:layout_width="80dp"-->
+        <!--            android:layout_height="16dp"-->
+        <!--            android:layout_marginTop="8dp"-->
+        <!--            android:layout_below="@+id/board_nickname"-->
+        <!--            android:textColor="@color/black"-->
+        <!--            android:textSize="10sp"-->
+        <!--            android:text="조회수"-->
+        <!--            android:layout_alignParentRight="true"/>-->
 
         <TextView android:id="@+id/board_time"
             android:layout_width="80dp"

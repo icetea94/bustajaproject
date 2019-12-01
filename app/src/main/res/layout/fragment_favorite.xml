@@ -12,14 +12,15 @@
         android:id="@+id/favor_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/favor_listview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:divider="#dddddd"
-        android:scrollbars="vertical"
-        android:dividerHeight="4dp">
-    </androidx.recyclerview.widget.RecyclerView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/favor_listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:divider="#dddddd"
+            android:scrollbars="vertical"
+            android:dividerHeight="4dp">
+        </androidx.recyclerview.widget.RecyclerView>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -33,7 +34,6 @@
         android:id="@+id/favor_refresh_fab"
         android:clickable="true"
         android:fitsSystemWindows ="true"
-        android:visibility="visible"
         app:rippleColor="@color/white"
         android:elevation="6dp"
         android:backgroundTint="@color/busblue"

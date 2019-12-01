@@ -8,78 +8,78 @@
     android:padding="16dp"
     tools:context=".MessageboardDetail">
 
-<FrameLayout
-    android:id="@+id/container"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <RelativeLayout
+    <FrameLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/detail_title_tv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:textColor="@color/black"
-        android:maxLength="15"
-        android:maxLines="1"
-        android:singleLine = "true"
-        android:lines = "1"
-        android:background="@drawable/bg_round"
-        android:hint="제목" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/detail_nickid_tv"
-        android:layout_width="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:layout_marginTop="80dp"
-        android:text="닉네임자리"
-        android:maxLength="20"
-        android:textColor="@color/busblue" />
+            <TextView
+                android:id="@+id/detail_title_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:textColor="@color/black"
+                android:maxLength="15"
+                android:maxLines="1"
+                android:singleLine = "true"
+                android:lines = "1"
+                android:background="@drawable/bg_round"
+                android:hint="제목" />
 
-    <TextView
-        android:id="@+id/detail_date_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/detail_nickid_tv"
-        android:layout_alignParentRight="true"
-        android:layout_gravity="right"
-        android:text="날짜"
-        android:textColor="@color/black" />
+            <TextView
+                android:id="@+id/detail_nickid_tv"
+                android:layout_width="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginTop="80dp"
+                android:text="닉네임자리"
+                android:maxLength="20"
+                android:textColor="@color/busblue" />
 
-    <TextView
-        android:id="@+id/detail_contents_tv"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_below="@+id/detail_date_tv"
-        android:layout_weight="1"
-        android:background="@drawable/bg_round"
-        android:gravity="top"
-        android:layout_marginTop="20dp"
-        android:hint="내용"
-        android:maxLines="10"
-        android:textColor="@color/black"
-        android:inputType="textMultiLine"
-        android:maxLength="100" />
+            <TextView
+                android:id="@+id/detail_date_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/detail_nickid_tv"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="right"
+                android:text="날짜"
+                android:textColor="@color/black" />
 
-    <Button
-        android:id="@+id/btn_back"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/detail_contents_tv"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/bg_button"
-        android:onClick="clickBack"
-        android:visibility="visible"
-        android:text="목록으로" />
+            <TextView
+                android:id="@+id/detail_contents_tv"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_below="@+id/detail_date_tv"
+                android:layout_weight="1"
+                android:background="@drawable/bg_round"
+                android:gravity="top"
+                android:layout_marginTop="20dp"
+                android:hint="내용"
+                android:maxLines="10"
+                android:textColor="@color/black"
+                android:inputType="textMultiLine"
+                android:maxLength="100" />
+
+            <Button
+                android:id="@+id/btn_back"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/detail_contents_tv"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bg_button"
+                android:onClick="clickBack"
+                android:visibility="visible"
+                android:text="목록으로" />
 
 
-    </RelativeLayout>
+        </RelativeLayout>
 
-</FrameLayout>
+    </FrameLayout>
 
 </RelativeLayout>

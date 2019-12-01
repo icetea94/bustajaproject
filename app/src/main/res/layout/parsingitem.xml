@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:padding="16dp"
+    android:background="@color/black"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -13,13 +14,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
-            android:text="plateNo1; "
+            android:text="차량 번호 : "
+            android:textColor="@color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/tv_plateNo1"
-            android:textSize="32dp"
-            android:textColor="@color/colorAccent"
+            android:textSize="24dp"
+            android:textColor="@color/busblue"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -29,12 +31,32 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
-            android:text="locationNo1; "
+            android:text="현재 버스위치(* 전) : "
             android:layout_width="wrap_content"
+            android:textColor="@color/white"
             android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/tv_locationNo1"
+            android:textColor="@color/busblue"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="노선(버스)ID : " />
+
+        <TextView
+            android:id="@+id/tv_routeId"
+            android:textColor="@color/busblue"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
 
@@ -43,21 +65,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
-            android:text="routeId; "
+            android:text="도착예정시간 (* 분) : "
             android:layout_width="wrap_content"
+            android:textColor="@color/white"
             android:layout_height="wrap_content" />
         <TextView
-            android:id="@+id/tv_routeId"
+            android:id="@+id/tv_predictTime1"
             android:layout_width="wrap_content"
+            android:textColor="@color/busblue"
             android:layout_height="wrap_content" />
     </LinearLayout>
-
 
     <!--구분선-->
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="4dp"
         android:layout_centerInParent="true"
         android:background="#e3e3e3"/>
 

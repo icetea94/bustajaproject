@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    package="com.example.bustaja">
+    package="com.devshyeon.bustaja">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -17,50 +17,50 @@
         android:theme="@style/AppTheme.Appbar"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".BusParsingMain"
+            android:name="com.devshyeon.bustaja.BusParsingMain"
 
             android:theme="@style/AppTheme.Appbar"></activity>
         <activity
-            android:name=".MyLocationMain"
+            android:name="com.devshyeon.bustaja.MyLocationMain"
 
             android:theme="@style/AppTheme.Appbar"></activity>
         <activity
-            android:name=".BusWebinfo"
+            android:name="com.devshyeon.bustaja.BusWebinfo"
             android:theme="@style/AppTheme.NoActionBar2"></activity>
 
         <activity
-            android:name=".FindActivity"
+            android:name="com.devshyeon.bustaja.FindActivity"
 
             android:theme="@style/AppTheme.Appbar"></activity>
         <activity
-            android:name=".ProfileActivity"
+            android:name="com.devshyeon.bustaja.ProfileActivity"
 
             android:theme="@style/AppTheme.Appbar"></activity>
         <activity
-            android:name=".AccessMain"
+            android:name="com.devshyeon.bustaja.AccessMain"
 
             android:theme="@style/AppTheme.Appbar" />
         <activity
-            android:name=".InformationMain"
+            android:name="com.devshyeon.bustaja.InformationMain"
 
             android:theme="@style/AppTheme.Appbar" />
         <activity
-            android:name=".AddmemMain"
+            android:name="com.devshyeon.bustaja.AddmemMain"
 
             android:theme="@style/AppTheme.Appbar" />
         <activity
-            android:name=".Bussearch"
+            android:name="com.devshyeon.bustaja.Bussearch"
             android:theme="@style/AppTheme.Appbar"         />
 
         <activity
-            android:name=".NoticeMain"
+            android:name="com.devshyeon.bustaja.NoticeMain"
 
             android:theme="@style/AppTheme.Appbar" />
         <activity
-            android:name=".LoginMain"
+            android:name="com.devshyeon.bustaja.LoginMain"
             android:theme="@style/AppTheme.Appbar" />
         <activity
-            android:name=".MessageboardMain"
+            android:name="com.devshyeon.bustaja.MessageboardMain"
 
             android:theme="@style/AppTheme.Appbar">
             <intent-filter>
@@ -68,18 +68,18 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MessageboardNew"
+            android:name="com.devshyeon.bustaja.MessageboardNew"
 
             android:theme="@style/AppTheme.Appbar"></activity>
         <activity
-            android:name=".MainActivity"
+            android:name="com.devshyeon.bustaja.MainActivity"
             android:theme="@style/Theme.MaterialComponents.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".Intro"
+            android:name="com.devshyeon.bustaja.Intro"
             android:theme="@style/Theme.MaterialComponents.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -88,7 +88,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MessageboardDetail"
+            android:name="com.devshyeon.bustaja.MessageboardDetail"
 
             android:theme="@style/AppTheme.Appbar" />
         <uses-library

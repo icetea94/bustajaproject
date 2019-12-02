@@ -135,6 +135,7 @@
         android:layout_marginTop="30dp"
         android:layout_below="@+id/tv_pw_confirm_rule"
         android:onClick="clickAddmem"
+        android:clickable="false"
         android:text="회원가입"
         android:background="#FFFFFF"
         android:textColor="@color/busblue"
@@ -143,5 +144,15 @@
         android:textAllCaps="false"
         android:textSize="20sp"
         android:textStyle="bold" />
-
+//일시적 막기
+    <TextView
+        android:id="@+id/tv_newnotice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="일시적으로 회원가입이 불가능 합니다. \n구글 로그인을 이용해주세요"
+        android:layout_marginTop="3dp"
+        android:layout_below="@id/addmemBtn"
+        android:layout_marginRight="35dp"
+        android:textColor="@color/red"
+        android:textSize="16sp" />
 </RelativeLayout>

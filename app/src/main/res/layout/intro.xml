@@ -39,7 +39,7 @@
         android:layout_centerHorizontal="true"
         android:src="@drawable/ic_directions_bus_black_24dp" />
 
-    <com.example.bustaja.MyFontTextView
+    <com.devshyeon.bustaja.MyFontTextView
         android:id="@+id/tv_mainbus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

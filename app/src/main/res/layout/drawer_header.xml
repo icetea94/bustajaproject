@@ -23,7 +23,7 @@
         android:textSize="15sp"
         android:textStyle="bold"
         android:text="버스타자" />
-    <com.example.bustaja.MyFontTextView
+    <com.devshyeon.bustaja.MyFontTextView
         android:id="@+id/tv_mainbus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

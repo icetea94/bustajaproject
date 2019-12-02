@@ -18,7 +18,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp" />
 
-        <com.example.bustaja.MyFontTextView
+        <com.devshyeon.bustaja.MyFontTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="30dp"
@@ -62,7 +62,7 @@
             android:backgroundTint="@color/busblue"
             android:layout_marginRight="25dp"/>
 
-        <com.example.bustaja.MyFontTextView
+        <com.devshyeon.bustaja.MyFontTextView
             android:text="회원탈퇴"
             android:id="@+id/textviewDelete"
             android:layout_gravity="center_horizontal"

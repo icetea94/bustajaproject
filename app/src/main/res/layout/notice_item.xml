@@ -55,6 +55,7 @@
         android:layout_marginTop="32dp"
         android:id="@+id/notice_contents"
         android:layout_width="match_parent"
+        android:background="#cccccc"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:animateLayoutChanges="true"

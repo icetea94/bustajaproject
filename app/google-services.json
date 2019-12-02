@@ -1,0 +1,107 @@
+{
+  "project_info": {
+    "project_number": "402602672713",
+    "firebase_url": "https://bustaja-2cf54.firebaseio.com",
+    "project_id": "bustaja-2cf54",
+    "storage_bucket": "bustaja-2cf54.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:402602672713:android:dab16a6a2102436e52f598",
+        "android_client_info": {
+          "package_name": "com.devshyeon.bustaja"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "402602672713-0p1aa2kq1j00bqkv7vgc2f3b2o0kqqqh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.devshyeon.bustaja",
+            "certificate_hash": "cca9a74dc3d93c4fc69600ff371a7b66eab569cd"
+          }
+        },
+        {
+          "client_id": "402602672713-kerehl1qpe25us0l56g9sag2rorbbvkc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHSTJsP2tRp5iUC9h6B5ru69CHmSKdrR8"
+        },
+        {
+          "current_key": "AIzaSyAdoK_nAO5_s6Jv8j6sNvsF9nmzQg4OKKU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "402602672713-kerehl1qpe25us0l56g9sag2rorbbvkc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:402602672713:android:6f0d592e07b5b99452f598",
+        "android_client_info": {
+          "package_name": "com.example.bustaja"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "402602672713-lie7odel3feppbvvq3indrefp6ar2e28.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bustaja",
+            "certificate_hash": "02bf87ce34bb39a7405e85237683c413334f8185"
+          }
+        },
+        {
+          "client_id": "402602672713-jlg8t314h1t6f29pf8v8ln48dkrg8q79.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bustaja",
+            "certificate_hash": "cca9a74dc3d93c4fc69600ff371a7b66eab569cd"
+          }
+        },
+        {
+          "client_id": "402602672713-gevvb03dpn5jfnh7av1ch6l5trbjet1p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bustaja",
+            "certificate_hash": "69331a26b17c9b9de1ed60d0a7a607c0436cb6c5"
+          }
+        },
+        {
+          "client_id": "402602672713-kerehl1qpe25us0l56g9sag2rorbbvkc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHSTJsP2tRp5iUC9h6B5ru69CHmSKdrR8"
+        },
+        {
+          "current_key": "AIzaSyAdoK_nAO5_s6Jv8j6sNvsF9nmzQg4OKKU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "402602672713-kerehl1qpe25us0l56g9sag2rorbbvkc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

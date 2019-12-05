@@ -85,8 +85,6 @@ public class MessageboardMain extends AppCompatActivity {
         boardAdapter2.notifyDataSetChanged();
         board_listview.setAdapter(boardAdapter2);
 
-
-
         if (boardItem.isEmpty()) {
             board_listview.setVisibility(View.GONE);
             board_empty_tv.setVisibility(View.VISIBLE);
@@ -96,16 +94,9 @@ public class MessageboardMain extends AppCompatActivity {
             board_empty_tv.setVisibility(View.GONE);
         }
 
-        firebaseAuth = FirebaseAuth.getInstance();
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         swipeRefreshLayout=findViewById(R.id.board_refresh);
-
-
-
-
-
-
-
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -116,6 +107,7 @@ public class MessageboardMain extends AppCompatActivity {
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
+        firebaseAuth = FirebaseAuth.getInstance();
         FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
         boardRef=firebaseDatabase.getReference("Boards");
         boardRef.addChildEventListener(new ChildEventListener() {

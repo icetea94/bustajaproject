@@ -59,9 +59,6 @@ public class NoticeMain extends AppCompatActivity {
         //서버주소
         String serverUrl="http://icetea94.dothome.co.kr/BusWeb/noticeData.php";
 
-        //결과를 JsonArray받을 것이므로...
-        //StringRequest가 아니라...
-        //JsonArrayRequest를 이용할 것임
         JsonArrayRequest jsonArrayRequest= new JsonArrayRequest(Request.Method.POST, serverUrl, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
@@ -80,9 +77,6 @@ public class NoticeMain extends AppCompatActivity {
                         String title= jsonObject.getString("title");
                         String content= jsonObject.getString("content");
                         String id= jsonObject.getString("id");
-
-
-
 
                         NoticeData.add( 0 , new NoticeItem(""+title, ""+id,""+content) );
                         noticeAdapter.notifyItemInserted(0);

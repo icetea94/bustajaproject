@@ -60,6 +60,12 @@ public class CityFragment extends Fragment {
         city_listview.setAdapter(cityAdapter);
         city_refresh_fab = view.findViewById(R.id.city_refresh_fab);
         city_refresh_fab.setVisibility(View.VISIBLE);
+
+
+
+
+
+
         view.setOnCreateContextMenuListener(this);
         progressDialog = new ProgressDialog(getContext());
 //
@@ -73,7 +79,14 @@ public class CityFragment extends Fragment {
         });
 //
 
+        city_refresh_fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) { //플로팅 액션 버튼
+                Snackbar.make(view, "최신 정보를 불러오는 중입니다", Snackbar.LENGTH_SHORT).setAction("Refresh", null).show();
+                cityAdapter.notifyDataSetChanged();
 
+            }
+        });
 
 
 
@@ -115,14 +128,7 @@ public class CityFragment extends Fragment {
 
 
 
-        city_refresh_fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "최신 정보를 불러오는 중입니다", Snackbar.LENGTH_SHORT).setAction("Refresh", null).show();
-                cityAdapter.notifyDataSetChanged();
 
-            }
-        });
         if (cityItem.isEmpty()) {
             city_listview.setVisibility(View.GONE);
             city_empty_tv.setVisibility(View.VISIBLE);

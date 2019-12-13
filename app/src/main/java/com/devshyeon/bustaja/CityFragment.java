@@ -45,7 +45,6 @@ public class CityFragment extends Fragment {
         super.onCreate(savedInstanceState);
         CityData();
 
-
     }
     @Nullable
     @Override

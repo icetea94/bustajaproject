@@ -44,6 +44,7 @@ import com.google.firebase.database.ValueEventListener;
 
 
 public class LoginMain extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
+
     SignInButton Google_Login;
     private static final int RC_SIGN_IN = 100;
     FirebaseAuth mAuth;
@@ -55,7 +56,7 @@ public class LoginMain extends AppCompatActivity implements GoogleApiClient.OnCo
     ProgressDialog progressDialog;
     FirebaseAuth firebaseAuth;
     NavigationView navigationView;
-    MenuItem menu_login;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,7 +75,7 @@ public class LoginMain extends AppCompatActivity implements GoogleApiClient.OnCo
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle("로그인");
         mAuth = FirebaseAuth.getInstance();
-
+        Google_Login = findViewById(R.id.Google_Login);
         if(firebaseAuth.getCurrentUser() != null){
             //이미 로그인 되었다면 이 액티비티를 종료함
             finish();
@@ -91,7 +92,7 @@ public class LoginMain extends AppCompatActivity implements GoogleApiClient.OnCo
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
         mAuth = FirebaseAuth.getInstance();
-        Google_Login = findViewById(R.id.Google_Login);
+
         Google_Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -193,7 +194,7 @@ public class LoginMain extends AppCompatActivity implements GoogleApiClient.OnCo
 
 
     public void updateUI(@Nullable FirebaseUser user) {
-        // No-op
+
     }
 
     @Override

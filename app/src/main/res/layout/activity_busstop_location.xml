@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".BusstopLocation">
+
+    <TextView
+        android:id="@+id/stopname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:textSize="20sp"
+        android:textColor="#8B00FF"
+        android:text="busstopname"/>
+    <fragment
+        android:layout_marginTop="60dp"
+        android:layout_width="380dp"
+        android:layout_gravity="top|center"
+        android:background="@drawable/bg_et"
+        android:layout_height="300dp"
+        android:id="@+id/frag_map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"/>
+    <TextView
+        android:id="@+id/livestop"
+        android:layout_width="380dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="380dp"
+        android:textColor="#8B00FF"
+        android:textSize="18sp"
+        android:text="실시간 도착(예정) 버스 정보"/>
+    <!--리사이클러뷰-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="380dp"
+        android:layout_gravity="bottom|center"
+        android:layout_marginBottom="6dp"
+        android:layout_height="150dp"
+        android:background="@drawable/bg_et"
+        android:scrollbars="vertical" />
+
+    <TextView android:id="@+id/stop_empty_tv"
+        android:layout_width="380dp"
+        android:layout_gravity="bottom|center"
+        android:layout_height="200dp"
+        android:text="버스 도착 예정 정보가 없습니다"
+        android:visibility="gone"
+        android:background="@color/white"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        android:gravity="center"/>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

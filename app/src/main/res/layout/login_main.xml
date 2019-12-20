@@ -19,7 +19,7 @@
         android:onClick="newaddmemBtn"
         android:layout_alignParentRight="true"
         android:textColor="@color/busblue"
-        android:textSize="18sp" />
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/tv_id_input"
@@ -30,7 +30,7 @@
         android:layout_marginLeft="3dp"
         android:text="아이디"
         android:textColor="@color/busblue"
-        android:textSize="18sp" />
+        android:textSize="13sp" />
 
     <TextView
         android:id="@+id/tv_pw_input"
@@ -43,17 +43,18 @@
         android:layout_toStartOf="@+id/et_pw_input"
         android:text="비밀번호"
         android:textColor="@color/busblue"
-        android:textSize="18sp" />
+        android:textSize="13sp" />
 
     <EditText
         android:id="@+id/et_id_input"
         android:layout_width="250dp"
         android:background="@drawable/bg_et"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="40dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="63dp"
         android:ems="20"
         android:inputType="text"
+        android:textSize="13sp"
         android:cursorVisible="true"
         android:layout_height="45dp"
         android:hint="아이디를 입력하세요" />
@@ -64,10 +65,11 @@
         android:inputType="textPassword"
         android:background="@drawable/bg_et"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="40dp"
+        android:layout_marginRight="30dp"
         android:ems="10"
         android:cursorVisible="true"
         android:layout_height="45dp"
+        android:textSize="13sp"
         android:layout_marginTop="5dp"
         android:layout_below="@+id/et_id_input"
         android:hint="비밀번호를 입력하세요" />
@@ -84,7 +86,7 @@
         android:textColor="@color/red"
         android:layout_marginRight="30dp"
         android:textAllCaps="false"
-        android:textSize="16sp"  />
+        android:textSize="14sp"  />
 
     <TextView
         android:id="@+id/loginBtn"
@@ -109,7 +111,7 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginBottom="15dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="50dp"
         android:layout_marginLeft="36dp"
         android:layout_below="@+id/loginBtn"
         android:layout_marginRight="25dp">

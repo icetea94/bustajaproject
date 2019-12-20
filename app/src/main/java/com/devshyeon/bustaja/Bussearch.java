@@ -62,8 +62,6 @@ public class Bussearch extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.search_option, menu);
-        searchItems = menu.findItem(R.id.go_search_menu);
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -74,12 +72,6 @@ public class Bussearch extends AppCompatActivity {
         int id = item.getItemId();
 
         switch (id) {
-            case R.id.go_search_menu:
-
-                Intent intent = new Intent(Bussearch.this, BusParsingMain.class);
-                startActivity(intent);
-
-                break;
 
             case android.R.id.home: {
                 onBackPressed();

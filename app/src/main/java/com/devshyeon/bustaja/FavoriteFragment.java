@@ -110,19 +110,23 @@ public class FavoriteFragment extends Fragment {
             public void onClick(View view, int position) {
                 FavorItem dict = favorItem.get(position);
 
-                Intent intent = new Intent(getContext(), BusWebinfo.class);
+//                Intent intent = new Intent(getContext(), BusWebinfo.class);
 
+//                intent.putExtra("busnum", dict.getBusNum());
+//                intent.putExtra("busstop", dict.getBusstopFF());
+//                intent.putExtra("routeid", dict.getFavorRouteId());
+//
+//                progressDialog.setMessage("경기 버스정보 웹 화면으로 이동중입니다. \n잠시 기다려 주세요...");
+//                progressDialog.show();
+//
+//                startActivity(intent);
+
+//                progressDialog.dismiss();
+                Intent intent = new Intent(getContext(), BusListView.class);
                 intent.putExtra("busnum", dict.getBusNum());
                 intent.putExtra("busstop", dict.getBusstopFF());
                 intent.putExtra("routeid", dict.getFavorRouteId());
-
-                progressDialog.setMessage("경기 버스정보 웹 화면으로 이동중입니다. \n잠시 기다려 주세요...");
-                progressDialog.show();
-
                 startActivity(intent);
-
-                progressDialog.dismiss();
-
             }
 
             @Override

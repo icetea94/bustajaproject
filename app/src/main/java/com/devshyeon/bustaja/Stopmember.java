@@ -2,16 +2,61 @@ package com.devshyeon.bustaja;
 
 public class Stopmember {
 
-    int imgID; //R.drawable.korea
-    String name;  //"전현무"
-
-    //생성(new)할 때 자동으로 실행되는 메소드 (생성자메소드)
-    public Stopmember(int imgID, String name) {
-
-        this.imgID=imgID;
-        this.name=name;
+    String stationName;
+    String stationSeq;
+    String stationy;
+    String stationx;
+    String stationId;
 
 
+    public Stopmember(String stationName, String stationSeq, String stationy, String stationx, String stationId) {
+        this.stationName = stationName;
+        this.stationSeq = stationSeq;
+        this.stationy = stationy;
+        this.stationx = stationx;
+        this.stationId = stationId;
     }
 
+    public Stopmember() {
+    }
+
+    public String getStationName() {
+        return stationName;
+    }
+
+    public void setStationName(String stationName) {
+        this.stationName = stationName;
+    }
+
+    public String getStationSeq() {
+        return stationSeq;
+    }
+
+    public void setStationSeq(String stationSeq) {
+        this.stationSeq = stationSeq;
+    }
+
+    public String getStationy() {
+        return stationy;
+    }
+
+    public void setStationy(String stationy) {
+        this.stationy = stationy;
+    }
+
+    public String getStationx() {
+        return stationx;
+    }
+
+    public void setStationx(String stationx) {
+        this.stationx = stationx;
+    }
+
+    public String getStationId() {
+        return stationId;
+    }
+
+    public void setStationId(String stationId) {
+        this.stationId = stationId;
+    }
 }

@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="8dp"
-    android:layout_marginBottom="8dp"
-    android:background="@android:color/white">
+
+    android:layout_marginBottom="8dp">
 
     <LinearLayout
         android:id="@+id/linearitem"
@@ -52,16 +52,16 @@
     </LinearLayout>
 
     <TextView
-        android:layout_marginTop="32dp"
         android:id="@+id/notice_contents"
         android:layout_width="match_parent"
-        android:background="#cccccc"
-        android:layout_height="wrap_content"
+        android:layout_height="140dp"
         android:layout_gravity="center"
+        android:layout_marginTop="32dp"
         android:animateLayoutChanges="true"
         android:padding="4dp"
-        android:textStyle="bold"
+        android:background="@drawable/bg_et"
         android:text="내용들"
-        android:textColor="@color/black" />
+        android:textColor="@color/black"
+        android:textStyle="bold" />
 
 </androidx.cardview.widget.CardView>

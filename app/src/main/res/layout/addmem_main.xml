@@ -18,14 +18,14 @@
         android:layout_marginLeft="3dp"
         android:text="이메일아이디"
         android:textColor="@color/busblue"
-        android:textSize="15sp" />
+        android:textSize="12sp" />
 
     <EditText
         android:id="@+id/et_addmem_id_input"
         android:layout_width="250dp"
         android:background="@drawable/bg_et"
         android:layout_alignParentRight="true"
-        android:textSize="16sp"
+        android:textSize="13sp"
         android:layout_marginRight="35dp"
         android:layout_marginTop="70dp"
         android:ems="20"
@@ -58,7 +58,7 @@
         android:layout_toStartOf="@+id/et_addmem_pw_input"
         android:text="비밀번호"
         android:textColor="@color/busblue"
-        android:textSize="15sp" />
+        android:textSize="12sp" />
 
     <EditText
         android:id="@+id/et_addmem_pw_input"
@@ -68,7 +68,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="35dp"
         android:layout_marginTop="3dp"
-        android:textSize="16sp"
+        android:textSize="13sp"
         android:ems="10"
         android:inputType="textPassword"
         android:cursorVisible="true"
@@ -99,7 +99,7 @@
         android:layout_toStartOf="@+id/et_addmem_pw_input"
         android:text="비밀번호확인"
         android:textColor="@color/busblue"
-        android:textSize="15sp" />
+        android:textSize="12sp" />
 
     <EditText
         android:id="@+id/et_addmem_pw_confirm"
@@ -108,7 +108,7 @@
         android:layout_below="@id/tv_pw_rule"
         android:layout_alignParentRight="true"
         android:layout_marginRight="35dp"
-        android:textSize="16sp"
+        android:textSize="13sp"
         android:layout_marginTop="3dp"
         android:ems="10"
         android:inputType="textPassword"

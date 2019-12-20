@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -16,70 +16,58 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Appbar"
         android:usesCleartextTraffic="true">
-        <activity
-            android:name="com.devshyeon.bustaja.BusParsingMain"
 
+        <activity android:name=".BusstopLocation"
             android:theme="@style/AppTheme.Appbar"></activity>
         <activity
-            android:name="com.devshyeon.bustaja.MyLocationMain"
-
-            android:theme="@style/AppTheme.Appbar"></activity>
-        <activity
-            android:name="com.devshyeon.bustaja.BusWebinfo"
-            android:theme="@style/AppTheme.NoActionBar2"></activity>
-
-        <activity
-            android:name="com.devshyeon.bustaja.FindActivity"
-
-            android:theme="@style/AppTheme.Appbar"></activity>
-        <activity
-            android:name="com.devshyeon.bustaja.ProfileActivity"
-
-            android:theme="@style/AppTheme.Appbar"></activity>
-        <activity
-            android:name="com.devshyeon.bustaja.AccessMain"
-
+            android:name=".BusListView"
             android:theme="@style/AppTheme.Appbar" />
         <activity
-            android:name="com.devshyeon.bustaja.InformationMain"
-
+            android:name=".MyLocationMain"
             android:theme="@style/AppTheme.Appbar" />
         <activity
-            android:name="com.devshyeon.bustaja.AddmemMain"
-
+            android:name=".FindActivity"
             android:theme="@style/AppTheme.Appbar" />
         <activity
-            android:name="com.devshyeon.bustaja.Bussearch"
-            android:theme="@style/AppTheme.Appbar"         />
-
-        <activity
-            android:name="com.devshyeon.bustaja.NoticeMain"
-
+            android:name=".ProfileActivity"
             android:theme="@style/AppTheme.Appbar" />
         <activity
-            android:name="com.devshyeon.bustaja.LoginMain"
+            android:name=".AccessMain"
             android:theme="@style/AppTheme.Appbar" />
         <activity
-            android:name="com.devshyeon.bustaja.MessageboardMain"
-
+            android:name=".InformationMain"
+            android:theme="@style/AppTheme.Appbar" />
+        <activity
+            android:name=".AddmemMain"
+            android:theme="@style/AppTheme.Appbar" />
+        <activity
+            android:name=".Bussearch"
+            android:theme="@style/AppTheme.Appbar" />
+        <activity
+            android:name=".NoticeMain"
+            android:theme="@style/AppTheme.Appbar" />
+        <activity
+            android:name=".LoginMain"
+            android:theme="@style/AppTheme.Appbar" />
+        <activity
+            android:name=".MessageboardMain"
             android:theme="@style/AppTheme.Appbar">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
         </activity>
         <activity
-            android:name="com.devshyeon.bustaja.MessageboardNew"
-
-            android:theme="@style/AppTheme.Appbar"></activity>
+            android:name=".MessageboardNew"
+            android:theme="@style/AppTheme.Appbar" />
         <activity
-            android:name="com.devshyeon.bustaja.MainActivity"
+            android:name=".MainActivity"
             android:theme="@style/Theme.MaterialComponents.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
         </activity>
         <activity
-            android:name="com.devshyeon.bustaja.Intro"
+            android:name=".Intro"
             android:theme="@style/Theme.MaterialComponents.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -88,16 +76,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.devshyeon.bustaja.MessageboardDetail"
-
+            android:name=".MessageboardDetail"
             android:theme="@style/AppTheme.Appbar" />
+
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDHSTJsP2tRp5iUC9h6B5ru69CHmSKdrR8"     />
-
+            android:value="AIzaSyDHSTJsP2tRp5iUC9h6B5ru69CHmSKdrR8" />
     </application>
 
 </manifest>

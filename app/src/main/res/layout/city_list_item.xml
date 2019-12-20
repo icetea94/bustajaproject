@@ -16,7 +16,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginLeft="10dp"
             android:text="busnum"
-            android:textColor="@color/busblue"
+            android:textColor="#0000FF"
             android:textSize="20sp"
             android:textStyle="bold" />
 

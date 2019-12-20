@@ -83,7 +83,7 @@ public class NoticeAdapter extends RecyclerView.Adapter {
         }
         private void changeVisibility(final boolean isExpanded) {
             // height 값을 dp로 지정해서 넣고싶으면 아래 소스를 이용
-            int dpValue = 150;
+            int dpValue = 140;
             float d = context.getResources().getDisplayMetrics().density;
             int height = (int) (dpValue * d);
 

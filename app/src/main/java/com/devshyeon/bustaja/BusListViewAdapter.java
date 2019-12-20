@@ -1,5 +1,6 @@
 package com.devshyeon.bustaja;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,66 +8,66 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
 
-public class BusListViewAdapter extends BaseAdapter {
-    //멤버변수
-    ArrayList<Stopmember> members;
-    LayoutInflater inflater;
-    //생성자메소드
-    public BusListViewAdapter(ArrayList<Stopmember> members, LayoutInflater inflater) {
-        this.members = members;
-        this.inflater=inflater;
+public class BusListViewAdapter extends RecyclerView.Adapter<BusListViewAdapter.MyViewHolder> {
+
+    private ArrayList<Stopmember> members;
+    private LayoutInflater mInflate;
+    private Context mContext;
+
+    public BusListViewAdapter(Context context, ArrayList<Stopmember> items) {
+        this.members = items;
+        this.mInflate = LayoutInflater.from(context);
+        this.mContext = context;
     }
 
-    //어댑터 객체가 만들어낼 뷰 객체의 개수를 리턴
+
+    @NonNull
     @Override
-    public int getCount() {
+    public BusListViewAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = mInflate.inflate(R.layout.listview_item, parent, false);
+        BusListViewAdapter.MyViewHolder viewHolder = new BusListViewAdapter.MyViewHolder(view);
+        return viewHolder;
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull BusListViewAdapter.MyViewHolder holder, int position) {
+        //binding
+        holder.stationName.setText(members.get(position).stationName);
+        holder.stationSeq.setText(members.get(position).stationSeq);
+        holder.stationId.setText(members.get(position).stationId);
+        holder.stationx.setText(members.get(position).stationx);
+        holder.stationy.setText(members.get(position).stationy);
+
+        //Click event
+    }
+
+    @Override
+    public int getItemCount() {
         return members.size();
     }
 
-    //
-    @Override
-    public Object getItem(int position) {
-        return members.get(position);
-    }
+    //ViewHolder
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
+        public TextView stationName;
+        public TextView stationSeq;
+        public TextView stationId;
+        public TextView stationx;
+        public TextView stationy;
 
-    //
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
+        public MyViewHolder(View itemView) {
+            super(itemView);
 
-    //리스트 뷰에 보여질 항목 하나의 뷰를 만들어내는 메소드//
-    @Override
-    public View getView(int position, View view, ViewGroup viewGroup) {
-
-        //xml로 뷰모양을 설계하고 이를 객체로만들어서 리턴함
-        //listview_item.xml문서를 읽어와서
-        //뷰 객체로 만들어 주는 (inflate 부풀리는 기능) 객체를 이용하여 뷰 객체 생성
-        //XML->View객체로 부풀려주는 LayoutInflater라는 직원이 필요함
-        //1.new View
-        //재활용 할 뷰 가 없는가?
-        if(view==null) {
-            view  = inflater.inflate(R.layout.listview_item,null);
+            stationName = itemView.findViewById(R.id.item_tv_name);
+            stationSeq = itemView.findViewById(R.id.item_tv_num);
+            stationId = itemView.findViewById(R.id.item_tv_Id);
+            stationx = itemView.findViewById(R.id.item_tv_x);
+            stationy = itemView.findViewById(R.id.item_tv_y);
         }
-
-        //2.bind view: 만들어진 뷰와 데이터를 연결
-        //현재 번(position)째의 뷰
-        //데이터를 얻어오기
-        Stopmember member=members.get(position);
-
-        ImageView iv=view.findViewById(R.id.item_iv);
-        TextView tvName=view.findViewById(R.id.item_tv_name);
-
-
-        iv.setImageResource(member.imgID);
-        tvName.setText(member.name);
-
-
-
-        //만들어진 뷰를 리턴하면 그 뷰가 화면에 보여짐
-        return view;
-
     }
+
 }

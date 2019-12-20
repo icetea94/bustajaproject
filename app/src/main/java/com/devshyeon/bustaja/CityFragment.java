@@ -31,7 +31,6 @@ public class CityFragment extends Fragment {
     SwipeRefreshLayout swipeRefreshLayout;
     TextView city_empty_tv;
     RecyclerView city_listview;
-    FloatingActionButton city_refresh_fab;
     ArrayList<CityItem> cityItem=new ArrayList<>();
     CityAdapter cityAdapter;
     ProgressDialog progressDialog;
@@ -57,8 +56,7 @@ public class CityFragment extends Fragment {
         cityAdapter = new CityAdapter(cityItem, getContext());
         city_listview.setLayoutManager(mLayoutManager);
         city_listview.setAdapter(cityAdapter);
-        city_refresh_fab = view.findViewById(R.id.city_refresh_fab);
-        city_refresh_fab.setVisibility(View.VISIBLE);
+
 
 
 
@@ -78,14 +76,7 @@ public class CityFragment extends Fragment {
         });
 //
 
-        city_refresh_fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) { //플로팅 액션 버튼
-                Snackbar.make(view, "최신 정보를 불러오는 중입니다", Snackbar.LENGTH_SHORT).setAction("Refresh", null).show();
-                cityAdapter.notifyDataSetChanged();
 
-            }
-        });
 
 
 
@@ -96,17 +87,19 @@ public class CityFragment extends Fragment {
             public void onClick(View view, int position) {
                 CityItem dict = cityItem.get(position);
 
-                Intent intent = new Intent(getContext(), BusWebinfo.class);
+//                Intent intent = new Intent(getContext(), BusWebinfo.class);
 
+                Intent intent = new Intent(getContext(), BusListView.class);
                 intent.putExtra("busnum", dict.getCitybusnum());
                 intent.putExtra("busstop", dict.getCitybusstop());
                 intent.putExtra("routeid", dict.getCityRouteId());
-                progressDialog.setMessage("경기 버스정보 웹 화면으로 이동중입니다. \n잠시 기다려 주세요...");
-                progressDialog.show();
-
                 startActivity(intent);
+//                progressDialog.setMessage("경기 버스정보 웹 화면으로 이동중입니다. \n잠시 기다려 주세요...");
+//                progressDialog.show();
+//
+//                startActivity(intent);
 
-                progressDialog.dismiss();
+//                progressDialog.dismiss();
 
 
             }
